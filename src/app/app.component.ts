@@ -4,9 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login';
-import { MaintenancelistPage } from '../pages/maintenancelist/maintenancelist';
-import { InspectionlistPage } from '../pages/inspectionlist/inspectionlist';
 import { TabsPage } from '../pages/tabs/tabs';
+import { SettingPage } from '../pages/setting/setting';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,9 +23,8 @@ export class MyApp {
       splashScreen.hide();
     });
     this.pages = [
-      {title: 'Home Page', component: TabsPage},
-      {title: '巡检', component: InspectionlistPage},
-      {title: '维保', component: MaintenancelistPage}
+      {title: '主页', component: TabsPage},
+      {title: '设置', component: SettingPage}
     ]
   }
 

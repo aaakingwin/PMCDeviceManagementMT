@@ -7,4 +7,6 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  <ion-label>{{qrtext}}</ion-label>
+  <button ion-button block (click)="scan()" [disabled]="loading">扫描</button>
 </ion-content>
