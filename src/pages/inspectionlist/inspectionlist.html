@@ -10,17 +10,15 @@
 <ion-list>
     <ion-item *ngFor="let item of items" (click)="openPage(item)">
       <ion-thumbnail item-left>
-        <img src="imgs/science.png" />
+        <img src="./assets/imgs/science.png" />
       </ion-thumbnail>
-      <h2>
-        {{item.DeviceName}}
-      </h2>
+      <h2>{{item.DeviceName}}</h2>
       <p>
           <ion-icon name="pin"></ion-icon>
         {{item.Address}}&nbsp;&nbsp;{{item.InstallationPosition}}
       </p>
       <div item-right style="text-align: center;">
-          <img class="devicestatusimg" src="img/{{item.StatusImg}}.png" />        
+          <img class="devicestatusimg" src="./assets/imgs/{{item.StatusImg}}.png" />        
           <br/>
           {{item.DeviceStatus}}
       </div>     

@@ -21,6 +21,10 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     private storageService: StorageService) 
   {
+    platform.ready().then(() => {
+      statusBar.styleDefault();
+      splashScreen.hide();
+    });     
     //菜单
     this.pages = [
       {title: '巡检维保', component: TabsPage},
@@ -35,11 +39,7 @@ export class MyApp {
     else
     {
       this.rootPage=LoginPage;
-    }
-    platform.ready().then(() => {
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });     
+    }    
   }
 
   openPage(page) {
