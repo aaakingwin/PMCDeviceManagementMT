@@ -17,18 +17,16 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;  
   rootPage:any;
   pages: Array<{title: string, component: any}>;
-  menuTitle:string=SysConfig.AppMenuTitle;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-    private storageService: StorageService) {
-    platform.ready().then(() => {
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
+    private storageService: StorageService) 
+  {
+    //菜单
     this.pages = [
       {title: '巡检维保', component: TabsPage},
       {title: '系统设置', component: SettingPage}
-    ]
+    ];
+    //判断用户是否已经登录
     let userinfo = this.storageService.read<UserInfoData>(SysConfig.StorageKey_UserInfoData);
     if(userinfo!=null)
     {
@@ -37,7 +35,11 @@ export class MyApp {
     else
     {
       this.rootPage=LoginPage;
-    }    
+    }
+    platform.ready().then(() => {
+      statusBar.styleDefault();
+      splashScreen.hide();
+    });     
   }
 
   openPage(page) {

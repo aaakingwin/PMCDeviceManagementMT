@@ -36,7 +36,7 @@ export class LoginPage {
     userinfo.LoginPwd=user.LoginPwd;    
     if(this.userInfoService.login(userinfo))
     {
-      this.storageService.write(SysConfig.StorageKey_UserInfoData, userinfo);      
+      this.storageService.write(SysConfig.StorageKey_UserInfoData, userinfo);
       this.navCtrl.push(TabsPage);
     }
     else

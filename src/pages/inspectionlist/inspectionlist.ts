@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SysConfig } from '../../common/sysconfig';
 import { InspectionsheetPage } from '../inspectionsheet/inspectionsheet';
 import { InspectionsheetService } from '../../service/inspectionsheetservice';
+import { InspectionsheetData } from '../../model/inspectionsheetdata';
 
 @IonicPage()
 @Component({
@@ -11,14 +12,14 @@ import { InspectionsheetService } from '../../service/inspectionsheetservice';
 })
 export class InspectionlistPage {
   headingText:string=SysConfig.AppHeadingText;
+  items: Array<InspectionsheetData>;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public inspectionsheetService:InspectionsheetService) {
-  }
+    public inspectionsheetService:InspectionsheetService) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InspectionlistPage');
+  ionViewDidLoad() {    
+    this.items=this.inspectionsheetService.getInspectionsheetList();
   }
 
   scanCallback =(text) => {
@@ -35,7 +36,7 @@ export class InspectionlistPage {
       }
     }
     catch (err) {
-      alert(SysConfig.Msg_InvalidQRCode);
+      alert('无效的二维码！');
       this.navCtrl.pop();  
     }
   }
@@ -43,4 +44,8 @@ export class InspectionlistPage {
   scan() {    
     this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
   } 
+
+  openPage(item) {
+    this.navCtrl.push(InspectionsheetPage,{'data':item});
+  }
 }

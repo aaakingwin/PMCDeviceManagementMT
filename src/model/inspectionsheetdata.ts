@@ -4,5 +4,6 @@ export class InspectionsheetData
     Address:string;
     InstallationPosition:string;
     DeviceStatus:string;
+    StatusImg:string;
     AnomalyDescription:string;
 }
