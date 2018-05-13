@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the MaintenancelistPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { SysConfig } from '../../common/sysconfig';
 
 @IonicPage()
 @Component({
@@ -14,7 +8,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'maintenancelist.html',
 })
 export class MaintenancelistPage {
-
+  headingText:string=SysConfig.AppHeadingText;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

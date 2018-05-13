@@ -9,21 +9,22 @@ import { MyApp } from './app.component';
 
 import { UserInfoService } from '../service/userinfoservice';
 import { StorageService } from '../service/storageservice';
-import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { InspectionlistPage } from '../pages/inspectionlist/inspectionlist';
 import { MaintenancelistPage } from '../pages/maintenancelist/maintenancelist';
 import { SettingPage } from '../pages/setting/setting';
+import { InspectionsheetPage } from '../pages/inspectionsheet/inspectionsheet';
+import { InspectionsheetService } from '../service/inspectionsheetservice';
 
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     TabsPage,
     LoginPage,
     InspectionlistPage,
+    InspectionsheetPage,
     MaintenancelistPage,
     SettingPage
   ],
@@ -34,16 +35,17 @@ import { SettingPage } from '../pages/setting/setting';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     TabsPage,
     LoginPage,
     InspectionlistPage,
+    InspectionsheetPage,
     MaintenancelistPage,
     SettingPage
   ],
   providers: [
     StorageService,
     UserInfoService,
+    InspectionsheetService,
     QRScanner,
     StatusBar,
     SplashScreen,

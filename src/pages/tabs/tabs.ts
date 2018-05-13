@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 
-import { HomePage } from '../home/home';
 import { InspectionlistPage } from '../inspectionlist/inspectionlist';
 import { MaintenancelistPage } from '../maintenancelist/maintenancelist';
 
@@ -14,20 +13,16 @@ export class TabsPage {
   tabRoots: Object[];
 
   constructor(public navCtrl: NavController) {
-    this.tabRoots = [{
-      root: HomePage,
-      tabTitle: 'home',
-      tabIcon: 'home'
-    },
+    this.tabRoots = [
     {
       root: InspectionlistPage,
       tabTitle: '巡检',
-      tabIcon: 'home'
+      tabIcon: 'clipboard'
     },
     {
       root: MaintenancelistPage,
       tabTitle: '维保',
-      tabIcon: 'home'
+      tabIcon: 'construct'
     }
     ];
   }

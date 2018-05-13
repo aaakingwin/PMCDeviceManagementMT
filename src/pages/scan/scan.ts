@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavParams } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
 @IonicPage()
@@ -8,54 +8,39 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
   templateUrl: 'scan.html',
 })
 export class ScanPage {
-  light: boolean;//判断闪光灯
-  frontCamera: boolean;//判断摄像头
+  light: boolean;//闪光灯
+  frontCamera: boolean;//摄像头
+  callback;//回调函数
 
   constructor(
-    private navCtrl: NavController,
+    private navParams:NavParams,
     private qrScanner: QRScanner) {
-      //默认为false
       this.light = false;
       this.frontCamera = false;
+      this.callback = this.navParams.get("callback");
   }
 
   ionViewDidLoad() {
     this.qrScanner.prepare()
       .then((status: QRScannerStatus) => {
-        if (status.authorized) {
-          // camera permission was granted
-          // start scanning
-          let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-            //alert(text);      
-            this.qrScanner.hide(); // hide camera preview
-            scanSub.unsubscribe(); // stop scanning
-            this.navCtrl.pop();
-            //TODO:传参
-            this.navCtrl.push('HomePage',{qrvalue:text});
-          });
-          // show camera preview
+        if (status.authorized) 
+        {
+          //显示摄像头
           this.qrScanner.show();
-          // wait for user to scan something, then the observable callback will be called
-        } else if (status.denied) {
-          // camera permission was permanently denied
-          // you must use QRScanner.openSettings() method to guide the user to the settings page
-          // then they can grant the permission from there
-        } else {
-          // permission was denied, but not permanently. You can ask for permission again at a later time.
-        }
+          //开始扫描
+          let scanSub = this.qrScanner.scan().subscribe((text: string) => {    
+            scanSub.unsubscribe();//停止扫描           
+            this.callback(text);//回传扫描结果                    
+          });
+        } 
+        else if (status.denied) {this.qrScanner.openSettings();} 
+        else {}
       })
       .catch((e: any) => console.log('Error is', e));
-  }
+  } 
 
-  ionViewDidEnter(){
-    //页面可见时才执行
-    this.showCamera();
-  }
-
-  /**
-   * 闪光灯控制，默认关闭
-   */
   toggleLight() {
+    //闪光灯控制，默认关闭
     if (this.light) {
       this.qrScanner.disableLight();
     } else {
@@ -63,11 +48,9 @@ export class ScanPage {
     }
     this.light = !this.light;
   }
-
-  /**
-   * 前后摄像头互换
-   */
+ 
   toggleCamera() {
+     //前后摄像头互换
     if (this.frontCamera) {
       this.qrScanner.useBackCamera();
     } else {
@@ -83,7 +66,9 @@ export class ScanPage {
     this.qrScanner.hide();//需要关闭扫描，否则相机一直开着
     (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
   }
-
+  ionViewDidEnter(){
+    this.showCamera();
+  }
   ionViewWillLeave() {
     this.hideCamera();
   }

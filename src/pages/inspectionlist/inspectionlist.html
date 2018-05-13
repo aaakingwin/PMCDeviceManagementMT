@@ -3,9 +3,21 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>巡检清单</ion-title>
+    <ion-title>{{headingText}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-巡检清单
+<ion-list>
+  <ion-item>
+    123
+  </ion-item>
+  <ion-item>
+    321
+  </ion-item>
+</ion-list>
 </ion-content>
+<ion-footer class="footerbar">
+  <button ion-button block (click)="scan()" [disabled]="loading">
+    <ion-icon name="qr-scanner">&nbsp;&nbsp;&nbsp;扫描设备标签</ion-icon>        
+  </button>
+</ion-footer>

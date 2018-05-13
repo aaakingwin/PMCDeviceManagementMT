@@ -16,7 +16,7 @@ export class SettingPage {
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      private storageService: StorageService) {
-      let userinfo = this.storageService.read<UserInfoData>(SysConfig.storagekey_UserInfoData);
+      let userinfo = this.storageService.read<UserInfoData>(SysConfig.StorageKey_UserInfoData);
       if(userinfo!=null)
       {
         this.userInfoData=userinfo;
@@ -28,7 +28,7 @@ export class SettingPage {
   }
 
   logout(){
-    this.storageService.remove(SysConfig.storagekey_UserInfoData);
+    this.storageService.remove(SysConfig.StorageKey_UserInfoData);
     this.navCtrl.push(LoginPage);
   }
 }

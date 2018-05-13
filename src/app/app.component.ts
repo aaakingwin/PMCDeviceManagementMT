@@ -6,26 +6,38 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingPage } from '../pages/setting/setting';
+import { UserInfoData } from '../model/userinfodata';
+import { SysConfig } from '../common/sysconfig';
+import { StorageService } from '../service/storageservice';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;  
-  rootPage:any = LoginPage;
+  rootPage:any;
   pages: Array<{title: string, component: any}>;
+  menuTitle:string=SysConfig.AppMenuTitle;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+    private storageService: StorageService) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
     this.pages = [
-      {title: '主页', component: TabsPage},
-      {title: '设置', component: SettingPage}
+      {title: '巡检维保', component: TabsPage},
+      {title: '系统设置', component: SettingPage}
     ]
+    let userinfo = this.storageService.read<UserInfoData>(SysConfig.StorageKey_UserInfoData);
+    if(userinfo!=null)
+    {
+      this.rootPage=TabsPage;
+    }
+    else
+    {
+      this.rootPage=LoginPage;
+    }    
   }
 
   openPage(page) {

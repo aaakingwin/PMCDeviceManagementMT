@@ -19,32 +19,13 @@ export class LoginPage {
     'LoginID': ['',  [Validators.required, Validators.minLength(1)]],
     'LoginPwd': ['', [Validators.required, Validators.minLength(1)]]
   });
-  displayState:string="hide";
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private formBuilder: FormBuilder,
     public toastCtrl: ToastController,
     private userInfoService: UserInfoService,
-    private storageService: StorageService) 
-  {
-    let userinfo = this.storageService.read<UserInfoData>(SysConfig.storagekey_UserInfoData);
-    if(userinfo!=null)
-    {
-      if(this.userInfoService.login(userinfo))
-      {    
-        this.navCtrl.push(TabsPage);
-      }
-      else
-      {
-        this.displayState="show";
-      }
-    }
-    else
-    {
-      this.displayState="show";
-    }
-  }
+    private storageService: StorageService) {}
 
   ionViewDidLoad() {}  
 
@@ -55,7 +36,7 @@ export class LoginPage {
     userinfo.LoginPwd=user.LoginPwd;    
     if(this.userInfoService.login(userinfo))
     {
-      this.storageService.write(SysConfig.storagekey_UserInfoData, userinfo);      
+      this.storageService.write(SysConfig.StorageKey_UserInfoData, userinfo);      
       this.navCtrl.push(TabsPage);
     }
     else

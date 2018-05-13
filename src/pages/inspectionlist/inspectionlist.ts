@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the InspectionlistPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { SysConfig } from '../../common/sysconfig';
+import { InspectionsheetPage } from '../inspectionsheet/inspectionsheet';
+import { InspectionsheetService } from '../../service/inspectionsheetservice';
 
 @IonicPage()
 @Component({
@@ -14,12 +10,37 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'inspectionlist.html',
 })
 export class InspectionlistPage {
+  headingText:string=SysConfig.AppHeadingText;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public inspectionsheetService:InspectionsheetService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InspectionlistPage');
   }
 
+  scanCallback =(text) => {
+    try {
+      let data=this.inspectionsheetService.convertToData(text);      
+      if(data!=null)
+      {        
+        this.navCtrl.pop(); 
+        this.navCtrl.push(InspectionsheetPage,{'data':data});
+      }
+      else
+      {
+        this.navCtrl.pop(); 
+      }
+    }
+    catch (err) {
+      alert(SysConfig.Msg_InvalidQRCode);
+      this.navCtrl.pop();  
+    }
+  }
+
+  scan() {    
+    this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
+  } 
 }
