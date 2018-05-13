@@ -32,6 +32,7 @@ export class InspectionlistPage {
       }
       else
       {
+        alert('无效的二维码！');
         this.navCtrl.pop(); 
       }
     }

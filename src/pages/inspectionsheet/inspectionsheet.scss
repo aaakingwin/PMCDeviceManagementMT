@@ -1,5 +1,5 @@
 page-inspectionsheet {
-    .greyword
+    .grey-word
     {
         color: grey;
         size: 10px;
@@ -7,5 +7,10 @@ page-inspectionsheet {
     .required-field
     {
         color: red;
+    }
+    .h-word
+    {
+        font-size:25px;
+        color: black;
     }
 }

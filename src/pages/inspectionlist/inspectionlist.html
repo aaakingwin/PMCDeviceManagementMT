@@ -10,9 +10,9 @@
 <ion-list>
     <ion-item *ngFor="let item of items" (click)="openPage(item)">
       <ion-thumbnail item-left>
-        <img src="./assets/imgs/science.png" />
+        <img src="./assets/imgs/science.jpg" />
       </ion-thumbnail>
-      <h2>{{item.DeviceName}}</h2>
+      <p class="h-word">{{item.DeviceName}}</p>
       <p>
           <ion-icon name="pin"></ion-icon>
         {{item.Address}}&nbsp;&nbsp;{{item.InstallationPosition}}
