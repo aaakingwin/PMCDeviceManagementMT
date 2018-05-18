@@ -6,9 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingPage } from '../pages/setting/setting';
-import { UserInfoData } from '../model/userinfodata';
+import { UserData } from '../model/userdata';
 import { SysConfig } from '../common/sysconfig';
-import { StorageService } from '../service/storageservice';
+import { StorageService } from '../common/storageservice';
 
 @Component({
   templateUrl: 'app.html'
@@ -31,7 +31,7 @@ export class MyApp {
       {title: '系统设置', component: SettingPage}
     ];
     //判断用户是否已经登录
-    let userinfo = this.storageService.read<UserInfoData>(SysConfig.StorageKey_UserInfoData);
+    let userinfo = this.storageService.read<UserData>(SysConfig.StorageKey_UserInfoData);
     if(userinfo!=null)
     {
       this.rootPage=TabsPage;

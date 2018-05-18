@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SysConfig } from '../../common/sysconfig';
 import { InspectionsheetPage } from '../inspectionsheet/inspectionsheet';
-import { InspectionsheetService } from '../../service/inspectionsheetservice';
+import { InspectionsheetProvider } from '../../providers/inspectionsheet/inspectionsheet';
 import { InspectionsheetData } from '../../model/inspectionsheetdata';
 
 @IonicPage()
@@ -16,15 +16,15 @@ export class InspectionlistPage {
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    public inspectionsheetService:InspectionsheetService) {}
+    public inspectionsheetProvider:InspectionsheetProvider) {}
 
   ionViewDidLoad() {    
-    this.items=this.inspectionsheetService.getInspectionsheetList();
+    this.items=this.inspectionsheetProvider.getInspectionsheetList();
   }
 
   scanCallback =(text) => {
     try {
-      let data=this.inspectionsheetService.convertToData(text);      
+      let data=this.inspectionsheetProvider.convertToData(text);      
       if(data!=null)
       {        
         this.navCtrl.pop(); 

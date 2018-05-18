@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { UserInfoService } from '../../service/userinfoservice';
-import { StorageService } from '../../service/storageservice';
-import { UserInfoData } from '../../model/userinfodata';
+import { UserProvider } from '../../providers/user/user';
+import { StorageService } from '../../common/storageservice';
+import { UserData } from '../../model/userdata';
 import { TabsPage } from '../tabs/tabs';
 import { SysConfig } from '../../common/sysconfig';
 
@@ -24,17 +24,17 @@ export class LoginPage {
     public navParams: NavParams,
     private formBuilder: FormBuilder,
     public toastCtrl: ToastController,
-    private userInfoService: UserInfoService,
+    private userProvider: UserProvider,
     private storageService: StorageService) {}
 
   ionViewDidLoad() {}  
 
   login(user, _event) {    
     _event.preventDefault();//该方法将通知 Web 浏览器不要执行与事件关联的默认动作    
-    let userinfo = new UserInfoData();
+    let userinfo = new UserData();
     userinfo.LoginID=user.LoginID;
     userinfo.LoginPwd=user.LoginPwd;    
-    if(this.userInfoService.login(userinfo))
+    if(this.userProvider.login(userinfo))
     {
       this.storageService.write(SysConfig.StorageKey_UserInfoData, userinfo);
       this.navCtrl.push(TabsPage);

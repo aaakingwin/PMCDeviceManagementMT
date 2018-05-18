@@ -1,4 +1,4 @@
-export class UserInfoData {
+export class UserData {
     LoginID:string;
     LoginPwd:string;
     UserToken:string;

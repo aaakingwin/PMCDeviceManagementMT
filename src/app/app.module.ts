@@ -4,19 +4,21 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { QRScanner } from '@ionic-native/qr-scanner';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 
-import { UserInfoService } from '../service/userinfoservice';
-import { StorageService } from '../service/storageservice';
+import { StorageService } from '../common/storageservice';
+import { UserProvider } from '../providers/user/user';
+import { InspectionsheetProvider } from '../providers/inspectionsheet/inspectionsheet';
+import { MaintenancesheetProvider } from '../providers/maintenancesheet/maintenancesheet';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { InspectionlistPage } from '../pages/inspectionlist/inspectionlist';
 import { MaintenancelistPage } from '../pages/maintenancelist/maintenancelist';
 import { SettingPage } from '../pages/setting/setting';
 import { InspectionsheetPage } from '../pages/inspectionsheet/inspectionsheet';
-import { InspectionsheetService } from '../service/inspectionsheetservice';
-
+import { MaintenancesheetPage } from '../pages/maintenancesheet/maintenancesheet';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,11 @@ import { InspectionsheetService } from '../service/inspectionsheetservice';
     InspectionlistPage,
     InspectionsheetPage,
     MaintenancelistPage,
+    MaintenancesheetPage,
     SettingPage
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -40,16 +44,18 @@ import { InspectionsheetService } from '../service/inspectionsheetservice';
     InspectionlistPage,
     InspectionsheetPage,
     MaintenancelistPage,
+    MaintenancesheetPage,
     SettingPage
   ],
   providers: [
-    StorageService,
-    UserInfoService,
-    InspectionsheetService,
     QRScanner,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    StorageService,
+    UserProvider,
+    InspectionsheetProvider,
+    MaintenancesheetProvider
   ]
 })
 export class AppModule {}

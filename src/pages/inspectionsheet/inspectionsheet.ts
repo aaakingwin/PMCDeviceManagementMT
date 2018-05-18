@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SysConfig } from '../../common/sysconfig';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { InspectionsheetData } from '../../model/inspectionsheetdata';
-import { InspectionsheetService } from '../../service/inspectionsheetservice';
+import { InspectionsheetProvider } from '../../providers/inspectionsheet/inspectionsheet';
 
 @IonicPage()
 @Component({
@@ -18,7 +18,7 @@ export class InspectionsheetPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private formBuilder: FormBuilder,
-    private inspectionsheetService:InspectionsheetService) 
+    private inspectionsheetProvider:InspectionsheetProvider) 
   {
     this.item=this.navParams.get('data');  
     this.inspectionSheetForm= this.formBuilder.group({
@@ -39,7 +39,7 @@ export class InspectionsheetPage {
     else
     {
       this.item.AnomalyDescription=data.AnomalyDescription;
-      if(this.inspectionsheetService.save(this.item))
+      if(this.inspectionsheetProvider.save(this.item))
       {
         alert('保存成功！');
         this.navCtrl.pop();
