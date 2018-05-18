@@ -6,9 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingPage } from '../pages/setting/setting';
-import { UserData } from '../model/userdata';
-import { SysConfig } from '../common/sysconfig';
-import { StorageService } from '../common/storageservice';
+import { UserData } from '../models/userdata';
+import { SysConfig } from '../providers/sysconfig';
+import { StorageService } from '../providers/storageservice';
 
 @Component({
   templateUrl: 'app.html'

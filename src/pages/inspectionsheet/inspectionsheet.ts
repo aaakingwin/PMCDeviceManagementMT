@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SysConfig } from '../../common/sysconfig';
+import { SysConfig } from '../../providers/sysconfig';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { InspectionsheetData } from '../../model/inspectionsheetdata';
+import { InspectionsheetData } from '../../models/inspectionsheetdata';
 import { InspectionsheetProvider } from '../../providers/inspectionsheet/inspectionsheet';
 
 @IonicPage()

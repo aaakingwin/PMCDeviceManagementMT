@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 
-import { StorageService } from '../common/storageservice';
+import { StorageService } from '../providers/storageservice';
 import { UserProvider } from '../providers/user/user';
 import { InspectionsheetProvider } from '../providers/inspectionsheet/inspectionsheet';
 import { MaintenancesheetProvider } from '../providers/maintenancesheet/maintenancesheet';

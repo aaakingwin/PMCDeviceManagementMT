@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { StorageService } from '../../common/storageservice';
-import { SysConfig } from '../../common/sysconfig';
+import { StorageService } from '../../providers/storageservice';
+import { SysConfig } from '../../providers/sysconfig';
 import { LoginPage } from '../login/login';
-import { UserData } from '../../model/userdata';
+import { UserData } from '../../models/userdata';
 
 @IonicPage()
 @Component({

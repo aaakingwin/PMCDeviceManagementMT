@@ -3,10 +3,10 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { UserProvider } from '../../providers/user/user';
-import { StorageService } from '../../common/storageservice';
-import { UserData } from '../../model/userdata';
+import { StorageService } from '../../providers/storageservice';
+import { UserData } from '../../models/userdata';
 import { TabsPage } from '../tabs/tabs';
-import { SysConfig } from '../../common/sysconfig';
+import { SysConfig } from '../../providers/sysconfig';
 
 @IonicPage()
 @Component({

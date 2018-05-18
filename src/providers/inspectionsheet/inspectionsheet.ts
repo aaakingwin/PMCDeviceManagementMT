@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { InspectionsheetData } from "../../model/inspectionsheetdata";
+import { InspectionsheetData } from "../../models/inspectionsheetdata";
 
 @Injectable()
 export class InspectionsheetProvider {

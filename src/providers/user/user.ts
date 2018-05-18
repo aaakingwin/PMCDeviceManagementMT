@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserData  } from '../../model/userdata';
+import { UserData  } from '../../models/userdata';
 
 @Injectable()
 export class UserProvider {

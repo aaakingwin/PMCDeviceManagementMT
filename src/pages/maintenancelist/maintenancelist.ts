@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SysConfig } from '../../common/sysconfig';
-import { MaintenancesheetData } from '../../model/maintenancesheetdata';
+import { SysConfig } from '../../providers/sysconfig';
+import { MaintenancesheetData } from '../../models/maintenancesheetdata';
 import { MaintenancesheetPage } from '../maintenancesheet/maintenancesheet';
 
 @IonicPage()
