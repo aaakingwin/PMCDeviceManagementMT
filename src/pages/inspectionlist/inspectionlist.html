@@ -7,7 +7,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-<ion-list>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
     <ion-item *ngFor="let item of items" (click)="openPage(item)">
       <ion-thumbnail item-left>
         <img src="./assets/imgs/science.jpg" />

@@ -24,30 +24,30 @@ export class InspectionsheetProvider {
       }    
   }
 
-  getInspectionsheetList():Array<InspectionsheetData>
+  getDataList():Array<InspectionsheetData>
   {
-      let isd1=new InspectionsheetData();
-      isd1.DeviceName='海康监控器';
-      isd1.Address='世纪园';        
-      isd1.InstallationPosition='监控室'
-      isd1.DeviceStatus='正常';
-      isd1.StatusImg='yes';
-      isd1.AnomalyDescription='abc';
-      let isd2=new InspectionsheetData();
-      isd2.DeviceName='路由器';
-      isd2.Address='万达';        
-      isd2.InstallationPosition='机房'
-      isd2.DeviceStatus='丢失';
-      isd2.StatusImg='no';
-      isd2.AnomalyDescription='qwe';
-      let isd3=new InspectionsheetData();
-      isd3.DeviceName='电梯';
-      isd3.Address='滨河花园';        
-      isd3.InstallationPosition='5#'
-      isd3.DeviceStatus='异常';
-      isd3.StatusImg='no';
-      isd3.AnomalyDescription='fds';
-      let list = [isd1,isd2,isd3];
+      let data1=new InspectionsheetData();
+      data1.DeviceName='海康监控器';
+      data1.Address='世纪园';        
+      data1.InstallationPosition='监控室'
+      data1.DeviceStatus='正常';
+      data1.StatusImg='yes';
+      data1.AnomalyDescription='abc';
+      let data2=new InspectionsheetData();
+      data2.DeviceName='路由器';
+      data2.Address='万达';        
+      data2.InstallationPosition='机房'
+      data2.DeviceStatus='丢失';
+      data2.StatusImg='no';
+      data2.AnomalyDescription='qwe';
+      let data3=new InspectionsheetData();
+      data3.DeviceName='电梯';
+      data3.Address='滨河花园';        
+      data3.InstallationPosition='5#'
+      data3.DeviceStatus='异常';
+      data3.StatusImg='no';
+      data3.AnomalyDescription='fds';
+      let list = [data1,data2,data3];
       return list;
   }
 

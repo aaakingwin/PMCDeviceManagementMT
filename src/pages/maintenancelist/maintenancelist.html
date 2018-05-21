@@ -1,29 +1,27 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>{{headingText}}</ion-title>
-    </ion-navbar>
-  </ion-header>
-  <ion-content padding>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{headingText}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
-      <ion-item *ngFor="let item of items" (click)="openPage(item)">
-        <ion-thumbnail item-left>
-          <img src="./assets/imgs/science.jpg" />
-        </ion-thumbnail>
-        <p class="h-word">{{item.DeviceName}}</p>
-        <p>
-            <ion-icon name="pin"></ion-icon>
-          {{item.Address}}
-        </p>
+    <ion-item *ngFor="let item of items" (click)="openPage(item)">
+      <ion-thumbnail item-left>
+        <img src="./assets/imgs/science.jpg" />
+      </ion-thumbnail>
+      <p class="h-word">{{item.DeviceName}}</p>
+      <p><ion-icon name="pin"></ion-icon>{{item.Address}}</p>
     </ion-item>
   </ion-list>
-  </ion-content>
-  <ion-footer class="footerbar">
-    <button ion-button block (click)="apply()">
-    添加申请      
-    </button>
-    <br/>
-  </ion-footer>
+</ion-content>
+<ion-footer class="footerbar">
+  <button ion-button block (click)="apply()">添加申请</button>
+  <br/>
+</ion-footer>
   

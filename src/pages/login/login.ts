@@ -7,6 +7,7 @@ import { StorageService } from '../../providers/storageservice';
 import { UserData } from '../../models/userdata';
 import { TabsPage } from '../tabs/tabs';
 import { SysConfig } from '../../providers/sysconfig';
+import { MessageService } from '../../providers/messageservice';
 
 @IonicPage()
 @Component({
@@ -14,6 +15,7 @@ import { SysConfig } from '../../providers/sysconfig';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  msg:MessageService=new MessageService(this.toastCtrl);
   local: Storage;
   loginForm = this.formBuilder.group({
     'LoginID': ['',  [Validators.required, Validators.minLength(1)]],
@@ -22,12 +24,12 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    private formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,
     public toastCtrl: ToastController,
-    private userProvider: UserProvider,
-    private storageService: StorageService) {}
+    public userProvider: UserProvider,
+    public storageService: StorageService) {}
 
-  ionViewDidLoad() {}  
+  ionViewDidLoad() {} 
 
   login(user, _event) {    
     _event.preventDefault();//该方法将通知 Web 浏览器不要执行与事件关联的默认动作    
@@ -41,14 +43,7 @@ export class LoginPage {
     }
     else
     {
-      let toast = this.toastCtrl.create({
-        message: '用户名或密码错误！',
-        duration: 3000,
-        position: 'middle',
-        showCloseButton: true,
-        closeButtonText: '关闭'
-      });
-      toast.present();
+      this.msg.showInfo('用户名或密码错误！');
     }   
   }
   

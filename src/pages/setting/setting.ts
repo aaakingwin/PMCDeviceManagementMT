@@ -23,9 +23,7 @@ export class SettingPage {
       }      
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingPage');
-  }
+  ionViewDidLoad() {}
 
   logout(){
     this.storageService.remove(SysConfig.StorageKey_UserInfoData);
