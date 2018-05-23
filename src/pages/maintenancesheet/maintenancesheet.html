@@ -11,4 +11,31 @@
   </p>
   <br/>
   <p class="h-word">申请内容</p>
+  <br/>
+  <form [formGroup]="maintenanceSheetForm">    
+    <ion-item no-lines>  
+      <ion-checkbox checked="true" ></ion-checkbox> 
+      <ion-label>无线主机设备</ion-label>
+    </ion-item>   
+    <ion-label class="grey-word">申请描述</ion-label>
+    <ion-item>  
+        <p class="required-field" *ngIf="!maintenanceSheetForm.controls.applyText1.valid && maintenanceSheetForm.controls.applyText1.touched" color="danger" item-left>*</p>              
+        <ion-input type="text" formControlName="applyText1"></ion-input>
+    </ion-item>            
+    <ion-item no-lines>  
+      <ion-checkbox  checked="true"></ion-checkbox>
+      <ion-label>传感器</ion-label>
+    </ion-item>   
+    <ion-label class="grey-word">申请描述</ion-label>
+    <ion-item>  
+        <p class="required-field" *ngIf="!maintenanceSheetForm.controls.applyText2.valid && maintenanceSheetForm.controls.applyText2.touched" color="danger" item-left>*</p>              
+        <ion-input type="text" formControlName="applyText2"></ion-input>
+    </ion-item>   
+    <ion-label class="grey-word">申请人</ion-label>
+    <ion-item>{{userinfo.UserName}}</ion-item>
+    <ion-label class="grey-word">申请日期</ion-label>
+    <ion-item>{{applicationDate}}</ion-item>
+    <button ion-button full (click)="save(maintenanceSheetForm.value, $event)" [disabled]="!maintenanceSheetForm.valid">保存</button>
+    <br/>
+  </form>
 </ion-content>

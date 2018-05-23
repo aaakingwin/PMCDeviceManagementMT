@@ -4,6 +4,9 @@ import { SysConfig } from '../../providers/sysconfig';
 import { MaintenancesheetData } from '../../models/maintenancesheetdata';
 import { MaintenancesheetProvider } from '../../providers/maintenancesheet/maintenancesheet';
 import { MessageService } from '../../providers/messageservice';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserData } from '../../models/userdata';
+import { StorageService } from '../../providers/storageservice';
 
 @IonicPage()
 @Component({
@@ -14,12 +17,24 @@ export class MaintenancesheetPage {
   msg:MessageService=new MessageService(this.toastCtrl);
   item:MaintenancesheetData;
   headingText:string=SysConfig.AppHeadingText;
-  
+  maintenanceSheetForm:FormGroup;
+  userinfo:UserData;
+  applicationDate:string;
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
+    public formBuilder: FormBuilder,
     public toastCtrl:ToastController,
-    public maintenancesheetProvider:MaintenancesheetProvider) {
-      this.item=this.navParams.get('data');       
+    public maintenancesheetProvider:MaintenancesheetProvider,
+    public storageService: StorageService) {
+      this.item=this.navParams.get('data'); 
+      this.userinfo = this.storageService.read<UserData>(SysConfig.StorageKey_UserInfoData);  
+      this.userinfo.UserName='abc';
+      this.applicationDate= new Date().toLocaleDateString();
+      this.maintenanceSheetForm= this.formBuilder.group({
+        'applyText1': [this.item.applyText1,  [Validators.required, Validators.minLength(1)]],
+        'applyText2': [this.item.applyText2,  [Validators.required, Validators.minLength(1)]],
+      });
   }
 
   ionViewDidLoad() {}
