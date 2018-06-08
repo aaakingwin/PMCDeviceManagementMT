@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>资产清单</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item *ngFor="let item of items" (click)="openPage(item)">
+      <ion-thumbnail item-left>
+        <img src="./assets/imgs/{{item.AssetType | assetTypeImg}}" />
+      </ion-thumbnail>
+      <p class="h-word">{{item.Name}}</p>
+      <p>
+          <ion-icon name="pin"></ion-icon>
+        {{item.Microdistrict}}&nbsp;&nbsp;{{item.InstallLocation}}
+      </p>
+      <div item-right style="text-align: center;">
+          <img class="devicestatusimg" src="./assets/imgs/{{item.IsDisabled | itemStatusImg}}" />
+      </div>  
+  </ion-item>
+</ion-list>
+</ion-content>
+

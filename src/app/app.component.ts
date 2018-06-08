@@ -9,6 +9,7 @@ import { SettingPage } from '../pages/setting/setting';
 import { UserData } from '../models/userdata';
 import { SysConfig } from '../providers/sysconfig';
 import { StorageService } from '../providers/storageservice';
+import { AssetlistPage } from '../pages/assetlist/assetlist';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,6 +29,7 @@ export class MyApp {
     //菜单
     this.pages = [
       {title: '巡检维保', component: TabsPage},
+      {title: '资产清单', component: AssetlistPage},
       {title: '系统设置', component: SettingPage}
     ];
     //判断用户是否已经登录

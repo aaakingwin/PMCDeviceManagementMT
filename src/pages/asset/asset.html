@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>资产</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>   
+  <ion-item>
+      <ion-thumbnail item-left>
+          <img src="./assets/imgs/{{item.AssetType | assetTypeImg}}" />
+      </ion-thumbnail>
+      <p class="h-word">{{item.Name}}</p> 
+      <p >{{item.Number}}</p> 
+  </ion-item>
+  <ion-label class="grey-word">类型</ion-label>
+  <ion-item> {{item.AssetType}}</ion-item>   
+  <ion-label class="grey-word">品牌</ion-label>
+  <ion-item> {{item.Brand}}</ion-item>   
+  <ion-label class="grey-word">型号</ion-label>
+  <ion-item> {{item.Model}}</ion-item>   
+  <ion-label class="grey-word">制造商</ion-label>
+  <ion-item> {{item.Manufacturer}}</ion-item>   
+  <ion-label class="grey-word">描述</ion-label>
+  <ion-item> {{item.Description}}</ion-item>   
+  <ion-label class="grey-word">小区名称</ion-label>
+  <ion-item> {{item.Microdistrict}}</ion-item>   
+  <ion-label class="grey-word">应用地点</ion-label>
+  <ion-item> {{item.AssetLocation}}</ion-item>   
+  <ion-label class="grey-word">电箱地点</ion-label>
+  <ion-item> {{item.PowerLocation}}</ion-item>     
+  <ion-label class="grey-word">安装地点</ion-label>
+  <ion-item> {{item.InstallLocation}}</ion-item>   
+  <ion-label class="grey-word">备注</ion-label>
+  <ion-item> {{item.Remark}}</ion-item>   
+  <ion-label class="grey-word">状态</ion-label>
+  <ion-item> {{item.IsDisabled | itemStatusShowText}}</ion-item>   
+  <ion-label class="grey-word">创建时间</ion-label>
+  <ion-item> {{item.CreatedTime}}</ion-item>   
+  <ion-label class="grey-word">更新时间</ion-label>
+  <ion-item> {{item.LastModifyedTime}}</ion-item>   
+</ion-content>

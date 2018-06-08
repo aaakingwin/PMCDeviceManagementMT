@@ -19,6 +19,10 @@ import { MaintenancelistPage } from '../pages/maintenancelist/maintenancelist';
 import { SettingPage } from '../pages/setting/setting';
 import { InspectionsheetPage } from '../pages/inspectionsheet/inspectionsheet';
 import { MaintenancesheetPage } from '../pages/maintenancesheet/maintenancesheet';
+import { AssetPage } from '../pages/asset/asset';
+import { AssetlistPage } from '../pages/assetlist/assetlist';
+import { PipesModule } from '../pipes/pipes.module';
+import { WebApi } from '../providers/webapi';
 
 @NgModule({
   declarations: [
@@ -29,9 +33,12 @@ import { MaintenancesheetPage } from '../pages/maintenancesheet/maintenancesheet
     InspectionsheetPage,
     MaintenancelistPage,
     MaintenancesheetPage,
+    AssetlistPage,
+    AssetPage,
     SettingPage
   ],
   imports: [
+    PipesModule,
     HttpClientModule,
     BrowserModule,
     IonicModule.forRoot(MyApp)
@@ -45,6 +52,8 @@ import { MaintenancesheetPage } from '../pages/maintenancesheet/maintenancesheet
     InspectionsheetPage,
     MaintenancelistPage,
     MaintenancesheetPage,
+    AssetlistPage,
+    AssetPage,
     SettingPage
   ],
   providers: [
@@ -55,7 +64,8 @@ import { MaintenancesheetPage } from '../pages/maintenancesheet/maintenancesheet
     StorageService,
     UserProvider,
     InspectionsheetProvider,
-    MaintenancesheetProvider
+    MaintenancesheetProvider,
+    WebApi,
   ]
 })
 export class AppModule {}

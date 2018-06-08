@@ -1,5 +1,5 @@
 import {FormControl } from '@angular/forms';
-
+//验证服务
 export class Validator {
     constructor() { }
 

@@ -1,9 +1,9 @@
 import { ToastController } from 'ionic-angular';
-
+//消息服务
 export class MessageService
 {
     constructor(public toastCtrl: ToastController) {}
-
+    //显示消息
     showInfo(msg){
         let toast = this.toastCtrl.create({
             message: msg, //提示消息
