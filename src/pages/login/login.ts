@@ -5,9 +5,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { UserProvider } from '../../providers/user/user';
 import { StorageService } from '../../providers/storageservice';
 import { UserData } from '../../models/userdata';
-import { TabsPage } from '../tabs/tabs';
 import { SysConfig } from '../../providers/sysconfig';
 import { MessageService } from '../../providers/messageservice';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -39,7 +39,7 @@ export class LoginPage {
     if(this.userProvider.login(userinfo))
     {
       this.storageService.write(SysConfig.StorageKey_UserInfoData, userinfo);
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.push(HomePage);
     }
     else
     {

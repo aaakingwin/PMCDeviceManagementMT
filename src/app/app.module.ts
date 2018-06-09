@@ -13,7 +13,6 @@ import { UserProvider } from '../providers/user/user';
 import { InspectionsheetProvider } from '../providers/inspectionsheet/inspectionsheet';
 import { MaintenancesheetProvider } from '../providers/maintenancesheet/maintenancesheet';
 import { LoginPage } from '../pages/login/login';
-import { TabsPage } from '../pages/tabs/tabs';
 import { InspectionlistPage } from '../pages/inspectionlist/inspectionlist';
 import { MaintenancelistPage } from '../pages/maintenancelist/maintenancelist';
 import { SettingPage } from '../pages/setting/setting';
@@ -23,12 +22,13 @@ import { AssetPage } from '../pages/asset/asset';
 import { AssetlistPage } from '../pages/assetlist/assetlist';
 import { PipesModule } from '../pipes/pipes.module';
 import { WebApi } from '../providers/webapi';
+import { HomePage } from '../pages/home/home';
 
 @NgModule({
   declarations: [
     MyApp,
-    TabsPage,
     LoginPage,
+    HomePage,
     InspectionlistPage,
     InspectionsheetPage,
     MaintenancelistPage,
@@ -46,8 +46,8 @@ import { WebApi } from '../providers/webapi';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    TabsPage,
     LoginPage,
+    HomePage,
     InspectionlistPage,
     InspectionsheetPage,
     MaintenancelistPage,
