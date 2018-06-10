@@ -16,7 +16,7 @@ export class SettingPage {
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      private storageService: StorageService) {
-      let userinfo = this.storageService.read<UserData>(SysConfig.StorageKey_UserInfoData);
+      let userinfo = this.storageService.read<UserData>(SysConfig.StorageKey_UserData);
       if(userinfo!=null)
       {
         this.userInfoData=userinfo;
@@ -26,7 +26,7 @@ export class SettingPage {
   ionViewDidLoad() {}
 
   logout(){
-    this.storageService.remove(SysConfig.StorageKey_UserInfoData);
+    this.storageService.remove(SysConfig.StorageKey_UserData);
     this.navCtrl.push(LoginPage);
   }
 }

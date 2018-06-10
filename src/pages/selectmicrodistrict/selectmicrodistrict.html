@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>小区</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list>
+    <button class="txt-h1" ion-item (click)="openItem(item)" *ngFor="let item of items">
+    {{item.Name}}
+    </button>
+  </ion-list>
+</ion-content>

@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SysConfig } from '../../providers/sysconfig';
 import { MaintenancesheetData } from '../../models/maintenancesheetdata';
 import { MaintenancesheetPage } from '../maintenancesheet/maintenancesheet';
-import { MaintenancesheetProvider } from '../../providers/maintenancesheet/maintenancesheet';
 
 @IonicPage()
 @Component({
@@ -11,12 +9,12 @@ import { MaintenancesheetProvider } from '../../providers/maintenancesheet/maint
   templateUrl: 'maintenancelist.html',
 })
 export class MaintenancelistPage {
-  headingText:string=SysConfig.AppHeadingText;
+  querydate:string;
   items: Array<MaintenancesheetData>;
   
   constructor(public navCtrl: NavController, 
-    public navParams: NavParams,
-    public maintenancesheetProvider:MaintenancesheetProvider) {
+    public navParams: NavParams) {
+      this.querydate=new Date().toISOString();
   }
 
   ionViewDidLoad() {    
@@ -24,23 +22,10 @@ export class MaintenancelistPage {
   }
 
   loadDataList(){
-    this.items=this.maintenancesheetProvider.getDataList();
+    
   }
-
-  apply() {    
-    let item = new MaintenancesheetData();
-    this.navCtrl.push(MaintenancesheetPage,{'data':item});
-  } 
 
   openPage(item) {
-    this.navCtrl.push(MaintenancesheetPage,{'data':item});
+    //this.navCtrl.push(MaintenancesheetPage,{'data':item});
   }
-
-  doRefresh(refresher) {
-    this.loadDataList();
-    setTimeout(() => {
-      refresher.complete();
-    }, 2000);
-  }
-
 }

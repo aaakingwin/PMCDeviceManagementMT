@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>维保</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+    <ion-item (click)="selectMicrodistrict()">
+      <label class="txt-h1">小区</label>
+      <label class="txt-h1" item-right>
+        {{microdistrict.Name}}&nbsp;
+        <ion-icon name="arrow-dropdown" item-right ></ion-icon>
+      </label>
+    </ion-item>
+    <ion-list>
+      <ion-item *ngFor="let a of assetlist">
+        <ion-item no-lines (click)="openListPage(a)">
+          <ion-thumbnail item-left>
+            <img src="./assets/imgs/{{a.AssetType | assetTypeImg}}" />
+          </ion-thumbnail>           
+          <label class="txt-h1">{{a.Name}}&nbsp;{{a.Model}}</label>
+          <br/>
+          <label class="txt-c1">{{a.Number}}</label>
+          <br/>
+          <label class="txt-c1">
+            <ion-icon name="pin"></ion-icon>
+            {{a.Microdistrict}}&nbsp;{{a.InstallLocation}}
+          </label>
+        </ion-item>
+        <button (click)="openPage(a)" item-right>维保</button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer class="footerbar">
+    <button ion-button block (click)="scan()" [disabled]="loading">
+      <ion-icon name="qr-scanner">&nbsp;&nbsp;&nbsp;扫描设备标签</ion-icon>        
+    </button>
+    <br/>
+  </ion-footer>
+  

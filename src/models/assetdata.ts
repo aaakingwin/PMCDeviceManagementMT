@@ -13,6 +13,7 @@ export class AssetData{
     PowerLocation:string;//电箱地点
     InstallLocation:string;//安装地点
     Remark:string;//备注
+    IsDisabled:boolean;//是否禁用
     CreatedTime:string;//创建时间
     LastModifyedTime:string;//最后修改时间
 }
@@ -26,4 +27,5 @@ export class AssetApi
 {
     static readonly GetAll:string='asset/all';
     static readonly GetMultiple='asset/multiple?';
+    static readonly GetSingle='asset/single?';
 }

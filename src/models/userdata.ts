@@ -1,6 +1,23 @@
 export class UserData {
-    LoginID:string;
-    LoginPwd:string;
-    UserName:string;
-    UserToken:string;
+    Token:string;
+    Id:string;
+    Name:string;
+    Password:string;
+    FullName:string;
+    Telephone:string;
+    RoleId:string;
+    EquipmentIdentity:string;
+    IsDisabled:boolean;
+    CreatedTime:string;
+    LastModifyedTime:string;
+}
+
+export class UserDTO
+{
+    Data:{Token:string};
+}
+
+export class UserApi{
+    static readonly GetSingle='user/single?';
+    static readonly PostLogin='authentication/login';
 }

@@ -3,28 +3,31 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>资产清单</ion-title>
+    <ion-title>资产</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-item>
-    <ion-label>小区</ion-label>
-    <ion-select [(ngModel)]="mid"  (ngModelChange)="getDataList()" interface="action-sheet" cancelText="取消">
-      <ion-option *ngFor="let m of microdistrictlist" value="{{m.Id}}">{{m.Name}}</ion-option> 
-    </ion-select>
+  <ion-item (click)="selectMicrodistrict()">
+    <label class="txt-h1">小区</label>
+    <label class="txt-h1" item-right>
+      {{microdistrict.Name}}&nbsp;
+      <ion-icon name="arrow-dropdown" item-right ></ion-icon>
+    </label>
   </ion-item>
   <ion-list>
     <ion-item *ngFor="let a of assetlist" (click)="openPage(a)">
       <ion-thumbnail item-left>
         <img src="./assets/imgs/{{a.AssetType | assetTypeImg}}" />
       </ion-thumbnail>
-      <p class="txt-h1">{{a.Name}}&nbsp;{{a.Model}}</p>
-      <p class="txt-p1">{{a.Number}}</p>
-      <p class="txt-p1">
+      <label class="txt-h1">{{a.Name}}&nbsp;{{a.Model}}</label>
+      <br/>
+      <label class="txt-c1">{{a.Number}}</label>
+      <br/>
+      <label class="txt-c1">
         <ion-icon name="pin"></ion-icon>
         {{a.Microdistrict}}&nbsp;{{a.InstallLocation}}
-      </p>
-  </ion-item>
-</ion-list>
+      </label>
+    </ion-item>
+  </ion-list>
 </ion-content>
 

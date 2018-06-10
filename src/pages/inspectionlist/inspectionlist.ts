@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { SysConfig } from '../../providers/sysconfig';
-import { InspectionsheetPage } from '../inspectionsheet/inspectionsheet';
-import { InspectionsheetProvider } from '../../providers/inspectionsheet/inspectionsheet';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { InspectionsheetData } from '../../models/inspectionsheetdata';
-import { MessageService } from '../../providers/messageservice';
+import { InspectionsheetPage } from '../inspectionsheet/inspectionsheet';
+import { WebApi } from '../../providers/webapi';
 
 @IonicPage()
 @Component({
@@ -12,55 +10,23 @@ import { MessageService } from '../../providers/messageservice';
   templateUrl: 'inspectionlist.html',
 })
 export class InspectionlistPage {
-  msg:MessageService=new MessageService(this.toastCtrl);
-  headingText:string=SysConfig.AppHeadingText;
+  querydate:string;
   items: Array<InspectionsheetData>;
 
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams,
-    public toastCtrl:ToastController,
-    public inspectionsheetProvider:InspectionsheetProvider) {}
+  constructor(public navCtrl: NavController,public navParams: NavParams,public webApi:WebApi) 
+    {
+      this.querydate=new Date().toISOString();
+    }
 
   ionViewDidLoad() {    
     this.loadDataList();
   }
 
-  scanCallback =(text) => {
-    try {
-      let data=this.inspectionsheetProvider.convertToData(text);      
-      if(data!=null)
-      {        
-        this.navCtrl.pop(); 
-        this.navCtrl.push(InspectionsheetPage,{'data':data});
-      }
-      else
-      {
-        this.msg.showInfo('无效的二维码！');
-        this.navCtrl.pop(); 
-      }
-    }
-    catch (err) {
-      this.msg.showInfo('无效的二维码！');
-      this.navCtrl.pop();  
-    }
-  }
-
   loadDataList(){
-    this.items=this.inspectionsheetProvider.getDataList();
-  }
 
-  scan() {    
-    this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
-  } 
-
-  doRefresh(refresher) {
-    this.loadDataList();
-    setTimeout(() => {
-      refresher.complete();
-    }, 2000);
   }
 
   openPage(item) {
-    this.navCtrl.push(InspectionsheetPage,{'data':item});
+    this.navCtrl.push(InspectionsheetPage,{'item':item});
   }
 }

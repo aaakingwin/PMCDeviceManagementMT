@@ -9,9 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 
 import { StorageService } from '../providers/storageservice';
-import { UserProvider } from '../providers/user/user';
-import { InspectionsheetProvider } from '../providers/inspectionsheet/inspectionsheet';
-import { MaintenancesheetProvider } from '../providers/maintenancesheet/maintenancesheet';
 import { LoginPage } from '../pages/login/login';
 import { InspectionlistPage } from '../pages/inspectionlist/inspectionlist';
 import { MaintenancelistPage } from '../pages/maintenancelist/maintenancelist';
@@ -23,6 +20,12 @@ import { AssetlistPage } from '../pages/assetlist/assetlist';
 import { PipesModule } from '../pipes/pipes.module';
 import { WebApi } from '../providers/webapi';
 import { HomePage } from '../pages/home/home';
+import { SelectmicrodistrictPage } from '../pages/selectmicrodistrict/selectmicrodistrict';
+import { AssetinspectionPage } from '../pages/assetinspection/assetinspection';
+import { AssetmaintenancePage } from '../pages/assetmaintenance/assetmaintenance';
+import { MessageService } from '../providers/messageservice';
+import { AssetinspectionrecordPage } from '../pages/assetinspectionrecord/assetinspectionrecord';
+import { AssetmaintenancerecordPage } from '../pages/assetmaintenancerecord/assetmaintenancerecord';
 
 @NgModule({
   declarations: [
@@ -33,8 +36,13 @@ import { HomePage } from '../pages/home/home';
     InspectionsheetPage,
     MaintenancelistPage,
     MaintenancesheetPage,
+    AssetinspectionPage,
+    AssetmaintenancePage,
+    AssetinspectionrecordPage,
+    AssetmaintenancerecordPage,
     AssetlistPage,
     AssetPage,
+    SelectmicrodistrictPage,
     SettingPage
   ],
   imports: [
@@ -52,8 +60,13 @@ import { HomePage } from '../pages/home/home';
     InspectionsheetPage,
     MaintenancelistPage,
     MaintenancesheetPage,
+    AssetinspectionPage,
+    AssetmaintenancePage,
+    AssetinspectionrecordPage,
+    AssetmaintenancerecordPage,
     AssetlistPage,
     AssetPage,
+    SelectmicrodistrictPage,
     SettingPage
   ],
   providers: [
@@ -62,9 +75,6 @@ import { HomePage } from '../pages/home/home';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     StorageService,
-    UserProvider,
-    InspectionsheetProvider,
-    MaintenancesheetProvider,
     WebApi,
   ]
 })

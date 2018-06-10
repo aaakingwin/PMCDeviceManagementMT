@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { SysConfig } from '../../providers/sysconfig';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { InspectionsheetData } from '../../models/inspectionsheetdata';
-import { InspectionsheetProvider } from '../../providers/inspectionsheet/inspectionsheet';
 import { MessageService } from '../../providers/messageservice';
 
 @IonicPage()
@@ -13,17 +11,15 @@ import { MessageService } from '../../providers/messageservice';
 })
 export class InspectionsheetPage {
   msg:MessageService=new MessageService(this.toastCtrl);
-  headingText:string=SysConfig.AppHeadingText;
   item:InspectionsheetData;
   inspectionSheetForm:FormGroup;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public formBuilder: FormBuilder,
-    public toastCtrl:ToastController,
-    public inspectionsheetProvider:InspectionsheetProvider) 
+    public toastCtrl:ToastController) 
   {
-    this.item=this.navParams.get('data');  
+    this.item=new  InspectionsheetData();
     this.inspectionSheetForm= this.formBuilder.group({
       'AnomalyDescription': [this.item.AnomalyDescription,  [Validators.required, Validators.minLength(1)]]
     });  
@@ -32,7 +28,7 @@ export class InspectionsheetPage {
   ionViewDidLoad() {}
 
   save(data, _event) {    
-    _event.preventDefault();//该方法将通知 Web 浏览器不要执行与事件关联的默认动作
+    /* _event.preventDefault();//该方法将通知 Web 浏览器不要执行与事件关联的默认动作
     if(this.item.DeviceStatus==null)
     {
       this.msg.showInfo('请选择巡检情况！');
@@ -48,7 +44,7 @@ export class InspectionsheetPage {
       else
       {
         this.msg.showInfo('保存失败！');
-      }
-    }
+      } 
+    }*/
   }
 }

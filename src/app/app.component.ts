@@ -10,6 +10,10 @@ import { SysConfig } from '../providers/sysconfig';
 import { StorageService } from '../providers/storageservice';
 import { AssetlistPage } from '../pages/assetlist/assetlist';
 import { HomePage } from '../pages/home/home';
+import { AssetinspectionPage } from '../pages/assetinspection/assetinspection';
+import { AssetmaintenancePage } from '../pages/assetmaintenance/assetmaintenance';
+import { InspectionlistPage } from '../pages/inspectionlist/inspectionlist';
+import { MaintenancelistPage } from '../pages/maintenancelist/maintenancelist';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,8 +27,12 @@ export class MyApp {
     this.initializeApp();
     this.login();
     this.pages = [
-      {title: '主页', component: HomePage },
-      {title: '资产清单', component: AssetlistPage},
+      {title: '首页', component: HomePage },
+      {title: '巡检', component: AssetinspectionPage},
+      {title: '维保', component: AssetmaintenancePage},
+      {title: '巡检记录', component: InspectionlistPage},
+      {title: '维保记录', component: MaintenancelistPage},
+      {title: '资产', component: AssetlistPage},
       {title: '系统设置', component: SettingPage}
     ];    
   }
@@ -32,8 +40,8 @@ export class MyApp {
   login()
   {
     //判断用户是否已经登录
-    let userinfo = this.storageService.read<UserData>(SysConfig.StorageKey_UserInfoData);
-     if(userinfo!=null)
+    let userdata = this.storageService.read<UserData>(SysConfig.StorageKey_UserData);
+     if(userdata!=null)
     {
       this.rootPage=HomePage;
     }
