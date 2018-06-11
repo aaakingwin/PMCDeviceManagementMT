@@ -19,20 +19,29 @@
     <ion-label class="txt-c1">巡检时间</ion-label>
     <ion-item class="txt-c2">{{inspectionsheetData.InspectionDate}} </ion-item> 
     <ion-label class="txt-c1">资产状态</ion-label>
-    <ion-item>
-        <ion-select [(ngModel)]="AssetStatus">
-            <ion-option value="nes">NES</ion-option>
-            <ion-option value="n64">Nintendo64</ion-option>
-        </ion-select>
-    </ion-item>
+    <div class="div-item-{{optType}}">
+        <ion-item class="txt-c2">{{inspectionsheetData.AssetStatus}} </ion-item> 
+    </div>   
+    <div class="div-form-{{optType}}">   
+        <ion-item>
+            <ion-select class="txt-c2" [(ngModel)]="assetStatusId" interface="popover">
+                <ion-option *ngFor="let a of assetStatusList" value="{{a.Id}}" >{{a.Name}}</ion-option>
+            </ion-select>
+        </ion-item>
+    </div>   
     <ion-label class="txt-c1">情况描述</ion-label>
-    <form [formGroup]="inspectionSheetForm">        
-        <ion-item>  
-            <p class="required-field" *ngIf="!inspectionSheetForm.controls.Description.valid && inspectionSheetForm.controls.Description.touched" color="danger" item-left>*</p>              
-            <ion-input class="txt-c2" type="text" formControlName="Description"></ion-input>
-        </ion-item>            
-        <br/>
-        <button ion-button full (click)="save(inspectionSheetForm.value, $event)" [disabled]="!inspectionSheetForm.valid">保存</button>
-        <br/>
-    </form>
+    <div class="div-item-{{optType}}" >
+        <ion-item class="txt-c2">{{inspectionsheetData.Description}} </ion-item> 
+    </div>
+    <div class="div-form-{{optType}}" >
+        <form [formGroup]="inspectionSheetForm">        
+            <ion-item>  
+                <p class="required-field" *ngIf="!inspectionSheetForm.controls.Description.valid && inspectionSheetForm.controls.Description.touched" color="danger" item-left>*</p>              
+                <ion-input class="txt-c2" type="text" formControlName="Description"></ion-input>
+            </ion-item>            
+            <br/>
+            <button ion-button full (click)="save(inspectionSheetForm.value, $event)" [disabled]="!inspectionSheetForm.valid">保存</button>
+            <br/>
+        </form>
+    </div>
 </ion-content>

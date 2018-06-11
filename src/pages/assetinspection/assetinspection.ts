@@ -73,7 +73,7 @@ export class AssetinspectionPage {
         {
           let assetdata=res.Data[0];
           this.navCtrl.pop(); 
-          this.navCtrl.push(InspectionsheetPage,{'item':assetdata});
+          this.navCtrl.push(InspectionsheetPage,{'asset':assetdata,'optType':SysConfig.OperationType_Create});
         }
         else
         {

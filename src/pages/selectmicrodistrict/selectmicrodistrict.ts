@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { MicrodistrictData, MicrodistrictDTO, MicrodistrictApi } from '../../models/microdistrictdata';
 import { WebApi } from '../../providers/webapi';
 import { MessageService } from '../../providers/messageservice';
+import { StorageService } from '../../providers/storageservice';
+import { SysConfig } from '../../providers/sysconfig';
 
 @IonicPage()
 @Component({
@@ -47,6 +49,7 @@ export class SelectmicrodistrictPage {
 
   openItem(item)
   {
+    StorageService.write(SysConfig.StorageKey_SelectedMicrodistrict,item);
     this.callback(item);
   }
 }
