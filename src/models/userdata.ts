@@ -15,6 +15,8 @@ export class UserData {
 export class UserDTO
 {
     Data:{Token:string};
+    Success:string;
+    Message:string;
 }
 
 export class UserApi{

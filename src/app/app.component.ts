@@ -2,9 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav,Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { LoginPage } from '../pages/login/login';
-import { SettingPage } from '../pages/setting/setting';
 import { UserData } from '../models/userdata';
 import { SysConfig } from '../providers/sysconfig';
 import { StorageService } from '../providers/storageservice';
@@ -23,7 +21,7 @@ export class MyApp {
   rootPage: any;
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public storageService: StorageService) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     this.login();
     this.pages = [
@@ -32,15 +30,14 @@ export class MyApp {
       {title: '维保', component: AssetmaintenancePage},
       {title: '巡检记录', component: InspectionlistPage},
       {title: '维保记录', component: MaintenancelistPage},
-      {title: '资产', component: AssetlistPage},
-      {title: '系统设置', component: SettingPage}
+      {title: '资产', component: AssetlistPage}
     ];    
   }
 
   login()
   {
     //判断用户是否已经登录
-    let userdata = this.storageService.read<UserData>(SysConfig.StorageKey_UserData);
+    let userdata = StorageService.read<UserData>(SysConfig.StorageKey_UserData);
      if(userdata!=null)
     {
       this.rootPage=HomePage;

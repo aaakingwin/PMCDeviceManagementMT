@@ -15,8 +15,9 @@ export class WebApi {
     return this.http.get<T>(this.rootUrl+api);
   }
   //Post方法
-  post<T>(api:string,body:any)
+  post<T>(api:string,param:any)
   {
+    let body = JSON.stringify(param);
     let headers = new HttpHeaders().set("Content-Type", "application/json");
     return this.http.post<T>(this.rootUrl+api, body, { headers });
   }

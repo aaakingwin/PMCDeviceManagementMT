@@ -13,7 +13,6 @@ import { StorageService } from '../../providers/storageservice';
   templateUrl: 'maintenancesheet.html',
 })
 export class MaintenancesheetPage {
-  msg:MessageService=new MessageService(this.toastCtrl);
   item:MaintenancesheetData;
   maintenanceSheetForm:FormGroup;
   userinfo:UserData;
@@ -25,7 +24,7 @@ export class MaintenancesheetPage {
     public toastCtrl:ToastController,
     public storageService: StorageService) {
       this.item=new MaintenancesheetData(); 
-      this.userinfo = this.storageService.read<UserData>(SysConfig.StorageKey_UserData);  
+      this.userinfo = StorageService.read<UserData>(SysConfig.StorageKey_UserData);  
       this.userinfo.Name='abc';
       this.applicationDate= new Date().toLocaleDateString();
       this.maintenanceSheetForm= this.formBuilder.group({

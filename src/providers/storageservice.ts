@@ -2,14 +2,14 @@
 export class StorageService {
     constructor() { }
     //写入
-    write(key: string, value: any) {
+    static write(key: string, value: any) {
         if (value) {
             value = JSON.stringify(value);
         }
         localStorage.setItem(key, value);
     }
     //读取
-    read<T>(key: string): T {
+    static read<T>(key: string): T {
         let value: string = localStorage.getItem(key);
         if (value && value != "undefined" && value != "null") {
             return <T>JSON.parse(value);
@@ -20,11 +20,11 @@ export class StorageService {
         }        
     }
     //移除
-    remove(key: string) {
+    static remove(key: string) {
         localStorage.removeItem(key);
     }
     //清空
-    clear() {
+    static clear() {
         sessionStorage.clear();
     }
 }

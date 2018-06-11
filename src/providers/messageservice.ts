@@ -2,10 +2,10 @@ import { ToastController } from 'ionic-angular';
 //消息服务
 export class MessageService
 {
-    constructor(public toastCtrl: ToastController) {}
+    constructor() {}
     //显示消息
-    showInfo(msg){
-        let toast = this.toastCtrl.create({
+    static showInfo(toastCtrl: ToastController,msg:string){
+        let toast = toastCtrl.create({
             message: msg, //提示消息
             duration: 2000,//自动消失
             position: 'middle',//位置top,bottom,middle
@@ -14,5 +14,5 @@ export class MessageService
         });
         //显示toast
         toast.present();//符合触发条件后立即执行显示。
-      }
+    }
 }

@@ -14,7 +14,6 @@ import { AssetinspectionrecordPage } from '../assetinspectionrecord/assetinspect
   templateUrl: 'assetinspection.html',
 })
 export class AssetinspectionPage {
-  msg:MessageService=new MessageService(this.toastCtrl);
   assetlist: AssetData[];
   microdistrict:MicrodistrictData;
   constructor(public navCtrl: NavController, public navParams: NavParams, 
@@ -71,14 +70,14 @@ export class AssetinspectionPage {
         }
         else
         {
-          this.msg.showInfo('无效的二维码！');
+          //this.msg.showInfo('无效的二维码！');
           this.navCtrl.pop(); 
         }      
       });    
     }
     else
     {
-      this.msg.showInfo('无效的二维码！');
+      //this.msg.showInfo('无效的二维码！');
       this.navCtrl.pop(); 
     }
   }

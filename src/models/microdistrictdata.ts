@@ -11,6 +11,8 @@ export class MicrodistrictData
 export class MicrodistrictDTO
 {
     Data:MicrodistrictData[];
+    Success:string;
+    Message:string;
 }
 
 export class MicrodistrictApi

@@ -5,7 +5,6 @@ import { WebApi } from '../../providers/webapi';
 import { AssetData, AssetDTO, AssetApi } from '../../models/assetdata';
 import { MicrodistrictData } from '../../models/microdistrictdata';
 import { SelectmicrodistrictPage } from '../selectmicrodistrict/selectmicrodistrict';
-import { MessageService } from '../../providers/messageservice';
 
 @IonicPage()
 @Component({
@@ -13,7 +12,6 @@ import { MessageService } from '../../providers/messageservice';
   templateUrl: 'assetlist.html',
 })
 export class AssetlistPage {
-  msg:MessageService=new MessageService(this.toastCtrl);
   assetlist: AssetData[];
   microdistrict:MicrodistrictData;
   constructor(public navCtrl: NavController, public navParams: NavParams, 

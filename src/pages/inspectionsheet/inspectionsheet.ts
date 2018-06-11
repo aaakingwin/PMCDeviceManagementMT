@@ -10,7 +10,6 @@ import { MessageService } from '../../providers/messageservice';
   templateUrl: 'inspectionsheet.html',
 })
 export class InspectionsheetPage {
-  msg:MessageService=new MessageService(this.toastCtrl);
   item:InspectionsheetData;
   inspectionSheetForm:FormGroup;
 

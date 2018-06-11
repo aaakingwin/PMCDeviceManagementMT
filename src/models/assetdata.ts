@@ -21,6 +21,8 @@ export class AssetData{
 export class AssetDTO
 {
     Data:AssetData[];
+    Success:string;
+    Message:string;
 }
 //资产API
 export class AssetApi

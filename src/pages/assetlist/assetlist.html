@@ -16,14 +16,12 @@
   </ion-item>
   <ion-list>
     <ion-item *ngFor="let a of assetlist" (click)="openPage(a)">
-      <ion-thumbnail item-left>
-        <img src="./assets/imgs/{{a.AssetType | assetTypeImg}}" />
-      </ion-thumbnail>
+      <img class="assettypeimg" item-left src="./assets/imgs/{{a.AssetType | assetTypeImg}}" />
       <label class="txt-h1">{{a.Name}}&nbsp;{{a.Model}}</label>
       <br/>
-      <label class="txt-c1">{{a.Number}}</label>
+      <label class="txt-c2">{{a.Number}}</label>
       <br/>
-      <label class="txt-c1">
+      <label class="txt-c2">
         <ion-icon name="pin"></ion-icon>
         {{a.Microdistrict}}&nbsp;{{a.InstallLocation}}
       </label>

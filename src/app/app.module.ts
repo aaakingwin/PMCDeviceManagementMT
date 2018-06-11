@@ -5,14 +5,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { QRScanner } from '@ionic-native/qr-scanner';
 import { HttpClientModule } from '@angular/common/http';
-
 import { MyApp } from './app.component';
-
 import { StorageService } from '../providers/storageservice';
 import { LoginPage } from '../pages/login/login';
 import { InspectionlistPage } from '../pages/inspectionlist/inspectionlist';
 import { MaintenancelistPage } from '../pages/maintenancelist/maintenancelist';
-import { SettingPage } from '../pages/setting/setting';
 import { InspectionsheetPage } from '../pages/inspectionsheet/inspectionsheet';
 import { MaintenancesheetPage } from '../pages/maintenancesheet/maintenancesheet';
 import { AssetPage } from '../pages/asset/asset';
@@ -42,8 +39,7 @@ import { AssetmaintenancerecordPage } from '../pages/assetmaintenancerecord/asse
     AssetmaintenancerecordPage,
     AssetlistPage,
     AssetPage,
-    SelectmicrodistrictPage,
-    SettingPage
+    SelectmicrodistrictPage
   ],
   imports: [
     PipesModule,
@@ -66,8 +62,7 @@ import { AssetmaintenancerecordPage } from '../pages/assetmaintenancerecord/asse
     AssetmaintenancerecordPage,
     AssetlistPage,
     AssetPage,
-    SelectmicrodistrictPage,
-    SettingPage
+    SelectmicrodistrictPage
   ],
   providers: [
     QRScanner,
@@ -75,6 +70,7 @@ import { AssetmaintenancerecordPage } from '../pages/assetmaintenancerecord/asse
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     StorageService,
+    MessageService,
     WebApi,
   ]
 })
