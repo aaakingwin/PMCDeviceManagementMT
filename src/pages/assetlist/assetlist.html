@@ -5,8 +5,6 @@
     </button>
     <ion-title>资产</ion-title>
   </ion-navbar>
-</ion-header>
-<ion-content padding>
   <ion-item (click)="selectMicrodistrict()">
     <label class="txt-h1">小区</label>
     <label class="txt-h1" item-right>
@@ -14,6 +12,8 @@
       <ion-icon name="arrow-dropdown" item-right ></ion-icon>
     </label>
   </ion-item>
+</ion-header>
+<ion-content padding>
   <ion-list>
     <ion-item *ngFor="let a of assetlist" (click)="openPage(a)">
       <img class="assettypeimg" item-left src="./assets/imgs/{{a.AssetType | assetTypeImg}}" />

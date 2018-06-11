@@ -33,12 +33,11 @@ export class LoginPage {
     userdata.Name=user.LoginID;
     userdata.Password=user.LoginPwd;    
     this.webApi.post<UserDTO>(UserApi.PostLogin,userdata).subscribe(res => {
-        userdata.Token=res.Data.Token;
-        StorageService.write(SysConfig.StorageKey_UserData, userdata);
-        this.navCtrl.setRoot(HomePage);
-      }, error => {
-        MessageService.showInfo(this.toastCtrl,'用户名或密码错误！');
-      }
-    ); 
+      userdata.Token=res.Data.Token;
+      StorageService.write(SysConfig.StorageKey_UserData, userdata);
+      this.navCtrl.setRoot(HomePage);
+    }, error => {
+      MessageService.showWebApiError(this.toastCtrl,error);  
+    }); 
   }  
 }

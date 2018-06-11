@@ -33,7 +33,7 @@ export class AssetmaintenancePage {
   }
 
   loadDataList(){
-    this.webApi.get<AssetDTO>(AssetApi.GetMultiple+'microdistrictid='+this.microdistrict.Id).subscribe(res => {
+    this.webApi.get<AssetDTO>(AssetApi.GetMultipleByMicrodistrictid+this.microdistrict.Id).subscribe(res => {
       this.assetlist=res.Data;
     });
   }
@@ -61,7 +61,7 @@ export class AssetmaintenancePage {
   scanCallback =(text) => {   
     if(text!=null)
     {     
-      this.webApi.get<AssetDTO>(AssetApi.GetSingle+"number="+text).subscribe(res => {
+      this.webApi.get<AssetDTO>(AssetApi.GetSingleByNumber+text).subscribe(res => {
         if(res.Data.length>0)
         {
           let assetdata=res.Data[0];

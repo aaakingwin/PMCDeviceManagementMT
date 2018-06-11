@@ -11,6 +11,10 @@ export class AssetPage {
   item:AssetData;
   constructor(public navCtrl: NavController, public navParams: NavParams ) {
     this.item=this.navParams.get('item'); 
+    if(this.item==null)
+    {
+      this.item=new AssetData();
+    }
   }
 
   ionViewDidLoad() {}

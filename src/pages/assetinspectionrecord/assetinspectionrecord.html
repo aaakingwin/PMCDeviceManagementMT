@@ -1,18 +1,19 @@
-<!--
-  Generated template for the AssetinspectionrecordPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>assetinspectionrecord</ion-title>
+    <ion-title>巡检记录</ion-title>
   </ion-navbar>
-
+  <ion-item>
+    <img class="assettypeimg" item-left src="./assets/imgs/{{assetdata.AssetType | assetTypeImg}}" />
+    <label class="txt-h1">{{assetdata.Name}}</label>
+    <br/>
+    <label class="txt-c2">{{assetdata.Number}}</label>
+  </ion-item>
 </ion-header>
-
-
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let item of items" (click)="openPage(item)">
+      <label class="txt-h1">{{item.InspectionDate}}</label>
+      <img class="itemstatusimg" item-right src="./assets/imgs/{{item.AssetStatus | itemStatusImg}}" />
+    </ion-item>
+  </ion-list>
 </ion-content>

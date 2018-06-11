@@ -11,11 +11,12 @@ export class MicrodistrictData
 export class MicrodistrictDTO
 {
     Data:MicrodistrictData[];
-    Success:string;
+    Success:boolean;
     Message:string;
+    Count:number;
 }
 
 export class MicrodistrictApi
 {
-    static readonly GetAll:string='microdistrict/all';
+    static readonly GetAll='microdistrict/all';
 }

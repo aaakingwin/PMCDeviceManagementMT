@@ -5,8 +5,6 @@
       </button>
       <ion-title>维保</ion-title>
     </ion-navbar>
-  </ion-header>
-  <ion-content padding>
     <ion-item (click)="selectMicrodistrict()">
       <label class="txt-h1">小区</label>
       <label class="txt-h1" item-right>
@@ -14,6 +12,8 @@
         <ion-icon name="arrow-dropdown" item-right ></ion-icon>
       </label>
     </ion-item>
+  </ion-header>
+  <ion-content padding>
     <ion-list>
       <ion-item *ngFor="let a of assetlist">
         <ion-item no-lines (click)="openListPage(a)">
@@ -37,6 +37,5 @@
     <button ion-button block (click)="scan()" [disabled]="loading">
       <ion-icon name="qr-scanner">&nbsp;&nbsp;&nbsp;扫描设备标签</ion-icon>        
     </button>
-    <br/>
   </ion-footer>
   

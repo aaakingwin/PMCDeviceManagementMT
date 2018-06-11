@@ -15,11 +15,11 @@ export class UserData {
 export class UserDTO
 {
     Data:{Token:string};
-    Success:string;
+    Success:boolean;
     Message:string;
+    Count:number;
 }
 
 export class UserApi{
-    static readonly GetSingle='user/single?';
     static readonly PostLogin='authentication/login';
 }

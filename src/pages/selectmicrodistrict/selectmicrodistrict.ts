@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { MicrodistrictData, MicrodistrictDTO, MicrodistrictApi } from '../../models/microdistrictdata';
 import { WebApi } from '../../providers/webapi';
+import { MessageService } from '../../providers/messageservice';
 
 @IonicPage()
 @Component({
@@ -12,7 +13,7 @@ export class SelectmicrodistrictPage {
   callback;//回调函数
   microdistrictlist:MicrodistrictData[];
   items:MicrodistrictData[];
-  constructor(public navCtrl: NavController, public navParams: NavParams,public webApi:WebApi) 
+  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,public webApi:WebApi) 
   {
     this.callback = this.navParams.get("callback");
   }
@@ -26,7 +27,9 @@ export class SelectmicrodistrictPage {
     this.webApi.get<MicrodistrictDTO>(MicrodistrictApi.GetAll).subscribe(res=>{
       this.microdistrictlist=res.Data;
       this.items=this.microdistrictlist;
-    });
+    }, error => {
+      MessageService.showWebApiError(this.toastCtrl,error);  
+    }); 
   }
 
   getItems(ev) {

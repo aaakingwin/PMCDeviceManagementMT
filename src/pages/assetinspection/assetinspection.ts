@@ -7,6 +7,7 @@ import { MicrodistrictData } from '../../models/microdistrictdata';
 import { SelectmicrodistrictPage } from '../selectmicrodistrict/selectmicrodistrict';
 import { InspectionsheetPage } from '../inspectionsheet/inspectionsheet';
 import { AssetinspectionrecordPage } from '../assetinspectionrecord/assetinspectionrecord';
+import { SysConfig } from '../../providers/sysconfig';
 
 @IonicPage()
 @Component({
@@ -26,16 +27,18 @@ export class AssetinspectionPage {
   }
 
   ionViewDidLoad() {
-    if(this.microdistrict!=null)
-    {
-      this.loadDataList();
-    }
+    this.loadDataList();
   }
 
   loadDataList(){
-    this.webApi.get<AssetDTO>(AssetApi.GetMultiple+'microdistrictid='+this.microdistrict.Id).subscribe(res => {
-      this.assetlist=res.Data;
-    });
+    if(this.microdistrict!=null && this.microdistrict.Id!=null && this.microdistrict.Id!='undefined')
+    {
+      this.webApi.get<AssetDTO>(AssetApi.GetMultipleByMicrodistrictid+this.microdistrict.Id).subscribe(res => {
+        this.assetlist=res.Data;
+      }, error => {
+        MessageService.showWebApiError(this.toastCtrl,error);  
+      }); 
+    }
   }
 
   openListPage(item) {    
@@ -43,7 +46,7 @@ export class AssetinspectionPage {
   }
 
   openPage(item) {    
-    this.navCtrl.push(InspectionsheetPage,{'item':item});
+    this.navCtrl.push(InspectionsheetPage,{'asset':item,'optType':SysConfig.OperationType_Create});
   }
 
   selectMicrodistrict(){
@@ -58,11 +61,15 @@ export class AssetinspectionPage {
     }
   }
 
+  scan() {    
+    this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
+  } 
+
   scanCallback =(text) => {   
-    if(text!=null)
+    if(text!=null && text!='undefined')
     {     
-      this.webApi.get<AssetDTO>(AssetApi.GetSingle+"number="+text).subscribe(res => {
-        if(res.Data.length>0)
+      this.webApi.get<AssetDTO>(AssetApi.GetSingleByNumber+text).subscribe(res => {
+        if(res.Count>0)
         {
           let assetdata=res.Data[0];
           this.navCtrl.pop(); 
@@ -70,20 +77,18 @@ export class AssetinspectionPage {
         }
         else
         {
-          //this.msg.showInfo('无效的二维码！');
+          MessageService.showInfo(this.toastCtrl,res.Message);
           this.navCtrl.pop(); 
         }      
-      });    
+      }, error => {
+        MessageService.showWebApiError(this.toastCtrl,error);  
+        this.navCtrl.pop();
+      }); 
     }
     else
     {
-      //this.msg.showInfo('无效的二维码！');
+      MessageService.showInfo(this.toastCtrl,'无效的二维码！');
       this.navCtrl.pop(); 
     }
-  }
-
-  scan() {    
-    this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
   } 
-
 }

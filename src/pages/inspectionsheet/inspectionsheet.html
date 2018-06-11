@@ -3,46 +3,36 @@
         <ion-title>巡检单</ion-title>
     </ion-navbar>
 </ion-header>
-<ion-content padding>   
+<ion-content padding>  
     <ion-item>
-        <ion-thumbnail item-left>
-            <img src="./assets/imgs/xjsb.jpg" />
-        </ion-thumbnail>
-        <p class="h-word">{{item.DeviceName}}</p> 
-    </ion-item>
-        <p class="h-word">
-        设备位置
-        </p>
-        <ion-label class="grey-word">小区名称</ion-label>
-        <ion-item> {{item.Address}}</ion-item>   
-        <ion-label class="grey-word">安装位置</ion-label>
-        <ion-item>{{item.InstallationPosition}}</ion-item>
+        <img class="assettypeimg" item-left src="./assets/imgs/{{assetData.AssetType | assetTypeImg}}" />
+        <label class="txt-h1">{{assetData.Name}}</label>
         <br/>
-        <p class="h-word">
-        巡检情况
-        </p>
-        <ion-list radio-group [(ngModel)]="item.DeviceStatus">
-            <ion-item>    
-                <ion-label>设备正常</ion-label>                
-                <ion-radio value="正常"></ion-radio>                    
-            </ion-item>
-            <ion-item>     
-                <ion-label>设备异常</ion-label>               
-                <ion-radio value="异常"></ion-radio>                    
-            </ion-item>
-            <ion-item>        
-                <ion-label>设备丢失</ion-label>            
-                <ion-radio value="丢失"></ion-radio>                    
-            </ion-item>
-        </ion-list>      
-        <form [formGroup]="inspectionSheetForm">    
-            <ion-label class="grey-word">异常情况描述</ion-label>
-            <ion-item>  
-                <p class="required-field" *ngIf="!inspectionSheetForm.controls.AnomalyDescription.valid && inspectionSheetForm.controls.AnomalyDescription.touched" color="danger" item-left>*</p>              
-                <ion-input type="text" formControlName="AnomalyDescription"></ion-input>
-            </ion-item>            
-            <br/>
-            <button ion-button full (click)="save(inspectionSheetForm.value, $event)" [disabled]="!inspectionSheetForm.valid">保存</button>
-            <br/>
-        </form>
+        <label class="txt-c2">{{assetData.Number}}</label>
+    </ion-item> 
+    <ion-label class="txt-c1">小区名称</ion-label>
+    <ion-item class="txt-c2">{{assetData.Microdistrict}} </ion-item>   
+    <ion-label class="txt-c1">安装位置</ion-label>
+    <ion-item class="txt-c2">{{assetData.InstallLocation}}</ion-item>
+    <ion-label class="txt-c1">巡检员</ion-label>
+    <ion-item class="txt-c2">{{inspectionsheetData.Inspector}} </ion-item>   
+    <ion-label class="txt-c1">巡检时间</ion-label>
+    <ion-item class="txt-c2">{{inspectionsheetData.InspectionDate}} </ion-item> 
+    <ion-label class="txt-c1">资产状态</ion-label>
+    <ion-item>
+        <ion-select [(ngModel)]="AssetStatus">
+            <ion-option value="nes">NES</ion-option>
+            <ion-option value="n64">Nintendo64</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-label class="txt-c1">情况描述</ion-label>
+    <form [formGroup]="inspectionSheetForm">        
+        <ion-item>  
+            <p class="required-field" *ngIf="!inspectionSheetForm.controls.Description.valid && inspectionSheetForm.controls.Description.touched" color="danger" item-left>*</p>              
+            <ion-input class="txt-c2" type="text" formControlName="Description"></ion-input>
+        </ion-item>            
+        <br/>
+        <button ion-button full (click)="save(inspectionSheetForm.value, $event)" [disabled]="!inspectionSheetForm.valid">保存</button>
+        <br/>
+    </form>
 </ion-content>

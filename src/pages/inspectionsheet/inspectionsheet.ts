@@ -3,6 +3,11 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { InspectionsheetData } from '../../models/inspectionsheetdata';
 import { MessageService } from '../../providers/messageservice';
+import { AssetData } from '../../models/assetdata';
+import { WebApi } from '../../providers/webapi';
+import { SysConfig } from '../../providers/sysconfig';
+import { StorageService } from '../../providers/storageservice';
+import { UserData } from '../../models/userdata';
 
 @IonicPage()
 @Component({
@@ -10,21 +15,40 @@ import { MessageService } from '../../providers/messageservice';
   templateUrl: 'inspectionsheet.html',
 })
 export class InspectionsheetPage {
-  item:InspectionsheetData;
+  inspectionsheetData:InspectionsheetData;
+  assetData:AssetData
   inspectionSheetForm:FormGroup;
-
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams,
-    public formBuilder: FormBuilder,
-    public toastCtrl:ToastController) 
+  optType:string;
+  constructor(public navCtrl: NavController,public navParams: NavParams,public formBuilder: FormBuilder,
+    public toastCtrl:ToastController,public webApi:WebApi) 
   {
-    this.item=new  InspectionsheetData();
+    this.optType=this.navParams.get('optType');
+    this.inspectionsheetData=this.navParams.get('inspectionsheet');
+    this.assetData=this.navParams.get('asset');
+    if(this.optType==SysConfig.OperationType_See)
+    {
+     
+    }   
+    if(this.inspectionsheetData==null)
+    {
+      let userdata = StorageService.read<UserData>(SysConfig.StorageKey_UserData);
+      this.inspectionsheetData=new InspectionsheetData();
+      this.inspectionsheetData.Inspector=userdata.FullName;
+      this.inspectionsheetData.InspectionDate=new Date().toLocaleDateString();
+    }
+    if(this.assetData==null)
+    {
+      this.assetData=new AssetData();
+    }
     this.inspectionSheetForm= this.formBuilder.group({
-      'AnomalyDescription': [this.item.AnomalyDescription,  [Validators.required, Validators.minLength(1)]]
+      'Description': [this.inspectionsheetData.Description,  [Validators.required, Validators.minLength(1)]]
     });  
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() 
+  {
+
+  }
 
   save(data, _event) {    
     /* _event.preventDefault();//该方法将通知 Web 浏览器不要执行与事件关联的默认动作

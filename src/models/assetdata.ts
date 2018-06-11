@@ -21,13 +21,14 @@ export class AssetData{
 export class AssetDTO
 {
     Data:AssetData[];
-    Success:string;
+    Success:boolean;
     Message:string;
+    Count:number;
 }
 //资产API
 export class AssetApi
 {
-    static readonly GetAll:string='asset/all';
-    static readonly GetMultiple='asset/multiple?';
-    static readonly GetSingle='asset/single?';
+    static readonly GetAll='asset/all';
+    static readonly GetMultipleByMicrodistrictid='asset/multiple?microdistrictid=';
+    static readonly GetSingleByNumber='asset/single?number=';
 }

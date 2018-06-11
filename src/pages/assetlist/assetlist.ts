@@ -5,6 +5,7 @@ import { WebApi } from '../../providers/webapi';
 import { AssetData, AssetDTO, AssetApi } from '../../models/assetdata';
 import { MicrodistrictData } from '../../models/microdistrictdata';
 import { SelectmicrodistrictPage } from '../selectmicrodistrict/selectmicrodistrict';
+import { MessageService } from '../../providers/messageservice';
 
 @IonicPage()
 @Component({
@@ -25,16 +26,18 @@ export class AssetlistPage {
   }
 
   ionViewDidLoad() {
-    if(this.microdistrict!=null)
-    {
-      this.loadAssetList();
-    }
+    this.loadDataList();
   }
 
-  loadAssetList(){
-    this.webApi.get<AssetDTO>(AssetApi.GetMultiple+'microdistrictid='+this.microdistrict.Id).subscribe(res => {
-      this.assetlist=res.Data;
-    });
+  loadDataList(){
+    if(this.microdistrict!=null && this.microdistrict.Id!=null && this.microdistrict.Id!='undefined')
+    {
+      this.webApi.get<AssetDTO>(AssetApi.GetMultipleByMicrodistrictid+this.microdistrict.Id).subscribe(res => {
+        this.assetlist=res.Data;
+      }, error => {
+        MessageService.showWebApiError(this.toastCtrl,error);  
+      }); 
+    }
   }
 
   openPage(item) {    
