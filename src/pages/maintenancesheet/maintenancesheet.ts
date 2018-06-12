@@ -33,8 +33,6 @@ export class MaintenancesheetPage {
       });
   }
 
-  ionViewDidLoad() {}
-
   save(data, _event) {    
     /* _event.preventDefault();//该方法将通知 Web 浏览器不要执行与事件关联的默认动作
     if(this.maintenancesheetProvider.save(this.item))

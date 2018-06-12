@@ -15,10 +15,7 @@ export class MaintenancelistPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams) {
       this.querydate=new Date().toISOString();
-  }
-
-  ionViewDidLoad() {    
-    this.loadDataList();
+      this.loadDataList();
   }
 
   loadDataList(){

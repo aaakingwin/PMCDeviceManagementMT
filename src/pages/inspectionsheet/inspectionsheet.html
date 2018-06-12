@@ -17,14 +17,15 @@
     <ion-label class="txt-c1">巡检员</ion-label>
     <ion-item class="txt-c2">{{inspectionsheetData.Inspector}} </ion-item>   
     <ion-label class="txt-c1">巡检时间</ion-label>
-    <ion-item class="txt-c2">{{inspectionsheetData.InspectionDate}} </ion-item> 
+    <ion-item class="txt-c2">{{inspectionsheetData.InspectionDate | dateFormatterYMD}} </ion-item> 
     <ion-label class="txt-c1">资产状态</ion-label>
     <div class="div-item-{{optType}}">
         <ion-item class="txt-c2">{{inspectionsheetData.AssetStatus}} </ion-item> 
     </div>   
     <div class="div-form-{{optType}}">   
-        <ion-item>
-            <ion-select class="txt-c2" [(ngModel)]="assetStatusId" interface="popover">
+        <ion-item>   
+            <ion-label class="required-field" color="danger">*</ion-label>         
+            <ion-select class="txt-c2" [(ngModel)]="assetStatusId" interface="popover" item-width="100px" >
                 <ion-option *ngFor="let a of assetStatusList" value="{{a.Id}}" >{{a.Name}}</ion-option>
             </ion-select>
         </ion-item>
@@ -36,11 +37,11 @@
     <div class="div-form-{{optType}}" >
         <form [formGroup]="inspectionSheetForm">        
             <ion-item>  
-                <p class="required-field" *ngIf="!inspectionSheetForm.controls.Description.valid && inspectionSheetForm.controls.Description.touched" color="danger" item-left>*</p>              
+                <ion-label class="required-field" color="danger">*</ion-label>                         
                 <ion-input class="txt-c2" type="text" formControlName="Description"></ion-input>
             </ion-item>            
             <br/>
-            <button ion-button full (click)="save(inspectionSheetForm.value, $event)" [disabled]="!inspectionSheetForm.valid">保存</button>
+            <button ion-button block (click)="save(inspectionSheetForm.value, $event)">保存</button>
             <br/>
         </form>
     </div>

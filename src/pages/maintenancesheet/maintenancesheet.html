@@ -35,7 +35,7 @@
     <ion-item>{{userinfo.UserName}}</ion-item>
     <ion-label class="grey-word">申请日期</ion-label>
     <ion-item>{{applicationDate}}</ion-item>
-    <button ion-button full (click)="save(maintenanceSheetForm.value, $event)" [disabled]="!maintenanceSheetForm.valid">保存</button>
+    <button ion-button block (click)="save(maintenanceSheetForm.value, $event)" [disabled]="!maintenanceSheetForm.valid">保存</button>
     <br/>
   </form>
 </ion-content>

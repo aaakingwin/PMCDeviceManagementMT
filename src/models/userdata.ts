@@ -7,17 +7,20 @@ export class UserData {
     Telephone:string;
     RoleId:string;
     EquipmentIdentity:string;
-    IsDisabled:boolean;
-    CreatedTime:string;
-    LastModifyedTime:string;
 }
 
-export class UserDTO
+export class UserResponse
 {
     Data:{Token:string};
     Success:boolean;
     Message:string;
     Count:number;
+}
+
+export class LoginRequest
+{
+    UserName:string;
+    Password:string;
 }
 
 export class UserApi{

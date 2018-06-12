@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { InspectionsheetData } from '../../models/inspectionsheetdata';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { InspectionsheetData, InspectionsheetApi, InspectionsheetResponse } from '../../models/inspectionsheetdata';
 import { InspectionsheetPage } from '../inspectionsheet/inspectionsheet';
 import { WebApi } from '../../providers/webapi';
+import { SysConfig } from '../../providers/sysconfig';
+import { MessageService } from '../../providers/messageservice';
+import { AssetResponse, AssetApi } from '../../models/assetdata';
+import { Converter } from '../../providers/converter';
+import { Verifier } from '../../providers/verifier';
 
 @IonicPage()
 @Component({
@@ -10,23 +15,39 @@ import { WebApi } from '../../providers/webapi';
   templateUrl: 'inspectionlist.html',
 })
 export class InspectionlistPage {
-  querydate:string;
-  items: Array<InspectionsheetData>;
-
-  constructor(public navCtrl: NavController,public navParams: NavParams,public webApi:WebApi) 
-    {
-      this.querydate=new Date().toISOString();
+  querydate:string=new Date().toISOString();
+  items: InspectionsheetData[];
+  constructor(public navCtrl: NavController,public navParams: NavParams,
+    public toastCtrl:ToastController,public webApi:WebApi) {
+      this.loadDataList(this.querydate);
     }
 
-  ionViewDidLoad() {    
-    this.loadDataList();
-  }
-
-  loadDataList(){
-
+  loadDataList(date){
+    if(!Verifier.isNull(date))
+    {
+      let inspectiondate=Converter.toYYYYMMDD(date);
+      this.webApi.get<InspectionsheetResponse>(InspectionsheetApi.GetMultipleByInspectiondate+inspectiondate).subscribe(res => {
+        this.items=res.Data;
+      }, error => {
+        MessageService.showWebApiError(this.toastCtrl,error);  
+      }); 
+    }   
   }
 
   openPage(item) {
-    this.navCtrl.push(InspectionsheetPage,{'item':item});
+    this.webApi.get<AssetResponse>(AssetApi.GetSingleByNumber+item.AssetNumber).subscribe(res => {
+      if(res.Count>0)
+      {
+        let assetdata=res.Data;  
+        this.navCtrl.push(InspectionsheetPage,{'inspectionsheet':item,'asset':assetdata,'optType':SysConfig.OperationType_See});
+      }   
+    }, error => {
+      MessageService.showWebApiError(this.toastCtrl,error);  
+    });     
+  }
+
+  changeDate(_event)
+  {   
+    this.loadDataList(_event);
   }
 }

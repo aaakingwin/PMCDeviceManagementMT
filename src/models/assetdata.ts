@@ -18,9 +18,9 @@ export class AssetData{
     LastModifyedTime:string;//最后修改时间
 }
 //资产传输对象
-export class AssetDTO
+export class AssetResponse
 {
-    Data:AssetData[];
+    Data:any;
     Success:boolean;
     Message:string;
     Count:number;

@@ -7,12 +7,19 @@
   </ion-navbar>
   <ion-item>
     <ion-label>日期</ion-label>
-    <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" (ngModelChange)="loadDataList()"  [(ngModel)]="querydate"></ion-datetime>
+    <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" (ngModelChange)="changeDate($event)" [(ngModel)]="querydate"></ion-datetime>
   </ion-item>
 </ion-header>
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of items" (click)="openPage(item)">
+    <ion-item *ngFor="let item of items" (click)="openPage(item)">      
+      <label class="txt-h1">{{item.AssetName}}</label>      
+      <br/>
+      <label class="txt-c2">{{item.AssetNumber}}</label>
+      <br/>
+      <label class="txt-c2"><ion-icon name="pin"></ion-icon>{{item.Microdistrict}}</label>
+      <label class="txt-h1" item-right>{{item.Inspector}}</label>
+      <img class="itemstatusimg" item-right src="./assets/imgs/{{item.AssetStatus | itemStatusImg}}" />
     </ion-item>
   </ion-list>
 </ion-content>

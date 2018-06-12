@@ -12,7 +12,7 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let item of items" (click)="openPage(item)">
-      <label class="txt-h1">{{item.InspectionDate}}</label>
+      <label class="txt-h1">{{item.InspectionDate | dateFormatterYMD}}</label>
       <img class="itemstatusimg" item-right src="./assets/imgs/{{item.AssetStatus | itemStatusImg}}" />
     </ion-item>
   </ion-list>

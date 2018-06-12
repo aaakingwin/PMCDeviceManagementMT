@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { MicrodistrictData, MicrodistrictDTO, MicrodistrictApi } from '../../models/microdistrictdata';
+import { MicrodistrictData, MicrodistrictApi, MicrodistrictResponse } from '../../models/microdistrictdata';
 import { WebApi } from '../../providers/webapi';
 import { MessageService } from '../../providers/messageservice';
 import { StorageService } from '../../providers/storageservice';
@@ -18,15 +18,12 @@ export class SelectmicrodistrictPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,public webApi:WebApi) 
   {
     this.callback = this.navParams.get("callback");
-  }
-
-  ionViewDidLoad() {
     this.loadMicrodistrictList();
   }
 
   loadMicrodistrictList()
   {
-    this.webApi.get<MicrodistrictDTO>(MicrodistrictApi.GetAll).subscribe(res=>{
+    this.webApi.get<MicrodistrictResponse>(MicrodistrictApi.GetAll).subscribe(res=>{
       this.microdistrictlist=res.Data;
       this.items=this.microdistrictlist;
     }, error => {

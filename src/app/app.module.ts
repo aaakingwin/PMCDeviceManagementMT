@@ -23,6 +23,8 @@ import { AssetmaintenancePage } from '../pages/assetmaintenance/assetmaintenance
 import { MessageService } from '../providers/messageservice';
 import { AssetinspectionrecordPage } from '../pages/assetinspectionrecord/assetinspectionrecord';
 import { AssetmaintenancerecordPage } from '../pages/assetmaintenancerecord/assetmaintenancerecord';
+import { Verifier } from '../providers/verifier';
+import { Converter } from '../providers/converter';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { AssetmaintenancerecordPage } from '../pages/assetmaintenancerecord/asse
     StorageService,
     MessageService,
     WebApi,
+    Converter,
+    Verifier
   ]
 })
 export class AppModule {}

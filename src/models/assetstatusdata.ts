@@ -4,9 +4,9 @@ export class AssetStatusData
     Name:string;
 }
 
-export class AssetStatusDTO
+export class AssetStatusResponse
 {
-    Data:AssetStatusData[];
+    Data:any;
     Success:boolean;
     Message:string;
     Count:number;

@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AssetPage } from '../asset/asset';
 import { WebApi } from '../../providers/webapi';
-import { AssetData, AssetDTO, AssetApi } from '../../models/assetdata';
+import { AssetData, AssetApi, AssetResponse } from '../../models/assetdata';
 import { MicrodistrictData } from '../../models/microdistrictdata';
 import { SelectmicrodistrictPage } from '../selectmicrodistrict/selectmicrodistrict';
 import { MessageService } from '../../providers/messageservice';
+import { Verifier } from '../../providers/verifier';
 
 @IonicPage()
 @Component({
@@ -19,20 +20,17 @@ export class AssetlistPage {
     public toastCtrl:ToastController,public webApi:WebApi)
   {
     this.microdistrict=this.navParams.get('microdistrict');  
-    if(this.microdistrict==null)
+    if(Verifier.isNull(this.microdistrict))
     {
       this.microdistrict=new MicrodistrictData();
     } 
-  }
-
-  ionViewDidLoad() {
     this.loadDataList();
   }
 
   loadDataList(){
-    if(this.microdistrict!=null && this.microdistrict.Id!=null && this.microdistrict.Id!='undefined')
+    if(!Verifier.isNull(this.microdistrict) && !Verifier.isNull(this.microdistrict.Id))
     {
-      this.webApi.get<AssetDTO>(AssetApi.GetMultipleByMicrodistrictid+this.microdistrict.Id).subscribe(res => {
+      this.webApi.get<AssetResponse>(AssetApi.GetMultipleByMicrodistrictid+this.microdistrict.Id).subscribe(res => {
         this.assetlist=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
@@ -49,7 +47,7 @@ export class AssetlistPage {
   }
 
   selectMicrodistrictCallback =(item) => {  
-    if(item!=null)
+    if(!Verifier.isNull(item))
     {        
       this.navCtrl.pop(); 
       this.navCtrl.setRoot(AssetlistPage,{'microdistrict':item});

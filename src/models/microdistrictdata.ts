@@ -8,9 +8,9 @@ export class MicrodistrictData
     LastModifyedTime:string;
 }
 
-export class MicrodistrictDTO
+export class MicrodistrictResponse
 {
-    Data:MicrodistrictData[];
+    Data:any;
     Success:boolean;
     Message:string;
     Count:number;

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AssetData } from '../../models/assetdata';
-import { InspectionsheetData, InspectionsheetDTO, InspectionsheetApi } from '../../models/inspectionsheetdata';
+import { InspectionsheetData, InspectionsheetApi, InspectionsheetResponse } from '../../models/inspectionsheetdata';
 import { WebApi } from '../../providers/webapi';
 import { MessageService } from '../../providers/messageservice';
 import { InspectionsheetPage } from '../inspectionsheet/inspectionsheet';
 import { SysConfig } from '../../providers/sysconfig';
+import { Verifier } from '../../providers/verifier';
 
 @IonicPage()
 @Component({
@@ -18,20 +19,17 @@ export class AssetinspectionrecordPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtrl:ToastController,public webApi:WebApi) {
     this.assetdata=this.navParams.get('item');
-    if(this.assetdata==null)
+    if(Verifier.isNull(this.assetdata))
     {
       this.assetdata=new AssetData();
     }
-  }
-
-  ionViewDidLoad() {
     this.loadDataList();
   }
 
   loadDataList(){
-    if(this.assetdata!=null && this.assetdata.Id!=null && this.assetdata.Id!='undefined')
+    if(!Verifier.isNull(this.assetdata) && !Verifier.isNull(this.assetdata.Id))
     {
-      this.webApi.get<InspectionsheetDTO>(InspectionsheetApi.GetMultipleByAssetId+this.assetdata.Id).subscribe(res => {
+      this.webApi.get<InspectionsheetResponse>(InspectionsheetApi.GetMultipleByAssetId+this.assetdata.Id).subscribe(res => {
         this.items=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  

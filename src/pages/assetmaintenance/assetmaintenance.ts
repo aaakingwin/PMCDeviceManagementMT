@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { MessageService } from '../../providers/messageservice';
-import { AssetData, AssetDTO, AssetApi } from '../../models/assetdata';
+import { AssetData, AssetApi, AssetResponse } from '../../models/assetdata';
 import { MicrodistrictData } from '../../models/microdistrictdata';
 import { WebApi } from '../../providers/webapi';
 import { AssetmaintenancerecordPage } from '../assetmaintenancerecord/assetmaintenancerecord';
 import { MaintenancesheetPage } from '../maintenancesheet/maintenancesheet';
 import { SelectmicrodistrictPage } from '../selectmicrodistrict/selectmicrodistrict';
+import { Verifier } from '../../providers/verifier';
 
 @IonicPage()
 @Component({
@@ -19,23 +20,20 @@ export class AssetmaintenancePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public toastCtrl:ToastController,public webApi:WebApi) {
     this.microdistrict=this.navParams.get('microdistrict');  
-    if(this.microdistrict==null)
+    if(Verifier.isNull(this.microdistrict))
     {
       this.microdistrict=new MicrodistrictData();
     } 
-  }
-
-  ionViewDidLoad() {
-    if(this.microdistrict!=null)
-    {
-      this.loadDataList();
-    }
+    this.loadDataList();
   }
 
   loadDataList(){
-    this.webApi.get<AssetDTO>(AssetApi.GetMultipleByMicrodistrictid+this.microdistrict.Id).subscribe(res => {
-      this.assetlist=res.Data;
-    });
+    if(!Verifier.isNull(this.microdistrict) && !Verifier.isNull(this.microdistrict.Id))
+    {
+      this.webApi.get<AssetResponse>(AssetApi.GetMultipleByMicrodistrictid+this.microdistrict.Id).subscribe(res => {
+        this.assetlist=res.Data;
+      });
+    }
   }
 
   openListPage(item) {    
@@ -51,7 +49,7 @@ export class AssetmaintenancePage {
   }
 
   selectMicrodistrictCallback =(item) => {  
-    if(item!=null)
+    if(!Verifier.isNull(item))
     {        
       this.navCtrl.pop(); 
       this.navCtrl.setRoot(AssetmaintenancePage,{'microdistrict':item});
@@ -59,9 +57,9 @@ export class AssetmaintenancePage {
   }
 
   scanCallback =(text) => {   
-    if(text!=null)
+    if(!Verifier.isNull(text))
     {     
-      this.webApi.get<AssetDTO>(AssetApi.GetSingleByNumber+text).subscribe(res => {
+      this.webApi.get<AssetResponse>(AssetApi.GetSingleByNumber+text).subscribe(res => {
         if(res.Data.length>0)
         {
           let assetdata=res.Data[0];
