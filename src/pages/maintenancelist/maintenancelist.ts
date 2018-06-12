@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { MaintenancesheetData } from '../../models/maintenancesheetdata';
 import { MaintenancesheetPage } from '../maintenancesheet/maintenancesheet';
+import { WebApi } from '../../providers/webapi';
+import { Verifier } from '../../providers/verifier';
+import { Converter } from '../../providers/converter';
+import { AssetResponse, AssetApi } from '../../models/assetdata';
+import { SysConfig } from '../../providers/sysconfig';
+import { MessageService } from '../../providers/messageservice';
 
 @IonicPage()
 @Component({
@@ -9,20 +15,39 @@ import { MaintenancesheetPage } from '../maintenancesheet/maintenancesheet';
   templateUrl: 'maintenancelist.html',
 })
 export class MaintenancelistPage {
-  querydate:string;
-  items: Array<MaintenancesheetData>;
-  
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams) {
-      this.querydate=new Date().toISOString();
-      this.loadDataList();
-  }
+  querydate:string=new Date().toISOString();
+  items: MaintenancesheetData[];
+  constructor(public navCtrl: NavController,public navParams: NavParams,
+    public toastCtrl:ToastController,public webApi:WebApi) {
+      this.loadDataList(this.querydate);
+    }
 
-  loadDataList(){
-    
+  loadDataList(date){
+    if(!Verifier.isNull(date))
+    {
+     /*  let inspectiondate=Converter.toYYYYMMDD(date);
+      this.webApi.get<InspectionsheetResponse>(InspectionsheetApi.GetMultipleByInspectiondate+inspectiondate).subscribe(res => {
+        this.items=res.Data;
+      }, error => {
+        MessageService.showWebApiError(this.toastCtrl,error);  
+      });  */
+    }   
   }
 
   openPage(item) {
-    //this.navCtrl.push(MaintenancesheetPage,{'data':item});
+    this.webApi.get<AssetResponse>(AssetApi.GetSingleByNumber+item.AssetNumber).subscribe(res => {
+      if(res.Count>0)
+      {
+        let assetdata=res.Data;  
+        this.navCtrl.push(MaintenancesheetPage,{'maintenancesheet':item,'asset':assetdata,'optType':SysConfig.OperationType_See});
+      }   
+    }, error => {
+      MessageService.showWebApiError(this.toastCtrl,error);  
+    });     
+  }
+
+  changeDate(_event)
+  {   
+    this.loadDataList(_event);
   }
 }

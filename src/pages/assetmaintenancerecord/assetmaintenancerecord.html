@@ -2,7 +2,18 @@
   <ion-navbar>
     <ion-title>维保记录</ion-title>
   </ion-navbar>
+  <ion-item>
+    <img class="assettypeimg" item-left src="./assets/imgs/{{assetdata.AssetType | assetTypeImg}}" />
+    <label class="txt-h1">{{assetdata.Name}}</label>
+    <br/>
+    <label class="txt-c2">{{assetdata.Number}}</label>
+  </ion-item>
 </ion-header>
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let item of items" (click)="openPage(item)">
+      <label class="txt-h1">{{item.InspectionDate | dateFormatterYMD}}</label>
+      <img class="itemstatusimg" item-right src="./assets/imgs/{{item.AssetStatus | itemStatusImg}}" />
+    </ion-item>
+  </ion-list>
 </ion-content>

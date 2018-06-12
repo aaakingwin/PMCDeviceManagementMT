@@ -1,7 +1,15 @@
 export class MaintenancesheetData
 {
-    DeviceName:string;
-    Address:string;
-    applyText1:string;
-    applyText2:string;
+    Id:string;
+    InspectionDate:string; 
+    MicrodistrictId:string;  
+    Microdistrict:string;   
+    InspectorUserId:string; 
+    Inspector:string;  
+    AssetId:string; 
+    AssetNumber:string;
+    AssetName:string;
+    AssetStatusId:string;
+    AssetStatus:string;
+    Description:string;  
 }

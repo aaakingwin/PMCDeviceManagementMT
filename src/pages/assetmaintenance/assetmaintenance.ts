@@ -8,6 +8,7 @@ import { AssetmaintenancerecordPage } from '../assetmaintenancerecord/assetmaint
 import { MaintenancesheetPage } from '../maintenancesheet/maintenancesheet';
 import { SelectmicrodistrictPage } from '../selectmicrodistrict/selectmicrodistrict';
 import { Verifier } from '../../providers/verifier';
+import { SysConfig } from '../../providers/sysconfig';
 
 @IonicPage()
 @Component({
@@ -32,7 +33,9 @@ export class AssetmaintenancePage {
     {
       this.webApi.get<AssetResponse>(AssetApi.GetMultipleByMicrodistrictid+this.microdistrict.Id).subscribe(res => {
         this.assetlist=res.Data;
-      });
+      }, error => {
+        MessageService.showWebApiError(this.toastCtrl,error);  
+      }); 
     }
   }
 
@@ -41,7 +44,7 @@ export class AssetmaintenancePage {
   }
 
   openPage(item) {    
-    this.navCtrl.push(MaintenancesheetPage,{'item':item});
+    this.navCtrl.push(MaintenancesheetPage,{'asset':item,'optType':SysConfig.OperationType_Create});
   }
 
   selectMicrodistrict(){
@@ -56,31 +59,41 @@ export class AssetmaintenancePage {
     }
   }
 
+  scan() {    
+    if(Verifier.isNull(this.microdistrict.Id))
+    {
+      MessageService.showInfo(this.toastCtrl,'请选择小区');
+    }
+    else
+    {
+      this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
+    }
+  } 
+
   scanCallback =(text) => {   
     if(!Verifier.isNull(text))
     {     
       this.webApi.get<AssetResponse>(AssetApi.GetSingleByNumber+text).subscribe(res => {
-        if(res.Data.length>0)
+        if(res.Count>0)
         {
-          let assetdata=res.Data[0];
+          let assetdata=res.Data;  
           this.navCtrl.pop(); 
-          this.navCtrl.push(MaintenancesheetPage,{'item':assetdata});
+          this.navCtrl.push(MaintenancesheetPage,{'asset':assetdata,'optType':SysConfig.OperationType_Create});
         }
         else
         {
-          //this.msg.showInfo('无效的二维码！');
+          MessageService.showInfo(this.toastCtrl,res.Message);
           this.navCtrl.pop(); 
         }      
-      });    
+      }, error => {
+        MessageService.showWebApiError(this.toastCtrl,error);  
+        this.navCtrl.pop();
+      }); 
     }
     else
     {
-      //this.msg.showInfo('无效的二维码！');
+      MessageService.showInfo(this.toastCtrl,'无效的二维码');
       this.navCtrl.pop(); 
     }
-  }
-
-  scan() {    
-    this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
   } 
 }

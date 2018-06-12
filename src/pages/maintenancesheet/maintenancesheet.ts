@@ -6,6 +6,10 @@ import { MessageService } from '../../providers/messageservice';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserData } from '../../models/userdata';
 import { StorageService } from '../../providers/storageservice';
+import { MicrodistrictData } from '../../models/microdistrictdata';
+import { AssetStatusData } from '../../models/assetstatusdata';
+import { AssetData } from '../../models/assetdata';
+import { Verifier } from '../../providers/verifier';
 
 @IonicPage()
 @Component({
@@ -13,23 +17,36 @@ import { StorageService } from '../../providers/storageservice';
   templateUrl: 'maintenancesheet.html',
 })
 export class MaintenancesheetPage {
-  item:MaintenancesheetData;
+  user:UserData;
+  microdistrict:MicrodistrictData;
+  assetStatusList:AssetStatusData[];   
+  maintenancesheetData:MaintenancesheetData;
+  assetData:AssetData;
+  assetStatusId:string;
   maintenanceSheetForm:FormGroup;
-  userinfo:UserData;
-  applicationDate:string;
+  optType:string;
 
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams,
-    public formBuilder: FormBuilder,
-    public toastCtrl:ToastController,
-    public storageService: StorageService) {
-      this.item=new MaintenancesheetData(); 
-      this.userinfo = StorageService.read<UserData>(SysConfig.StorageKey_UserData);  
-      this.userinfo.Name='abc';
-      this.applicationDate= new Date().toLocaleDateString();
+  constructor(public navCtrl: NavController,public navParams: NavParams,public formBuilder: FormBuilder,
+    public toastCtrl:ToastController,public storageService: StorageService) {
+    this.optType=this.navParams.get('optType');
+    this.maintenancesheetData=this.navParams.get('maintenancesheet');
+    this.assetData=this.navParams.get('asset');
+    this.user = StorageService.read<UserData>(SysConfig.StorageKey_UserData);
+    this.microdistrict= StorageService.read<MicrodistrictData>(SysConfig.StorageKey_SelectedMicrodistrict);
+    this.assetStatusList=StorageService.read<AssetStatusData[]>(SysConfig.StorageKey_AssetStatusList);
+    if(Verifier.isNull(this.maintenancesheetData))
+    {     
+      this.maintenancesheetData=new MaintenancesheetData();
+      this.maintenancesheetData.Inspector=this.user.FullName;
+      this.maintenancesheetData.InspectionDate=new Date().toLocaleDateString();
+    }
+    if(Verifier.isNull(this.assetData))
+    {
+      this.assetData=new AssetData();
+    }  
       this.maintenanceSheetForm= this.formBuilder.group({
-        'applyText1': [this.item.applyText1,  [Validators.required, Validators.minLength(1)]],
-        'applyText2': [this.item.applyText2,  [Validators.required, Validators.minLength(1)]],
+        'applyText1': [this.maintenancesheetData.AssetName,  [Validators.required, Validators.minLength(1)]],
+        'applyText2': [this.maintenancesheetData.AssetName,  [Validators.required, Validators.minLength(1)]],
       });
   }
 

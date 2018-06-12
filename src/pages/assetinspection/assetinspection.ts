@@ -60,7 +60,14 @@ export class AssetinspectionPage {
   }
 
   scan() {    
-    this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
+    if(Verifier.isNull(this.microdistrict.Id))
+    {
+      MessageService.showInfo(this.toastCtrl,'请选择小区');
+    }
+    else
+    {
+      this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
+    }
   } 
 
   scanCallback =(text) => {   
@@ -85,7 +92,7 @@ export class AssetinspectionPage {
     }
     else
     {
-      MessageService.showInfo(this.toastCtrl,'无效的二维码！');
+      MessageService.showInfo(this.toastCtrl,'无效的二维码');
       this.navCtrl.pop(); 
     }
   } 
