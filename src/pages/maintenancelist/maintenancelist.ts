@@ -4,7 +4,6 @@ import { MaintenancesheetData } from '../../models/maintenancesheetdata';
 import { MaintenancesheetPage } from '../maintenancesheet/maintenancesheet';
 import { WebApi } from '../../providers/webapi';
 import { Verifier } from '../../providers/verifier';
-import { Converter } from '../../providers/converter';
 import { AssetResponse, AssetApi } from '../../models/assetdata';
 import { SysConfig } from '../../providers/sysconfig';
 import { MessageService } from '../../providers/messageservice';

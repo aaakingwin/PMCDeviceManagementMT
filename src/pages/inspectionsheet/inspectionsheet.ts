@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { InspectionsheetData, InspectionsheetApi, InspectionsheetResponse, InspectionsheetRequest } from '../../models/inspectionsheetdata';
+import { InspectionsheetData, InspectionsheetApi, InspectionsheetRequest } from '../../models/inspectionsheetdata';
 import { MessageService } from '../../providers/messageservice';
-import { AssetData, AssetResponse, AssetApi } from '../../models/assetdata';
+import { AssetData } from '../../models/assetdata';
 import { WebApi } from '../../providers/webapi';
 import { SysConfig } from '../../providers/sysconfig';
 import { StorageService } from '../../providers/storageservice';
 import { UserData } from '../../models/userdata';
-import { AssetStatusData, AssetStatusApi, AssetStatusResponse } from '../../models/assetstatusdata';
+import { AssetStatusData } from '../../models/assetstatusdata';
 import { MicrodistrictData } from '../../models/microdistrictdata';
 import { Verifier } from '../../providers/verifier';
 
