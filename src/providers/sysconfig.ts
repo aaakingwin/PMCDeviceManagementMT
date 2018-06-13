@@ -1,5 +1,7 @@
 //系统配置
-export class SysConfig {    
+export class SysConfig {   
+    static readonly ApkName='test.apk'; 
+    static readonly AppUpdateUrl='';
     //WebApi
     static readonly WebApi_RootUrl='http://6f390792d13a.sn.mynetname.net:7474/api/v1/';//根路径
     static readonly WebApi_GetAll='all';

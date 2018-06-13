@@ -25,6 +25,10 @@ import { AssetinspectionrecordPage } from '../pages/assetinspectionrecord/asseti
 import { AssetmaintenancerecordPage } from '../pages/assetmaintenancerecord/assetmaintenancerecord';
 import { Verifier } from '../providers/verifier';
 import { Converter } from '../providers/converter';
+import { AppVersion } from '@ionic-native/app-version';
+import { FileOpener } from '@ionic-native/file-opener';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 @NgModule({
   declarations: [
@@ -70,6 +74,10 @@ import { Converter } from '../providers/converter';
     QRScanner,
     StatusBar,
     SplashScreen,
+    File,
+    FileTransfer,
+    FileOpener,
+    AppVersion,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     StorageService,
     MessageService,
