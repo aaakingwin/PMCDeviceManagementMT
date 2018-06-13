@@ -33,7 +33,7 @@ export class HomePage {
 
   loadAssetStatusList()
   {
-    this.webApi.get<AssetStatusResponse>(AssetStatusApi.GetAll).subscribe(res => {
+    this.webApi.get<AssetStatusResponse>(AssetStatusApi.getAll()).subscribe(res => {
       let assetStatusList=res.Data;
       StorageService.write(SysConfig.StorageKey_AssetStatusList,assetStatusList);
     }, error => {

@@ -1,3 +1,5 @@
+import { SysConfig } from "../providers/sysconfig";
+
 export class InspectionsheetData
 {
     Id:string;
@@ -33,8 +35,20 @@ export class InspectionsheetRequest
 
 export class InspectionsheetApi
 {
-    static readonly GetMultipleByAssetId='inspection/multiple?type=assetid&assetid=';
-    static readonly GetMultipleByInspectiondate='inspection/multiple?type=inspectiondate&inspectiondate=';
-    static readonly GetSingleById='inspection/single?id=';     
-    static readonly PostCreate='inspection/create?token=';
+    static getMultipleByAssetId(id:string)
+    {
+        return SysConfig.WebApi_Inspection+SysConfig.WebApi_GetMultiple+'type=assetid&assetid='+id;
+    }
+    static getMultipleByInspectionDate(idate:string)
+    {
+        return SysConfig.WebApi_Inspection+SysConfig.WebApi_GetMultiple+'type=inspectiondate&inspectiondate='+idate;
+    }
+    static getSingleById(id:string)
+    {
+        return SysConfig.WebApi_Inspection+SysConfig.WebApi_GetSingle+'id='+id;
+    }
+    static postCreate()
+    {
+        return SysConfig.WebApi_Inspection+SysConfig.WebApi_PostCreate+'token='+'token';
+    }
 }

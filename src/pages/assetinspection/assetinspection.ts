@@ -31,7 +31,7 @@ export class AssetinspectionPage {
   loadDataList(){
     if(!Verifier.isNull(this.microdistrict) && !Verifier.isNull(this.microdistrict.Id))
     {
-      this.webApi.get<AssetResponse>(AssetApi.GetMultipleByMicrodistrictid+this.microdistrict.Id).subscribe(res => {
+      this.webApi.get<AssetResponse>(AssetApi.getMultipleByMicrodistrictId(this.microdistrict.Id)).subscribe(res => {
         this.assetlist=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
@@ -73,7 +73,7 @@ export class AssetinspectionPage {
   scanCallback =(text) => {   
     if(!Verifier.isNull(text))
     {     
-      this.webApi.get<AssetResponse>(AssetApi.GetSingleByNumber+text).subscribe(res => {
+      this.webApi.get<AssetResponse>(AssetApi.getSingleByNumber(text)).subscribe(res => {
         if(res.Count>0)
         {
           let assetdata=res.Data;  

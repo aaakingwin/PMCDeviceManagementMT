@@ -23,7 +23,7 @@ export class SelectmicrodistrictPage {
 
   loadMicrodistrictList()
   {
-    this.webApi.get<MicrodistrictResponse>(MicrodistrictApi.GetAll).subscribe(res=>{
+    this.webApi.get<MicrodistrictResponse>(MicrodistrictApi.getAll()).subscribe(res=>{
       this.microdistrictlist=res.Data;
       this.items=this.microdistrictlist;
     }, error => {

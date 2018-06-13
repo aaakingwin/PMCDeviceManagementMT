@@ -67,7 +67,7 @@ export class InspectionsheetPage {
     inspection.AssetId=this.assetData.Id;
     inspection.AssetStatusId=this.assetStatusId;     
     inspection.Description=data.Description;
-    this.webApi.post(InspectionsheetApi.PostCreate+this.user.Token,inspection).subscribe(res => {
+    this.webApi.post(InspectionsheetApi.postCreate(),inspection).subscribe(res => {
       MessageService.showInfo(this.toastCtrl,'保存成功');
       this.navCtrl.pop();
     }, error => {

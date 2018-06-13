@@ -14,31 +14,27 @@ import { WebApi } from '../../providers/webapi';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  userData:UserData;
   loginForm = this.formBuilder.group({
     'LoginID': ['',  [Validators.required, Validators.minLength(1)]],
     'LoginPwd': ['', [Validators.required, Validators.minLength(1)]]
   });
 
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams,
-    public formBuilder: FormBuilder,
-    public toastCtrl: ToastController,
-    public webApi:WebApi) {}
+  constructor(public navCtrl: NavController,public navParams: NavParams,public formBuilder: FormBuilder,
+    public toastCtrl: ToastController,public webApi:WebApi) {}
 
   login(user, _event) {    
     _event.preventDefault();//该方法将通知 Web 浏览器不要执行与事件关联的默认动作    
     let loginRequest=new LoginRequest();
     loginRequest.UserName=user.LoginID;
     loginRequest.Password=user.LoginPwd;    
-    this.webApi.post<UserResponse>(UserApi.PostLogin,loginRequest).subscribe(res => {
-      let userdata = new UserData();
-      userdata.Token=res.Data.Token;
-      userdata.FullName='测试员';
-      userdata.Id='D87C2DF5-A46B-487D-9465-E7E77E22175F';
-      StorageService.write(SysConfig.StorageKey_UserData, userdata);
+    this.webApi.post<UserResponse>(UserApi.postLogin(),loginRequest).subscribe(res => {
+      this.userData=res.Data;
+      this.userData.Password=loginRequest.Password;
+      StorageService.write(SysConfig.StorageKey_UserData, this.userData);
       this.navCtrl.setRoot(HomePage);
     }, error => {
-      MessageService.showWebApiError(this.toastCtrl,error);  
+      MessageService.showInfo(this.toastCtrl,'账户或密码有误');
     }); 
   }  
 }

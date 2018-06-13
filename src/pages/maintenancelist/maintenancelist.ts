@@ -34,7 +34,7 @@ export class MaintenancelistPage {
   }
 
   openPage(item) {
-    this.webApi.get<AssetResponse>(AssetApi.GetSingleByNumber+item.AssetNumber).subscribe(res => {
+    this.webApi.get<AssetResponse>(AssetApi.getSingleByNumber(item.AssetNumber)).subscribe(res => {
       if(res.Count>0)
       {
         let assetdata=res.Data;  

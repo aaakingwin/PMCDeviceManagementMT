@@ -1,3 +1,5 @@
+import { SysConfig } from "../providers/sysconfig";
+
 export class MicrodistrictData
 {
     Id:string;
@@ -18,5 +20,8 @@ export class MicrodistrictResponse
 
 export class MicrodistrictApi
 {
-    static readonly GetAll='microdistrict/all';
+    static getAll()
+    {
+        return SysConfig.WebApi_Microdistrict+SysConfig.WebApi_GetAll;
+    }
 }

@@ -9,6 +9,7 @@ export class AssetTypeImgPipe implements PipeTransform {
     switch(value)
     {
       case '监控设备' : { retValue='at_monitor.svg'; break; }
+      case '电梯设施' : { retValue='at_elevator.svg'; break; }
       default : { retValue=''; break; }
     }
     return retValue;

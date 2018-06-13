@@ -29,7 +29,7 @@ export class AssetinspectionrecordPage {
   loadDataList(){
     if(!Verifier.isNull(this.assetdata) && !Verifier.isNull(this.assetdata.Id))
     {
-      this.webApi.get<InspectionsheetResponse>(InspectionsheetApi.GetMultipleByAssetId+this.assetdata.Id).subscribe(res => {
+      this.webApi.get<InspectionsheetResponse>(InspectionsheetApi.getMultipleByAssetId(this.assetdata.Id)).subscribe(res => {
         this.items=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  

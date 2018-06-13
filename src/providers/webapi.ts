@@ -7,7 +7,7 @@ export class WebApi {
   rootUrl:string;
   constructor(public http: HttpClient) 
   {
-    this.rootUrl=SysConfig.WebApiRootUrl;
+    this.rootUrl=SysConfig.WebApi_RootUrl;
   }
   //Get方法
   get<T>(api:string)

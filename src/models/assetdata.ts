@@ -1,3 +1,5 @@
+import { SysConfig } from "../providers/sysconfig";
+
 //资产数据类
 export class AssetData{
     Id:string;//唯一码
@@ -28,7 +30,18 @@ export class AssetResponse
 //资产API
 export class AssetApi
 {
-    static readonly GetAll='asset/all';
-    static readonly GetMultipleByMicrodistrictid='asset/multiple?microdistrictid=';
-    static readonly GetSingleByNumber='asset/single?number=';
+    static getAll()
+    {
+        return SysConfig.WebApi_Asset+SysConfig.WebApi_GetAll;
+    }
+
+    static getMultipleByMicrodistrictId(id:string)
+    {
+        return  SysConfig.WebApi_Asset+SysConfig.WebApi_GetMultiple+'microdistrictid='+id;
+    }
+
+    static getSingleByNumber(number:string)
+    {
+        return  SysConfig.WebApi_Asset+SysConfig.WebApi_GetSingle+'number='+number;
+    }
 }

@@ -1,5 +1,6 @@
+import { SysConfig } from "../providers/sysconfig";
+
 export class UserData {
-    Token:string;
     Id:string;
     Name:string;
     Password:string;
@@ -11,7 +12,7 @@ export class UserData {
 
 export class UserResponse
 {
-    Data:{Token:string};
+    Data:any;
     Success:boolean;
     Message:string;
     Count:number;
@@ -24,5 +25,9 @@ export class LoginRequest
 }
 
 export class UserApi{
-    static readonly PostLogin='authentication/login';
+
+    static postLogin()
+    {
+        return SysConfig.WebApi_Authentication+SysConfig.WebApi_PostLogin;
+    }
 }

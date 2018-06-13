@@ -2,7 +2,6 @@ import { ToastController } from 'ionic-angular';
 //消息服务
 export class MessageService
 {
-    constructor() {}
     //显示消息
     static showInfo(toastCtrl: ToastController,msg:string){
         let toast = toastCtrl.create({
@@ -24,6 +23,7 @@ export class MessageService
         {
             switch(error.status)
             {
+                case 400:{msg=error.error;break;}
                 case 404:{msg="找不到服务";break;}
                 case 500:{msg="请求无效";break;}
                 default:{break;}

@@ -1,6 +1,5 @@
 //本地存储服务
 export class StorageService {
-    constructor() { }
     //写入
     static write(key: string, value: any) {
         if (value) {

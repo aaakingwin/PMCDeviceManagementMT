@@ -26,7 +26,7 @@ export class InspectionlistPage {
     if(!Verifier.isNull(date))
     {
       let inspectiondate=Converter.toYYYYMMDD(date);
-      this.webApi.get<InspectionsheetResponse>(InspectionsheetApi.GetMultipleByInspectiondate+inspectiondate).subscribe(res => {
+      this.webApi.get<InspectionsheetResponse>(InspectionsheetApi.getMultipleByInspectionDate(inspectiondate)).subscribe(res => {
         this.items=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
@@ -35,7 +35,7 @@ export class InspectionlistPage {
   }
 
   openPage(item) {
-    this.webApi.get<AssetResponse>(AssetApi.GetSingleByNumber+item.AssetNumber).subscribe(res => {
+    this.webApi.get<AssetResponse>(AssetApi.getSingleByNumber(item.AssetNumber)).subscribe(res => {
       if(res.Count>0)
       {
         let assetdata=res.Data;  

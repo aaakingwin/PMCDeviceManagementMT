@@ -1,3 +1,5 @@
+import { SysConfig } from "../providers/sysconfig";
+
 export class AssetStatusData
 {
     Id:string;
@@ -14,5 +16,8 @@ export class AssetStatusResponse
 
 export class AssetStatusApi
 {
-    static readonly GetAll='assetstatus/all';
+    static getAll()
+    {
+        return SysConfig.WebApi_AssetStatus+SysConfig.WebApi_GetAll;
+    }
 }

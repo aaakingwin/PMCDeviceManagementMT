@@ -1,7 +1,6 @@
 //验证
 export class Verifier
 {
-    constructor() { }
     //判断空值
     static isNull(value:any):boolean{
         if (value && value != null && value != "undefined" && value != "null") {
