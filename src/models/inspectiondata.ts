@@ -1,22 +1,18 @@
 import { SysConfig } from "../providers/sysconfig";
 
-export class InspectionsheetData
+export class InspectionData
 {
     Id:string;
     InspectionDate:string; 
-    MicrodistrictId:string;  
     Microdistrict:string;   
-    InspectorUserId:string; 
     Inspector:string;  
-    AssetId:string; 
     AssetNumber:string;
     AssetName:string;
-    AssetStatusId:string;
     AssetStatus:string;
     Description:string;  
 }
 
-export class InspectionsheetResponse
+export class InspectionResponse
 {
     Data:any;
     Success:boolean;
@@ -24,7 +20,7 @@ export class InspectionsheetResponse
     Count:number;
 }
 
-export class InspectionsheetRequest
+export class InspectionRequest
 {
     MicrodistrictId:string;
     InspectorUserId:string;
@@ -33,15 +29,15 @@ export class InspectionsheetRequest
     Description:string;
 }
 
-export class InspectionsheetApi
+export class InspectionApi
 {
     static getMultipleByAssetId(id:string)
     {
         return SysConfig.WebApi_Inspection+SysConfig.WebApi_GetMultiple+'type=assetid&assetid='+id;
     }
-    static getMultipleByInspectionDate(idate:string)
+    static getMultipleByInspectionDate(date:string)
     {
-        return SysConfig.WebApi_Inspection+SysConfig.WebApi_GetMultiple+'type=inspectiondate&inspectiondate='+idate;
+        return SysConfig.WebApi_Inspection+SysConfig.WebApi_GetMultiple+'type=inspectiondate&inspectiondate='+date;
     }
     static getSingleById(id:string)
     {

@@ -1,10 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Converter } from '../../providers/converter';
 
-/**
- * Generated class for the DateFormatterYyyymmddPipe pipe.
- *
- * See https://angular.io/api/core/Pipe for more info on Angular Pipes.
- */
 @Pipe({
   name: 'dateFormatterYMD',
 })
@@ -13,6 +9,6 @@ export class DateFormatterYMDPipe implements PipeTransform {
    * Takes a value and makes it lowercase.
    */
   transform(value: string, ...args) {    
-    return value.substring(0,10);
+    return Converter.toYYYYMMDD(value);
   }
 }

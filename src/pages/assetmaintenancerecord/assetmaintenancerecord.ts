@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AssetData } from '../../models/assetdata';
-import { MaintenancesheetData } from '../../models/maintenancesheetdata';
+import { MaintenanceData, MaintenanceResponse, MaintenanceApi } from '../../models/maintenancedata';
 import { WebApi } from '../../providers/webapi';
 import { Verifier } from '../../providers/verifier';
 import { MaintenancesheetPage } from '../maintenancesheet/maintenancesheet';
 import { SysConfig } from '../../providers/sysconfig';
+import { MessageService } from '../../providers/messageservice';
 
 @IonicPage()
 @Component({
@@ -14,7 +15,7 @@ import { SysConfig } from '../../providers/sysconfig';
 })
 export class AssetmaintenancerecordPage {
   assetdata:AssetData;
-  items:MaintenancesheetData[];
+  items:MaintenanceData[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtrl:ToastController,public webApi:WebApi) {
     this.assetdata=this.navParams.get('item');
@@ -28,16 +29,16 @@ export class AssetmaintenancerecordPage {
   loadDataList(){
     if(!Verifier.isNull(this.assetdata) && !Verifier.isNull(this.assetdata.Id))
     {
-      /* this.webApi.get<InspectionsheetResponse>(InspectionsheetApi.getMultipleByAssetId(this.assetdata.Id)).subscribe(res => {
+      this.webApi.get<MaintenanceResponse>(MaintenanceApi.getMultipleByAssetId(this.assetdata.Id)).subscribe(res => {
         this.items=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
-      });  */
+      }); 
     }
   }
 
   openPage(item)
   {    
-    this.navCtrl.push(MaintenancesheetPage,{'maintenancesheet':item,'asset':this.assetdata,'optType':SysConfig.OperationType_See});
+    this.navCtrl.push(MaintenancesheetPage,{'maintenance':item,'asset':this.assetdata,'optType':SysConfig.OperationType_See});
   }
 }

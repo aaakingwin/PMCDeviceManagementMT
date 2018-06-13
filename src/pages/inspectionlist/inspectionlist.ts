@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { InspectionsheetData, InspectionsheetApi, InspectionsheetResponse } from '../../models/inspectionsheetdata';
+import { InspectionData, InspectionApi, InspectionResponse } from '../../models/inspectiondata';
 import { InspectionsheetPage } from '../inspectionsheet/inspectionsheet';
 import { WebApi } from '../../providers/webapi';
 import { SysConfig } from '../../providers/sysconfig';
@@ -16,7 +16,7 @@ import { Verifier } from '../../providers/verifier';
 })
 export class InspectionlistPage {
   querydate:string=new Date().toISOString();
-  items: InspectionsheetData[];
+  items: InspectionData[];
   constructor(public navCtrl: NavController,public navParams: NavParams,
     public toastCtrl:ToastController,public webApi:WebApi) {
       this.loadDataList(this.querydate);
@@ -26,7 +26,7 @@ export class InspectionlistPage {
     if(!Verifier.isNull(date))
     {
       let inspectiondate=Converter.toYYYYMMDD(date);
-      this.webApi.get<InspectionsheetResponse>(InspectionsheetApi.getMultipleByInspectionDate(inspectiondate)).subscribe(res => {
+      this.webApi.get<InspectionResponse>(InspectionApi.getMultipleByInspectionDate(inspectiondate)).subscribe(res => {
         this.items=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
@@ -39,7 +39,7 @@ export class InspectionlistPage {
       if(res.Count>0)
       {
         let assetdata=res.Data;  
-        this.navCtrl.push(InspectionsheetPage,{'inspectionsheet':item,'asset':assetdata,'optType':SysConfig.OperationType_See});
+        this.navCtrl.push(InspectionsheetPage,{'inspection':item,'asset':assetdata,'optType':SysConfig.OperationType_See});
       }   
     }, error => {
       MessageService.showWebApiError(this.toastCtrl,error);  

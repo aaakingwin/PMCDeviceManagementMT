@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { MaintenancesheetData } from '../../models/maintenancesheetdata';
+import { MaintenanceData, MaintenanceResponse, MaintenanceApi } from '../../models/maintenancedata';
 import { MaintenancesheetPage } from '../maintenancesheet/maintenancesheet';
 import { WebApi } from '../../providers/webapi';
 import { Verifier } from '../../providers/verifier';
 import { AssetResponse, AssetApi } from '../../models/assetdata';
 import { SysConfig } from '../../providers/sysconfig';
 import { MessageService } from '../../providers/messageservice';
+import { Converter } from '../../providers/converter';
 
 @IonicPage()
 @Component({
@@ -15,7 +16,7 @@ import { MessageService } from '../../providers/messageservice';
 })
 export class MaintenancelistPage {
   querydate:string=new Date().toISOString();
-  items: MaintenancesheetData[];
+  items: MaintenanceData[];
   constructor(public navCtrl: NavController,public navParams: NavParams,
     public toastCtrl:ToastController,public webApi:WebApi) {
       this.loadDataList(this.querydate);
@@ -24,12 +25,12 @@ export class MaintenancelistPage {
   loadDataList(date){
     if(!Verifier.isNull(date))
     {
-     /*  let inspectiondate=Converter.toYYYYMMDD(date);
-      this.webApi.get<InspectionsheetResponse>(InspectionsheetApi.GetMultipleByInspectiondate+inspectiondate).subscribe(res => {
+      let requestdate=Converter.toYYYYMMDD(date);
+      this.webApi.get<MaintenanceResponse>(MaintenanceApi.getMultipleByRequestDate(requestdate)).subscribe(res => {
         this.items=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
-      });  */
+      });
     }   
   }
 
@@ -38,7 +39,7 @@ export class MaintenancelistPage {
       if(res.Count>0)
       {
         let assetdata=res.Data;  
-        this.navCtrl.push(MaintenancesheetPage,{'maintenancesheet':item,'asset':assetdata,'optType':SysConfig.OperationType_See});
+        this.navCtrl.push(MaintenancesheetPage,{'maintenance':item,'asset':assetdata,'optType':SysConfig.OperationType_See});
       }   
     }, error => {
       MessageService.showWebApiError(this.toastCtrl,error);  

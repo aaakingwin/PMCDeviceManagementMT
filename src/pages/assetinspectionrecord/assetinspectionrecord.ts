@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AssetData } from '../../models/assetdata';
-import { InspectionsheetData, InspectionsheetApi, InspectionsheetResponse } from '../../models/inspectionsheetdata';
+import { InspectionData, InspectionApi, InspectionResponse } from '../../models/inspectiondata';
 import { WebApi } from '../../providers/webapi';
 import { MessageService } from '../../providers/messageservice';
 import { InspectionsheetPage } from '../inspectionsheet/inspectionsheet';
@@ -15,7 +15,7 @@ import { Verifier } from '../../providers/verifier';
 })
 export class AssetinspectionrecordPage {
   assetdata:AssetData;
-  items:InspectionsheetData[];
+  items:InspectionData[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtrl:ToastController,public webApi:WebApi) {
     this.assetdata=this.navParams.get('item');
@@ -29,7 +29,7 @@ export class AssetinspectionrecordPage {
   loadDataList(){
     if(!Verifier.isNull(this.assetdata) && !Verifier.isNull(this.assetdata.Id))
     {
-      this.webApi.get<InspectionsheetResponse>(InspectionsheetApi.getMultipleByAssetId(this.assetdata.Id)).subscribe(res => {
+      this.webApi.get<InspectionResponse>(InspectionApi.getMultipleByAssetId(this.assetdata.Id)).subscribe(res => {
         this.items=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
@@ -39,6 +39,6 @@ export class AssetinspectionrecordPage {
 
   openPage(item)
   {    
-    this.navCtrl.push(InspectionsheetPage,{'inspectionsheet':item,'asset':this.assetdata,'optType':SysConfig.OperationType_See});
+    this.navCtrl.push(InspectionsheetPage,{'inspection':item,'asset':this.assetdata,'optType':SysConfig.OperationType_See});
   }
 }

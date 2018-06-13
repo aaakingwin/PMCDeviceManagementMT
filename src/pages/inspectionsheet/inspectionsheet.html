@@ -15,12 +15,12 @@
     <ion-label class="txt-c1">安装位置</ion-label>
     <ion-item class="txt-c2">{{assetData.InstallLocation}}</ion-item>
     <ion-label class="txt-c1">巡检员</ion-label>
-    <ion-item class="txt-c2">{{inspectionsheetData.Inspector}} </ion-item>   
+    <ion-item class="txt-c2">{{inspectionData.Inspector}} </ion-item>   
     <ion-label class="txt-c1">巡检时间</ion-label>
-    <ion-item class="txt-c2">{{inspectionsheetData.InspectionDate | dateFormatterYMD}} </ion-item> 
+    <ion-item class="txt-c2">{{inspectionData.InspectionDate | dateFormatterYMD}} </ion-item> 
     <ion-label class="txt-c1">资产状态</ion-label>
     <div class="div-item-{{optType}}">
-        <ion-item class="txt-c2">{{inspectionsheetData.AssetStatus}} </ion-item> 
+        <ion-item class="txt-c2">{{inspectionData.AssetStatus}} </ion-item> 
     </div>   
     <div class="div-form-{{optType}}">   
         <ion-item>   
@@ -32,7 +32,7 @@
     </div>   
     <ion-label class="txt-c1">情况描述</ion-label>
     <div class="div-item-{{optType}}" >
-        <ion-item class="txt-c2">{{inspectionsheetData.Description}} </ion-item> 
+        <ion-item class="txt-c2">{{inspectionData.Description}} </ion-item> 
     </div>
     <div class="div-form-{{optType}}" >
         <form [formGroup]="inspectionSheetForm">        

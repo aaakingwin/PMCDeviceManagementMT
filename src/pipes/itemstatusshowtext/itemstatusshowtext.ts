@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ItemStatusShowTextPipe implements PipeTransform {
   //项目状态
-  transform(value: boolean) {
+  transform(value: boolean, ...args) {
     if(value)
     {
       return '正常';

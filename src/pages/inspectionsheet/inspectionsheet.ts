@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { InspectionsheetData, InspectionsheetApi, InspectionsheetRequest } from '../../models/inspectionsheetdata';
+import { InspectionData, InspectionApi, InspectionRequest } from '../../models/inspectiondata';
 import { MessageService } from '../../providers/messageservice';
 import { AssetData } from '../../models/assetdata';
 import { WebApi } from '../../providers/webapi';
@@ -21,7 +21,7 @@ export class InspectionsheetPage {
   user:UserData;
   microdistrict:MicrodistrictData;
   assetStatusList:AssetStatusData[];   
-  inspectionsheetData:InspectionsheetData;
+  inspectionData:InspectionData;
   assetData:AssetData;
   assetStatusId:string;
   inspectionSheetForm:FormGroup;
@@ -29,23 +29,23 @@ export class InspectionsheetPage {
   constructor(public navCtrl: NavController,public navParams: NavParams,public formBuilder: FormBuilder,
     public toastCtrl:ToastController,public webApi:WebApi) {
     this.optType=this.navParams.get('optType');
-    this.inspectionsheetData=this.navParams.get('inspectionsheet');
+    this.inspectionData=this.navParams.get('inspection');
     this.assetData=this.navParams.get('asset');
     this.user = StorageService.read<UserData>(SysConfig.StorageKey_UserData);
     this.microdistrict= StorageService.read<MicrodistrictData>(SysConfig.StorageKey_SelectedMicrodistrict);
     this.assetStatusList=StorageService.read<AssetStatusData[]>(SysConfig.StorageKey_AssetStatusList);
-    if(Verifier.isNull(this.inspectionsheetData))
+    if(Verifier.isNull(this.inspectionData))
     {     
-      this.inspectionsheetData=new InspectionsheetData();
-      this.inspectionsheetData.Inspector=this.user.FullName;
-      this.inspectionsheetData.InspectionDate=new Date().toLocaleDateString();
+      this.inspectionData=new InspectionData();
+      this.inspectionData.Inspector=this.user.FullName;
+      this.inspectionData.InspectionDate=new Date().toLocaleDateString();
     }
     if(Verifier.isNull(this.assetData))
     {
       this.assetData=new AssetData();
     }  
     this.inspectionSheetForm= this.formBuilder.group({
-      'Description': [this.inspectionsheetData.Description,  [Validators.required, Validators.minLength(1)]]
+      'Description': [this.inspectionData.Description,  [Validators.required, Validators.minLength(1)]]
     });
   }
 
@@ -61,13 +61,13 @@ export class InspectionsheetPage {
       MessageService.showInfo(this.toastCtrl,'请填写情况描述');
       return;
     }    
-    let inspection =new InspectionsheetRequest();
+    let inspection =new InspectionRequest();
     inspection.MicrodistrictId=this.microdistrict.Id;
     inspection.InspectorUserId=this.user.Id;
     inspection.AssetId=this.assetData.Id;
     inspection.AssetStatusId=this.assetStatusId;     
     inspection.Description=data.Description;
-    this.webApi.post(InspectionsheetApi.postCreate(),inspection).subscribe(res => {
+    this.webApi.post(InspectionApi.postCreate(),inspection).subscribe(res => {
       MessageService.showInfo(this.toastCtrl,'保存成功');
       this.navCtrl.pop();
     }, error => {

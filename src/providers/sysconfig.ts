@@ -8,10 +8,11 @@ export class SysConfig {
     static readonly WebApi_PostCreate='create?';
     static readonly WebApi_PostLogin='login';
     static readonly WebApi_Asset='asset/';
+    static readonly WebApi_Microdistrict='microdistrict/';
     static readonly WebApi_Authentication='authentication/';
     static readonly WebApi_AssetStatus='assetstatus/';
     static readonly WebApi_Inspection='inspection/';
-    static readonly WebApi_Microdistrict='microdistrict/';
+    static readonly WebApi_Maintenance='maintenancerequest/';
     //本地缓存
     static readonly StorageKey_UserData='UserData';//当前用户
     static readonly StorageKey_SelectedMicrodistrict='SelectedMicrodistrict';//被选中的小区
