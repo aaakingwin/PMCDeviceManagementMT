@@ -11,9 +11,9 @@
 </ion-header>
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of items" (click)="openPage(item)">
-      <label class="txt-h1">{{item.RequestDate | dateFormatterYMD}}</label>
-      <img class="itemstatusimg" item-right src="./assets/imgs/{{item.Status | itemStatusImg}}" />
+    <ion-item *ngFor="let maintenance of maintenancelist" (click)="openPage(maintenance)">
+      <label class="txt-h1">{{maintenance.ApplicationDate | dateFormatterYMD}}</label>
+      <img class="itemstatusimg" item-right src="./assets/imgs/{{maintenance.Status | itemStatusImg}}" />
     </ion-item>
   </ion-list>
 </ion-content>

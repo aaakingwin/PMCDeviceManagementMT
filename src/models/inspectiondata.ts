@@ -17,7 +17,6 @@ export class InspectionResponse
     Data:any;
     Success:boolean;
     Message:string;
-    Count:number;
 }
 
 export class InspectionRequest
@@ -31,20 +30,23 @@ export class InspectionRequest
 
 export class InspectionApi
 {
-    static getMultipleByAssetId(id:string)
+    static getDataByAssetId(userid:string,assetid:string)
     {
-        return SysConfig.WebApi_Inspection+SysConfig.WebApi_GetMultiple+'type=assetid&assetid='+id;
+        return SysConfig.WebApi_Module_Inspection + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
+        + '&type=assetid&assetid=' + assetid;
     }
-    static getMultipleByInspectionDate(date:string)
+    static getDataByInspectionDate(userid:string,inspectiondate:string)
     {
-        return SysConfig.WebApi_Inspection+SysConfig.WebApi_GetMultiple+'type=inspectiondate&inspectiondate='+date;
+        return SysConfig.WebApi_Module_Inspection + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid  
+        + '&type=inspectiondate&inspectiondate=' + inspectiondate;
     }
-    static getSingleById(id:string)
+    static getDataById(userid:string,id:string)
     {
-        return SysConfig.WebApi_Inspection+SysConfig.WebApi_GetSingle+'id='+id;
+        return SysConfig.WebApi_Module_Inspection + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid  
+        +'&id=' + id;
     }
-    static postCreate()
+    static postCreate(userid:string)
     {
-        return SysConfig.WebApi_Inspection+SysConfig.WebApi_PostCreate+'token='+'token';
+        return SysConfig.WebApi_Module_Inspection + SysConfig.WebApi_Post_Create + SysConfig.WebApi_Param_User + userid;
     }
 }

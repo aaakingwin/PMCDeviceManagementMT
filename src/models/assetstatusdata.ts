@@ -11,13 +11,13 @@ export class AssetStatusResponse
     Data:any;
     Success:boolean;
     Message:string;
-    Count:number;
 }
 
 export class AssetStatusApi
 {
-    static getAll()
+    static getAll(userid:string)
     {
-        return SysConfig.WebApi_AssetStatus+SysConfig.WebApi_GetAll;
+        return SysConfig.WebApi_Module_AssetStatus + SysConfig.WebApi_Get_View  + SysConfig.WebApi_Param_User + userid 
+        + '&type=all';
     }
 }

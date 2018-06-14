@@ -7,6 +7,7 @@ import { Verifier } from '../../providers/verifier';
 import { MaintenancesheetPage } from '../maintenancesheet/maintenancesheet';
 import { SysConfig } from '../../providers/sysconfig';
 import { MessageService } from '../../providers/messageservice';
+import { UserService } from '../../providers/userservice';
 
 @IonicPage()
 @Component({
@@ -15,10 +16,10 @@ import { MessageService } from '../../providers/messageservice';
 })
 export class AssetmaintenancerecordPage {
   assetdata:AssetData;
-  items:MaintenanceData[];
+  maintenancelist:MaintenanceData[];
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtrl:ToastController,public webApi:WebApi) {
-    this.assetdata=this.navParams.get('item');
+    this.assetdata=this.navParams.get('asset');
     if(Verifier.isNull(this.assetdata))
     {
       this.assetdata=new AssetData();
@@ -29,8 +30,8 @@ export class AssetmaintenancerecordPage {
   loadDataList(){
     if(!Verifier.isNull(this.assetdata) && !Verifier.isNull(this.assetdata.Id))
     {
-      this.webApi.get<MaintenanceResponse>(MaintenanceApi.getMultipleByAssetId(this.assetdata.Id)).subscribe(res => {
-        this.items=res.Data;
+      this.webApi.get<MaintenanceResponse>(MaintenanceApi.getDataByAssetId(UserService.getUserId(),this.assetdata.Id)).subscribe(res => {
+        this.maintenancelist=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
       }); 

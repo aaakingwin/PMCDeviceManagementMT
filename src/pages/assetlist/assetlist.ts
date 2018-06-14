@@ -7,6 +7,7 @@ import { MicrodistrictData } from '../../models/microdistrictdata';
 import { SelectmicrodistrictPage } from '../selectmicrodistrict/selectmicrodistrict';
 import { MessageService } from '../../providers/messageservice';
 import { Verifier } from '../../providers/verifier';
+import { UserService } from '../../providers/userservice';
 
 @IonicPage()
 @Component({
@@ -30,7 +31,7 @@ export class AssetlistPage {
   loadDataList(){
     if(!Verifier.isNull(this.microdistrict) && !Verifier.isNull(this.microdistrict.Id))
     {
-      this.webApi.get<AssetResponse>(AssetApi.getMultipleByMicrodistrictId(this.microdistrict.Id)).subscribe(res => {
+      this.webApi.get<AssetResponse>(AssetApi.getDataByMicrodistrictId(UserService.getUserId(),this.microdistrict.Id)).subscribe(res => {
         this.assetlist=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
@@ -39,7 +40,7 @@ export class AssetlistPage {
   }
 
   openPage(item) {    
-    this.navCtrl.push(AssetPage,{'item':item});
+    this.navCtrl.push(AssetPage,{'asset':item});
   }
 
   selectMicrodistrict(){

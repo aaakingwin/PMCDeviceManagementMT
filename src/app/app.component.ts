@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { UserData, LoginRequest, UserResponse, UserApi } from '../models/userdata';
 import { SysConfig } from '../providers/sysconfig';
-import { StorageService } from '../providers/storageservice';
 import { AssetlistPage } from '../pages/assetlist/assetlist';
 import { HomePage } from '../pages/home/home';
 import { AssetinspectionPage } from '../pages/assetinspection/assetinspection';
@@ -18,6 +17,7 @@ import { File } from '@ionic-native/file';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { FileOpener } from '@ionic-native/file-opener';
 import { AppVersion } from '@ionic-native/app-version';
+import { UserService } from '../providers/userservice';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +25,7 @@ import { AppVersion } from '@ionic-native/app-version';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;  
   rootPage: any;
-  userData:UserData;
+  user:UserData;
   vcode:string;
   pages: Array<{title: string, component: any}>=[
     {title: '首页', component: HomePage },
@@ -44,22 +44,22 @@ export class MyApp {
       else
       {
         this.initializeApp();
-        this.userData=StorageService.read<UserData>(SysConfig.StorageKey_UserData);
+        this.user=UserService.get();
         this.login();
       }    
   }
 
   login()
   {
-    if(!Verifier.isNull(this.userData))
+    if(!Verifier.isNull(this.user))
     {
       let loginRequest=new LoginRequest();
-      loginRequest.UserName=this.userData.Name;
-      loginRequest.Password=this.userData.Password;    
+      loginRequest.UserName=this.user.Name;
+      loginRequest.Password=this.user.Password;    
       this.webApi.post<UserResponse>(UserApi.postLogin(),loginRequest).subscribe(res => {
-        this.userData=res.Data;
-        this.userData.Password=loginRequest.Password;
-        StorageService.write(SysConfig.StorageKey_UserData, this.userData);
+        this.user=res.Data;
+        this.user.Password=loginRequest.Password;
+        UserService.set(this.user);
         this.rootPage=HomePage;
       }, error => {
         this.rootPage=LoginPage;

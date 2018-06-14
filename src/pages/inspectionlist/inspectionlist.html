@@ -12,14 +12,14 @@
 </ion-header>
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of items" (click)="openPage(item)">      
-      <label class="txt-h1">{{item.AssetName}}</label>      
+    <ion-item *ngFor="let inspection of inspectionlist" (click)="openPage(inspection)">      
+      <label class="txt-h1">{{inspection.AssetName}}</label>      
       <br/>
-      <label class="txt-c2">{{item.AssetNumber}}</label>
+      <label class="txt-c2">{{inspection.AssetNumber}}</label>
       <br/>
-      <label class="txt-c2"><ion-icon name="pin"></ion-icon>{{item.Microdistrict}}</label>
-      <label class="txt-h1" item-right>{{item.Inspector}}</label>
-      <img class="itemstatusimg" item-right src="./assets/imgs/{{item.AssetStatus | itemStatusImg}}" />
+      <label class="txt-c2"><ion-icon name="pin"></ion-icon>{{inspection.Microdistrict}}</label>
+      <label class="txt-h1" item-right>{{inspection.Inspector}}</label>
+      <img class="itemstatusimg" item-right src="./assets/imgs/{{inspection.AssetStatus | itemStatusImg}}" />
     </ion-item>
   </ion-list>
 </ion-content>

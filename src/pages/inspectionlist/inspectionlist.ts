@@ -8,6 +8,7 @@ import { MessageService } from '../../providers/messageservice';
 import { AssetResponse, AssetApi } from '../../models/assetdata';
 import { Converter } from '../../providers/converter';
 import { Verifier } from '../../providers/verifier';
+import { UserService } from '../../providers/userservice';
 
 @IonicPage()
 @Component({
@@ -16,7 +17,7 @@ import { Verifier } from '../../providers/verifier';
 })
 export class InspectionlistPage {
   querydate:string=new Date().toISOString();
-  items: InspectionData[];
+  inspectionlist: InspectionData[];
   constructor(public navCtrl: NavController,public navParams: NavParams,
     public toastCtrl:ToastController,public webApi:WebApi) {
       this.loadDataList(this.querydate);
@@ -26,8 +27,8 @@ export class InspectionlistPage {
     if(!Verifier.isNull(date))
     {
       let inspectiondate=Converter.toYYYYMMDD(date);
-      this.webApi.get<InspectionResponse>(InspectionApi.getMultipleByInspectionDate(inspectiondate)).subscribe(res => {
-        this.items=res.Data;
+      this.webApi.get<InspectionResponse>(InspectionApi.getDataByInspectionDate(UserService.getUserId(),inspectiondate)).subscribe(res => {
+        this.inspectionlist=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
       }); 
@@ -35,12 +36,9 @@ export class InspectionlistPage {
   }
 
   openPage(item) {
-    this.webApi.get<AssetResponse>(AssetApi.getSingleByNumber(item.AssetNumber)).subscribe(res => {
-      if(res.Count>0)
-      {
-        let assetdata=res.Data;  
-        this.navCtrl.push(InspectionsheetPage,{'inspection':item,'asset':assetdata,'optType':SysConfig.OperationType_See});
-      }   
+    this.webApi.get<AssetResponse>(AssetApi.getDataByNumber(UserService.getUserId(),item.AssetNumber)).subscribe(res => {
+      let assetdata=res.Data;  
+      this.navCtrl.push(InspectionsheetPage,{'inspection':item,'asset':assetdata,'optType':SysConfig.OperationType_See});   
     }, error => {
       MessageService.showWebApiError(this.toastCtrl,error);  
     });     

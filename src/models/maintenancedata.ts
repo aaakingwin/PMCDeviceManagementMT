@@ -4,8 +4,8 @@ export class MaintenanceData
 {
     Id:string;    
     Microdistrict:string;   
-    RequestDate:string;  
-    RequestUser:string; 
+    ApplicationDate:string;  
+    ApplicationUser:string; 
     ConfirmDate:string;
     ConfirmUser:string;
     Status:string;
@@ -19,33 +19,35 @@ export class MaintenanceResponse
     Data:any;
     Success:boolean;
     Message:string;
-    Count:number;
 }
 
 export class MaintenanceRequest
 {
     MicrodistrictId:string;
-	RequestUserId:string;
+	ApplicationUserId:string;
 	AssetId:string;
 	Description:string;
 }
 
 export class MaintenanceApi
 {
-    static getMultipleByAssetId(id:string)
+    static getDataByAssetId(userid:string,assetid:string)
     {
-        return SysConfig.WebApi_Maintenance+SysConfig.WebApi_GetMultiple+'type=assetid&assetid='+id;
+        return SysConfig.WebApi_Module_Maintenance + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
+        + '&type=assetid&assetid=' + assetid;
     }
-    static getMultipleByRequestDate(date:string)
+    static getDataByApplicationDate(userid:string,applicationdate:string)
     {
-        return SysConfig.WebApi_Maintenance+SysConfig.WebApi_GetMultiple+'type=requestdate&requestdate='+date;
+        return SysConfig.WebApi_Module_Maintenance + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
+        + '&type=applicationdate&applicationdate=' + applicationdate;
     }
-    static getSingleById(id:string)
+    static getDataById(userid:string,id:string)
     {
-        return SysConfig.WebApi_Maintenance+SysConfig.WebApi_GetSingle+'id='+id;
+        return SysConfig.WebApi_Module_Maintenance + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
+        + '&id=' + id;
     }
-    static postCreate()
+    static postCreate(userid:string,)
     {
-        return SysConfig.WebApi_Maintenance+SysConfig.WebApi_PostCreate+'token='+'token';
+        return SysConfig.WebApi_Module_Maintenance + SysConfig.WebApi_Post_Create + SysConfig.WebApi_Param_User + userid;
     }
 }

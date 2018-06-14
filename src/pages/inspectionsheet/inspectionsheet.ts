@@ -11,6 +11,7 @@ import { UserData } from '../../models/userdata';
 import { AssetStatusData } from '../../models/assetstatusdata';
 import { MicrodistrictData } from '../../models/microdistrictdata';
 import { Verifier } from '../../providers/verifier';
+import { UserService } from '../../providers/userservice';
 
 @IonicPage()
 @Component({
@@ -18,12 +19,12 @@ import { Verifier } from '../../providers/verifier';
   templateUrl: 'inspectionsheet.html',
 })
 export class InspectionsheetPage {
+  inspectionData:InspectionData;
+  assetData:AssetData;
   user:UserData;
   microdistrict:MicrodistrictData;
   assetStatusList:AssetStatusData[];   
-  inspectionData:InspectionData;
-  assetData:AssetData;
-  assetStatusId:string;
+  assetStatusId:string;  
   inspectionSheetForm:FormGroup;
   optType:string;
   constructor(public navCtrl: NavController,public navParams: NavParams,public formBuilder: FormBuilder,
@@ -31,7 +32,7 @@ export class InspectionsheetPage {
     this.optType=this.navParams.get('optType');
     this.inspectionData=this.navParams.get('inspection');
     this.assetData=this.navParams.get('asset');
-    this.user = StorageService.read<UserData>(SysConfig.StorageKey_UserData);
+    this.user=UserService.get();
     this.microdistrict= StorageService.read<MicrodistrictData>(SysConfig.StorageKey_SelectedMicrodistrict);
     this.assetStatusList=StorageService.read<AssetStatusData[]>(SysConfig.StorageKey_AssetStatusList);
     if(Verifier.isNull(this.inspectionData))
@@ -67,7 +68,7 @@ export class InspectionsheetPage {
     inspection.AssetId=this.assetData.Id;
     inspection.AssetStatusId=this.assetStatusId;     
     inspection.Description=data.Description;
-    this.webApi.post(InspectionApi.postCreate(),inspection).subscribe(res => {
+    this.webApi.post(InspectionApi.postCreate(this.user.Id),inspection).subscribe(res => {
       MessageService.showInfo(this.toastCtrl,'保存成功');
       this.navCtrl.pop();
     }, error => {

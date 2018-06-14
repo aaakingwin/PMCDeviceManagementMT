@@ -10,6 +10,7 @@ import { AssetData } from '../../models/assetdata';
 import { Verifier } from '../../providers/verifier';
 import { MessageService } from '../../providers/messageservice';
 import { WebApi } from '../../providers/webapi';
+import { UserService } from '../../providers/userservice';
 
 @IonicPage()
 @Component({
@@ -28,13 +29,13 @@ export class MaintenancesheetPage {
     this.optType=this.navParams.get('optType');
     this.maintenanceData=this.navParams.get('maintenance');
     this.assetData=this.navParams.get('asset');
-    this.user = StorageService.read<UserData>(SysConfig.StorageKey_UserData);
+    this.user = UserService.get();
     this.microdistrict= StorageService.read<MicrodistrictData>(SysConfig.StorageKey_SelectedMicrodistrict);
     if(Verifier.isNull(this.maintenanceData))
     {     
       this.maintenanceData=new MaintenanceData();
-      this.maintenanceData.RequestUser=this.user.FullName;
-      this.maintenanceData.RequestDate=new Date().toLocaleDateString();
+      this.maintenanceData.ApplicationUser=this.user.FullName;
+      this.maintenanceData.ApplicationDate=new Date().toLocaleDateString();
     }
     if(Verifier.isNull(this.assetData))
     {
@@ -54,10 +55,10 @@ export class MaintenancesheetPage {
     }    
     let maintenance =new MaintenanceRequest();
     maintenance.MicrodistrictId=this.microdistrict.Id;
-    maintenance.RequestUserId=this.user.Id;
+    maintenance.ApplicationUserId=this.user.Id;
     maintenance.AssetId=this.assetData.Id;   
     maintenance.Description=data.Description;
-    this.webApi.post(MaintenanceApi.postCreate(),maintenance).subscribe(res => {
+    this.webApi.post(MaintenanceApi.postCreate(this.user.Id),maintenance).subscribe(res => {
       MessageService.showInfo(this.toastCtrl,'保存成功');
       this.navCtrl.pop();
     }, error => {

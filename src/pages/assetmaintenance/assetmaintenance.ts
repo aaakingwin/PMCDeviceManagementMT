@@ -9,6 +9,7 @@ import { MaintenancesheetPage } from '../maintenancesheet/maintenancesheet';
 import { SelectmicrodistrictPage } from '../selectmicrodistrict/selectmicrodistrict';
 import { Verifier } from '../../providers/verifier';
 import { SysConfig } from '../../providers/sysconfig';
+import { UserService } from '../../providers/userservice';
 
 @IonicPage()
 @Component({
@@ -31,7 +32,7 @@ export class AssetmaintenancePage {
   loadDataList(){
     if(!Verifier.isNull(this.microdistrict) && !Verifier.isNull(this.microdistrict.Id))
     {
-      this.webApi.get<AssetResponse>(AssetApi.getMultipleByMicrodistrictId(this.microdistrict.Id)).subscribe(res => {
+      this.webApi.get<AssetResponse>(AssetApi.getDataByMicrodistrictId(UserService.getUserId(),this.microdistrict.Id)).subscribe(res => {
         this.assetlist=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
@@ -40,7 +41,7 @@ export class AssetmaintenancePage {
   }
 
   openListPage(item) {    
-    this.navCtrl.push(AssetmaintenancerecordPage,{'item':item});
+    this.navCtrl.push(AssetmaintenancerecordPage,{'asset':item});
   }
 
   openPage(item) {    
@@ -73,18 +74,10 @@ export class AssetmaintenancePage {
   scanCallback =(text) => {   
     if(!Verifier.isNull(text))
     {     
-      this.webApi.get<AssetResponse>(AssetApi.getSingleByNumber(text)).subscribe(res => {
-        if(res.Count>0)
-        {
-          let assetdata=res.Data;  
-          this.navCtrl.pop(); 
-          this.navCtrl.push(MaintenancesheetPage,{'asset':assetdata,'optType':SysConfig.OperationType_Create});
-        }
-        else
-        {
-          MessageService.showInfo(this.toastCtrl,res.Message);
-          this.navCtrl.pop(); 
-        }      
+      this.webApi.get<AssetResponse>(AssetApi.getDataByNumber(UserService.getUserId(),text)).subscribe(res => {
+        let assetdata=res.Data;  
+        this.navCtrl.pop(); 
+        this.navCtrl.push(MaintenancesheetPage,{'asset':assetdata,'optType':SysConfig.OperationType_Create}); 
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
         this.navCtrl.pop();

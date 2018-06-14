@@ -25,23 +25,19 @@ export class AssetResponse
     Data:any;
     Success:boolean;
     Message:string;
-    Count:number;
 }
 //资产API
 export class AssetApi
-{
-    static getAll()
+{    
+    static getDataByMicrodistrictId(userid:string,microdistrictid:string)
     {
-        return SysConfig.WebApi_Asset+SysConfig.WebApi_GetAll;
+        return  SysConfig.WebApi_Module_Asset + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
+        + '&type=microdistrictid&microdistrictid=' + microdistrictid;
     }
 
-    static getMultipleByMicrodistrictId(id:string)
+    static getDataByNumber(userid:string,number:string)
     {
-        return  SysConfig.WebApi_Asset+SysConfig.WebApi_GetMultiple+'microdistrictid='+id;
-    }
-
-    static getSingleByNumber(number:string)
-    {
-        return  SysConfig.WebApi_Asset+SysConfig.WebApi_GetSingle+'number='+number;
+        return  SysConfig.WebApi_Module_Asset + SysConfig.WebApi_Get_Scan + SysConfig.WebApi_Param_User + userid 
+        +'&number=' + number;
     }
 }

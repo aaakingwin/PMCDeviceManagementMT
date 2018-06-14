@@ -9,12 +9,12 @@ import { Verifier } from '../../providers/verifier';
   templateUrl: 'asset.html',
 })
 export class AssetPage {
-  item:AssetData;
+  assetData:AssetData;
   constructor(public navCtrl: NavController, public navParams: NavParams ) {
-    this.item=this.navParams.get('item'); 
-    if(Verifier.isNull(this.item))
+    this.assetData=this.navParams.get('asset'); 
+    if(Verifier.isNull(this.assetData))
     {
-      this.item=new AssetData();
+      this.assetData=new AssetData();
     }
   }
 }

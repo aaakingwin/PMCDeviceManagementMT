@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
-import { StorageService } from '../../providers/storageservice';
 import { UserData, UserApi, LoginRequest, UserResponse } from '../../models/userdata';
-import { SysConfig } from '../../providers/sysconfig';
 import { MessageService } from '../../providers/messageservice';
 import { HomePage } from '../home/home';
 import { WebApi } from '../../providers/webapi';
+import { UserService } from '../../providers/userservice';
 
 @IonicPage()
 @Component({
@@ -14,7 +13,7 @@ import { WebApi } from '../../providers/webapi';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  userData:UserData;
+  user:UserData;
   loginForm = this.formBuilder.group({
     'LoginID': ['',  [Validators.required, Validators.minLength(1)]],
     'LoginPwd': ['', [Validators.required, Validators.minLength(1)]]
@@ -29,9 +28,9 @@ export class LoginPage {
     loginRequest.UserName=user.LoginID;
     loginRequest.Password=user.LoginPwd;    
     this.webApi.post<UserResponse>(UserApi.postLogin(),loginRequest).subscribe(res => {
-      this.userData=res.Data;
-      this.userData.Password=loginRequest.Password;
-      StorageService.write(SysConfig.StorageKey_UserData, this.userData);
+      this.user=res.Data;
+      this.user.Password=loginRequest.Password;
+      UserService.set(this.user);
       this.navCtrl.setRoot(HomePage);
     }, error => {
       MessageService.showInfo(this.toastCtrl,'账户或密码有误');

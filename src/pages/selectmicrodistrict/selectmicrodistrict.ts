@@ -5,6 +5,7 @@ import { WebApi } from '../../providers/webapi';
 import { MessageService } from '../../providers/messageservice';
 import { StorageService } from '../../providers/storageservice';
 import { SysConfig } from '../../providers/sysconfig';
+import { UserService } from '../../providers/userservice';
 
 @IonicPage()
 @Component({
@@ -13,19 +14,19 @@ import { SysConfig } from '../../providers/sysconfig';
 })
 export class SelectmicrodistrictPage {
   callback;//回调函数
-  microdistrictlist:MicrodistrictData[];
+  all:MicrodistrictData[];
   items:MicrodistrictData[];
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,public webApi:WebApi) 
   {
     this.callback = this.navParams.get("callback");
-    this.loadMicrodistrictList();
+    this.loadDataList();
   }
 
-  loadMicrodistrictList()
+  loadDataList()
   {
-    this.webApi.get<MicrodistrictResponse>(MicrodistrictApi.getAll()).subscribe(res=>{
-      this.microdistrictlist=res.Data;
-      this.items=this.microdistrictlist;
+    this.webApi.get<MicrodistrictResponse>(MicrodistrictApi.getAll(UserService.getUserId())).subscribe(res=>{
+      this.all=res.Data;
+      this.items=this.all;
     }, error => {
       MessageService.showWebApiError(this.toastCtrl,error);  
     }); 
@@ -34,13 +35,13 @@ export class SelectmicrodistrictPage {
   getItems(ev) {
     let val = ev.target.value;
     if (val && val.trim() != '') {
-      this.items = this.microdistrictlist.filter((item) => {
+      this.items = this.all.filter((item) => {
         return (item.Name.toLowerCase().indexOf(val.toLowerCase()) >= 0);
       })
     }
     else
     {
-      this.items=this.microdistrictlist;
+      this.items=this.all;
     }
   }
 

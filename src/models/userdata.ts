@@ -15,7 +15,6 @@ export class UserResponse
     Data:any;
     Success:boolean;
     Message:string;
-    Count:number;
 }
 
 export class LoginRequest
@@ -28,6 +27,6 @@ export class UserApi{
 
     static postLogin()
     {
-        return SysConfig.WebApi_Authentication+SysConfig.WebApi_PostLogin;
+        return SysConfig.WebApi_Module_Authentication + SysConfig.WebApi_Post_Login;
     }
 }

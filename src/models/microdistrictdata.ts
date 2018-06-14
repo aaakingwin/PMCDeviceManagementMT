@@ -15,13 +15,13 @@ export class MicrodistrictResponse
     Data:any;
     Success:boolean;
     Message:string;
-    Count:number;
 }
 
 export class MicrodistrictApi
 {
-    static getAll()
+    static getAll(userid:string)
     {
-        return SysConfig.WebApi_Microdistrict+SysConfig.WebApi_GetAll;
+        return SysConfig.WebApi_Module_Microdistrict + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
+        + '&type=all';
     }
 }
