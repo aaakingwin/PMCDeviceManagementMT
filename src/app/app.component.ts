@@ -26,7 +26,6 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;  
   rootPage: any;
   user:UserData;
-  vcode:string;
   pages: Array<{title: string, component: any}>=[
     {title: '首页', component: HomePage },
     {title: '巡检', component: AssetinspectionPage},
@@ -37,16 +36,24 @@ export class MyApp {
   ];    
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public alertCtrl: AlertController,
     public webApi:WebApi,public transfer: FileTransfer,public appVersion: AppVersion,public file: File,public fileOpener: FileOpener) {      
-      if(this.isOldVersion())
-      {
-        this.upgrade();
-      }
-      else
-      {
-        this.initializeApp();
-        this.user=UserService.get();
-        this.login();
-      }    
+      this.initializeApp();
+      /* this.appVersion.getVersionCode().then(code=> {
+        let vcode = code;
+        this.webApi.get('values/1132533').subscribe(res => {
+          let scode = res as string;
+          if(vcode==scode)
+          {            
+            this.user=UserService.get();
+            this.login();
+          }
+          else
+          {
+            this.upgrade();
+          }    
+        }); 
+      });   */
+      this.user=UserService.get();
+      this.login();
   }
 
   login()
@@ -82,14 +89,6 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  //是否是老版
-  isOldVersion():boolean
-  {
-      return false;
-     /*  this.appVersion.getVersionCode().then(code=> {
-          this.vcode = code;
-      });   */    
-  }
   //升级
   upgrade() {      
       this.alertCtrl.create({
