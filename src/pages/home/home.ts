@@ -12,20 +12,22 @@ import { AssetStatusResponse, AssetStatusApi } from '../../models/assetstatusdat
 import { WebApi } from '../../providers/webapi';
 import { MessageService } from '../../providers/messageservice';
 import { UserService } from '../../providers/userservice';
+import { AboutPage } from '../about/about';
 
 @IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
 })
-export class HomePage {
-  pages: Array<{title: string, component: any}> = [
-    {title: '巡检', component: AssetinspectionPage},
-    {title: '维保', component: AssetmaintenancePage},
-    {title: '巡检记录', component: InspectionlistPage},
-    {title: '维保记录', component: MaintenancelistPage},
-    {title: '资产', component: AssetlistPage}
-  ];
+export class HomePage { 
+  pages: Array<{title: string, component: any, img: string}>=[
+    {title: '常规巡检', component: AssetinspectionPage ,img: 'inspection.png'},
+    {title: '维保申请', component: AssetmaintenancePage ,img: 'microdistrict.png'},
+    {title: '巡检记录', component: InspectionlistPage ,img: 'inspectionrecord.png'},
+    {title: '维保记录', component: MaintenancelistPage ,img: 'microdistrictrecord.png'},
+    {title: '资产', component: AssetlistPage ,img: 'asset.png'},
+    {title: '关于', component: AboutPage ,img: 'about.png'}
+  ];    
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,public webApi:WebApi) {
     this.loadAssetStatusList();
   }

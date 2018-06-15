@@ -4,7 +4,7 @@ import { SysConfig } from "../providers/sysconfig";
 export class AssetData{
     Id:string;//唯一码
     AssetType:string;//资产类型
-    Number:string;//资产编码
+    Number:string;//资产编号
     Name:string;//资产名称
     Brand:string;//品牌
     Model:string;//资产型号

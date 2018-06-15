@@ -7,38 +7,58 @@
   <ion-item>
     <img class="assettypeimg" item-left src="./assets/imgs/{{assetData.AssetType | assetTypeImg}}" />
     <label class="txt-h1">{{assetData.Name}}</label>
-    <br/>
-    <label class="txt-c2">{{assetData.Number}}</label>
 </ion-item> 
-<ion-label class="txt-c1">小区名称</ion-label>
-<ion-item class="txt-c2">{{assetData.Microdistrict}} </ion-item>   
-<ion-label class="txt-c1">安装位置</ion-label>
-<ion-item class="txt-c2">{{assetData.InstallLocation}}</ion-item>
-<ion-label class="txt-c1">申请人</ion-label>
-<ion-item class="txt-c2">{{maintenanceData.ApplicationUser}} </ion-item>   
-<ion-label class="txt-c1">申请时间</ion-label>
-<ion-item class="txt-c2">{{maintenanceData.ApplicationDate | dateFormatterYMD}} </ion-item> 
+<ion-item>
+    <label class="txt-c1" >资产编号：</label>
+    <label class="txt-c2" >{{assetData.Number}}</label>
+</ion-item>
+<ion-item>
+    <label class="txt-c1" >小区名称：</label>
+    <label class="txt-c2" >{{assetData.Microdistrict}}</label>
+</ion-item>
+<ion-item>
+    <label class="txt-c1" >安装位置：</label>
+    <label class="txt-c2" >{{assetData.InstallLocation}}</label>
+</ion-item>
+<ion-item>
+    <label class="txt-c1" >申请人：</label>
+    <label class="txt-c2" >{{maintenanceData.ApplicationUser}}</label>
+</ion-item>
+<ion-item>
+    <label class="txt-c1" >申请时间：</label>
+    <label class="txt-c2" >{{maintenanceData.ApplicationDate | dateFormatterYMD}}</label>
+</ion-item>    
 <div class="div-item-{{optType}}">
-  <ion-label class="txt-c1">状态</ion-label>
-  <ion-item class="txt-c2">{{maintenanceData.Status}} </ion-item> 
-  <ion-label class="txt-c1">确认人</ion-label>
-  <ion-item class="txt-c2">{{maintenanceData.ConfirmUser}} </ion-item> 
-  <ion-label class="txt-c1">确认时间</ion-label>
-  <ion-item class="txt-c2">{{maintenanceData.ConfirmDate | dateFormatterYMD}} </ion-item> 
+    <ion-item>
+        <label class="txt-c1" >状态：</label>
+        <label class="txt-c2" >{{maintenanceData.Status}}</label>
+    </ion-item>
+    <ion-item>
+        <label class="txt-c1" >确认人：</label>
+        <label class="txt-c2" >{{maintenanceData.ConfirmUser}}</label>
+    </ion-item>
+    <ion-item>
+        <label class="txt-c1" >确认时间：</label>
+        <label class="txt-c2" >{{maintenanceData.ConfirmDate | dateFormatterYMD}}</label>
+    </ion-item>
 </div>  
-<ion-label class="txt-c1">情况描述</ion-label>
 <div class="div-item-{{optType}}" >
-    <ion-item class="txt-c2">{{maintenanceData.Description}} </ion-item> 
+    <ion-item>
+        <label class="txt-c1" >情况描述：</label>
+        <label class="txt-c2" >{{maintenanceData.Description}}</label>
+    </ion-item>
 </div>
 <div class="div-form-{{optType}}" >
+    <ion-item no-lines>
+    <label item-left class="txt-c1">情况描述：</label><label item-left class="required-field" color="danger">*</label>
+    </ion-item>
     <form [formGroup]="maintenanceSheetForm">        
-        <ion-item>  
-            <ion-label class="required-field" color="danger">*</ion-label>                         
-            <ion-input class="txt-c2" type="text" formControlName="Description"></ion-input>
+        <ion-item>                                       
+            <ion-textarea class="txt-c2" formControlName="Description" ></ion-textarea>
         </ion-item>            
-        <br/>
+        <br/>        
         <button ion-button block (click)="save(maintenanceSheetForm.value, $event)">保存</button>
         <br/>
-    </form>
+    </form>    
 </div>
 </ion-content>

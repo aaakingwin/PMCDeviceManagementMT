@@ -31,4 +31,17 @@ export class UserService{
             return null;
         }
     }
+    //获取用户姓名
+    static getFullName():string
+    {
+        let user = StorageService.read<UserData>(SysConfig.StorageKey_UserData);
+        if(!Verifier.isNull(user) && !Verifier.isNull(user.FullName))
+        {
+            return user.FullName;
+        }
+        else
+        {
+            return '';
+        }
+    }
 }

@@ -8,6 +8,7 @@ import { SelectmicrodistrictPage } from '../selectmicrodistrict/selectmicrodistr
 import { MessageService } from '../../providers/messageservice';
 import { Verifier } from '../../providers/verifier';
 import { UserService } from '../../providers/userservice';
+import { SysConfig } from '../../providers/sysconfig';
 
 @IonicPage()
 @Component({
@@ -24,6 +25,7 @@ export class AssetlistPage {
     if(Verifier.isNull(this.microdistrict))
     {
       this.microdistrict=new MicrodistrictData();
+      this.microdistrict.Name=SysConfig.ShowText_SelectedMicrodistrict;
     } 
     this.loadDataList();
   }

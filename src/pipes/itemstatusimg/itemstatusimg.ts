@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ItemStatusImgPipe implements PipeTransform {
   //项目状态图片
   transform(value: string, ...args) {
-    if(value=='正常' || value=='确认')
+    if(value=='正常')
     {
       return 'yes.png';
     }

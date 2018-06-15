@@ -5,9 +5,6 @@ import { Converter } from '../../providers/converter';
   name: 'dateFormatterYMD',
 })
 export class DateFormatterYMDPipe implements PipeTransform {
-  /**
-   * Takes a value and makes it lowercase.
-   */
   transform(value: string, ...args) {    
     return Converter.toYYYYMMDD(value);
   }

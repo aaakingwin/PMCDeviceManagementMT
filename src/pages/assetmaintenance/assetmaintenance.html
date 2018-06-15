@@ -3,11 +3,11 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>维保</ion-title>
+    <ion-title>维保申请</ion-title>
   </ion-navbar>
   <ion-item (click)="selectMicrodistrict()">
-    <label class="txt-h1">小区</label>
-    <label class="txt-h1" item-right>
+    <label class="txt-c1">筛选小区</label>
+    <label class="txt-c1" item-right>
       {{microdistrict.Name}}&nbsp;
       <ion-icon name="arrow-dropdown" item-right ></ion-icon>
     </label>
@@ -17,12 +17,15 @@
   <ion-list>
     <ion-item *ngFor="let a of assetlist">
       <ion-item no-lines (click)="openListPage(a)">
-        <img class="assettypeimg" item-left src="./assets/imgs/{{a.AssetType | assetTypeImg}}" />        
-        <label class="txt-h1">{{a.Name}}&nbsp;{{a.Model}}</label>
+        <img class="assettypeimg" item-left src="./assets/imgs/{{a.AssetType | assetTypeImg}}" />
+        <label class="txt-c1">{{a.Name}}&nbsp;{{a.Model}}</label>
+        <br/>        
+        <label class="txt-c2-min">
+          <ion-icon name="md-barcode"></ion-icon>
+          {{a.Number}}
+        </label>
         <br/>
-        <label class="txt-c2">{{a.Number}}</label>
-        <br/>
-        <label class="txt-c2">
+        <label class="txt-c2-min">
           <ion-icon name="pin"></ion-icon>
           {{a.Microdistrict}}&nbsp;{{a.InstallLocation}}
         </label>

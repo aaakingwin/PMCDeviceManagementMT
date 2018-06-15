@@ -6,20 +6,36 @@
     <ion-title>维保记录</ion-title>
   </ion-navbar>
   <ion-item>
-    <ion-label>日期</ion-label>
+    <ion-label class="txt-c1" color='dark' >筛选日期</ion-label>
     <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" (ngModelChange)="changeDate($event)" [(ngModel)]="querydate"></ion-datetime>
   </ion-item>
 </ion-header>
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let maintenance of maintenancelist" (click)="openPage(maintenance)">      
-      <label class="txt-h1">{{maintenance.AssetName}}</label>      
-      <br/>
-      <label class="txt-c2">{{maintenance.AssetNumber}}</label>
-      <br/>
-      <label class="txt-c2"><ion-icon name="pin"></ion-icon>{{maintenance.Microdistrict}}</label>
-      <label class="txt-h1" item-right>{{maintenance.ApplicationUser}}</label>
-      <img class="itemstatusimg" item-right src="./assets/imgs/{{maintenance.Status | itemStatusImg}}" />
+    <ion-item *ngFor="let maintenance of maintenancelist" (click)="openPage(maintenance)"> 
+      <ion-item no-lines>
+        <label class="txt-c1">{{maintenance.AssetName}}</label>
+        <br/>        
+        <label class="txt-c2-min">
+          <ion-icon name="md-barcode"></ion-icon>
+          {{maintenance.AssetNumber}}
+        </label>
+        <br/>
+        <label class="txt-c2-min">
+          <ion-icon name="pin"></ion-icon>
+          {{maintenance.Microdistrict}}
+        </label>
+      </ion-item>    
+      <label item-right>
+          <label class="txt-c1">申请人</label>
+          <br/>      
+          <label class="txt-c2">{{maintenance.ApplicationUser}}</label> 
+      </label> 
+      <label item-right>
+          <label class="txt-c1">状态</label>  
+          <br/>
+          <label class="txt-c2">{{maintenance.Status}}</label>  
+      </label>        
     </ion-item>
   </ion-list>
 </ion-content>

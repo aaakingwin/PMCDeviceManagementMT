@@ -3,14 +3,15 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>城市管理巡检维保终端</ion-title>
+    <ion-title>物管中心资产管理终端</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <ion-list>
-    <button class="layout-center" ion-item *ngFor="let p of pages" (click)="openPage(p)">
+    <ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <img class="menuimg" item-left src="./assets/imgs/{{p.img}}" />
       {{p.title}}
-    </button>
+    </ion-item>
   </ion-list>
 </ion-content>
 <ion-footer class="footerbar">

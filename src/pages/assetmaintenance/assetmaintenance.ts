@@ -25,6 +25,7 @@ export class AssetmaintenancePage {
     if(Verifier.isNull(this.microdistrict))
     {
       this.microdistrict=new MicrodistrictData();
+      this.microdistrict.Name=SysConfig.ShowText_SelectedMicrodistrict;
     } 
     this.loadDataList();
   }
@@ -63,7 +64,7 @@ export class AssetmaintenancePage {
   scan() {    
     if(Verifier.isNull(this.microdistrict.Id))
     {
-      MessageService.showInfo(this.toastCtrl,'请选择小区');
+      MessageService.showInfo(this.toastCtrl,SysConfig.ShowText_SelectedMicrodistrict);
     }
     else
     {

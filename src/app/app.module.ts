@@ -29,6 +29,7 @@ import { AppVersion } from '@ionic-native/app-version';
 import { FileOpener } from '@ionic-native/file-opener';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { AboutPage } from '../pages/about/about';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { File } from '@ionic-native/file';
     AssetmaintenancerecordPage,
     AssetlistPage,
     AssetPage,
+    AboutPage,
     SelectmicrodistrictPage
   ],
   imports: [
@@ -68,6 +70,7 @@ import { File } from '@ionic-native/file';
     AssetmaintenancerecordPage,
     AssetlistPage,
     AssetPage,
+    AboutPage,
     SelectmicrodistrictPage
   ],
   providers: [

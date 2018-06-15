@@ -17,17 +17,22 @@
 
 .txt-h1
 {
-    font-size:18px;
+    font-size: 18px;
     color: black;
 }
 .txt-c1
 {
-    font-size:12px;
+    font-size: 16px;
     color: black;    
 }
 .txt-c2
 {
-    font-size:12px;
+    font-size: 16px;
+    color: grey;
+}
+.txt-c2-min
+{
+    font-size: 15px;
     color: grey;
 }
 .layout-center
@@ -42,6 +47,11 @@
 .footerbar
 {
     background-color: white;        
+}
+.menuimg
+{
+    width: 25px;
+    height: 25px;
 }
 .itemstatusimg
 {
