@@ -27,6 +27,10 @@ export class AssetinspectionPage {
       this.microdistrict=new MicrodistrictData();
       this.microdistrict.Name=SysConfig.ShowText_SelectedMicrodistrict;
     } 
+  }
+
+  ionViewWillEnter()
+  {
     this.loadDataList();
   }
 

@@ -17,9 +17,9 @@ export class AppVersionResponse
 
 export class AppVersionApi
 {    
-    static getLast(userid:string)
+    static getLast()
     {
-        return  SysConfig.WebApi_Module_AppVersion + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
-        + '&type=last';
+        return  SysConfig.WebApi_Module_AppVersion + SysConfig.WebApi_Get_View
+        + 'type=last';
     }
 }

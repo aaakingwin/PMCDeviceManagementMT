@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav,Platform, AlertController } from 'ionic-angular';
+import { Nav,Platform, AlertController, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
@@ -21,6 +21,7 @@ import { AboutPage } from '../pages/about/about';
 import { AppVersionData, AppVersionApi, AppVersionResponse } from '../models/appversiondata';
 import { StorageService } from '../providers/storageservice';
 import { SysConfig } from '../providers/sysconfig';
+import { MessageService } from '../providers/messageservice';
 
 @Component({
   templateUrl: 'app.html'
@@ -40,16 +41,17 @@ export class MyApp {
     {title: '关于', component: AboutPage ,img: 'about.png'}
   ];    
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public alertCtrl: AlertController,
-    public webApi:WebApi,public transfer: FileTransfer,public appVersion: AppVersion,public file: File,public fileOpener: FileOpener) {      
-      this.initializeApp();
+    public toastCtrl:ToastController,public webApi:WebApi,public transfer: FileTransfer,public appVersion: AppVersion,
+    public file: File,public fileOpener: FileOpener) {      
+      this.initializeApp();           
       if(this.isWeb())
       {
         this.login();
       }
       else
       {
-        this.webApi.get<AppVersionResponse>(AppVersionApi.getLast(this.user.Id)).subscribe(res => {
-          this.version = res.Data;
+        this.webApi.get<AppVersionResponse>(AppVersionApi.getLast()).subscribe(res => {          
+          this.version = res.Data;         
           this.appVersion.getVersionCode().then(code=> {
             if(this.version.Version==code)
             {     
@@ -59,10 +61,12 @@ export class MyApp {
             else
             {
               this.upgrade();
-            }            
-          });            
-        }); 
-      }      
+            }             
+          }); 
+        }, error => {
+          MessageService.showWebApiError(this.toastCtrl,error);  
+        });
+      }
   }
 
   login()
