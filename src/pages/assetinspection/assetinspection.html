@@ -17,7 +17,6 @@
   <ion-list>
     <ion-item *ngFor="let a of assetlist">
       <ion-item no-lines (click)="openListPage(a)">
-        <img class="assettypeimg" item-left src="./assets/imgs/{{a.AssetType | assetTypeImg}}" />
         <label class="txt-c1">{{a.Name}}&nbsp;{{a.Model}}</label>
         <br/>        
         <label class="txt-c2-min">
