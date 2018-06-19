@@ -131,7 +131,7 @@ export class MyApp {
       alert.present();
       const fileTransfer: FileTransferObject = this.transfer.create();
       const apk = this.file.externalRootDirectory + this.version.Name +'.apk'; 
-      fileTransfer.download(SysConfig.WebApi_RootUrl + this.version.ServerPath, apk).then(() => {
+      fileTransfer.download(SysConfig.RootUrl + this.version.ServerPath, apk).then(() => {
         this.fileOpener.open(apk,'application/vnd.android.package-archive');
       });
       fileTransfer.onProgress((event: ProgressEvent) => {
