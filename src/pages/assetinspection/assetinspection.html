@@ -29,6 +29,11 @@
           <ion-icon name="pin"></ion-icon>
           {{a.Microdistrict}}&nbsp;{{a.InstallLocation}}
         </label>
+        <br/>
+        <label class="txt-c2-min">
+          <ion-icon name="md-time"></ion-icon>
+          {{a.LastInspectionTime}}
+        </label>  
       </ion-item>      
       <button ion-button (click)="openPage(a)" color="light" round small item-right>巡检</button> 
     </ion-item> 
