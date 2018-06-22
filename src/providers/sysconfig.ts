@@ -1,7 +1,7 @@
 //系统配置
 export class SysConfig {   
     //网站根目录
-    static readonly RootUrl = 'http://6f390792d13a.sn.mynetname.net:7474';
+    static readonly RootUrl = 'http://58.211.58.110:1105';
     //WebApi
     static readonly WebApi_Root='/api/v1/';//根路径
     static readonly WebApi_Param_User='userid=';
