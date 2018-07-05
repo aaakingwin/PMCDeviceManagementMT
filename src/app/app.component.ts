@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav,Platform, AlertController, ToastController } from 'ionic-angular';
+import { Nav,Platform, AlertController, ToastController, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
@@ -40,10 +40,15 @@ export class MyApp {
     {title: '资产', component: AssetlistPage ,img: 'asset.png'},
     {title: '关于', component: AboutPage ,img: 'about.png'}
   ];    
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public alertCtrl: AlertController,
-    public toastCtrl:ToastController,public webApi:WebApi,public transfer: FileTransfer,public appVersion: AppVersion,
-    public file: File,public fileOpener: FileOpener) {      
-      this.initializeApp();           
+  constructor(public appCtrl: App,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+    public alertCtrl: AlertController,public toastCtrl:ToastController,public webApi:WebApi,public transfer: FileTransfer,
+    public appVersion: AppVersion,public file: File,public fileOpener: FileOpener) {      
+      this.platform.ready().then(() => {
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+        this.registerBackButtonAction();//注册返回按键事件
+      });
+      this.user=UserService.get();//加载本地用户          
       if(this.isWeb())
       {
         this.login();
@@ -69,6 +74,7 @@ export class MyApp {
       }
   }
 
+  //登录
   login()
   {
     if(!Verifier.isNull(this.user))
@@ -91,16 +97,51 @@ export class MyApp {
     }
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-    this.user=UserService.get();//加载本地用户
-  }
-
+  //菜单按钮事件
   openPage(page) {
     this.nav.setRoot(page.component);
+  }
+
+  //注册返回按钮事件
+  registerBackButtonAction() {
+    this.platform.registerBackButtonAction(() => {
+      //控制modal、系统自带提示框
+      let overlay = this.appCtrl._appRoot._overlayPortal.getActive() || this.appCtrl._appRoot._modalPortal.getActive();
+      if (overlay) {
+        overlay.dismiss();
+        return;
+      }
+      let activeVC = this.nav.getActive();
+      let page = activeVC.instance;
+      for (let p of this.pages) {
+        if(page instanceof p.component)
+        {
+          return this.showExit();
+        }
+      }
+      if (page instanceof LoginPage) {
+        return this.showExit();
+      }
+      this.appCtrl.getActiveNav().pop();//剩余的情况全部使用全局路由进行操作 
+    });
+  }
+
+  //退出提示框
+  showExit() {
+    this.alertCtrl.create({
+      subTitle: '是否确定要退出？',
+      buttons: [
+        { 
+          text: '取消'
+        },
+        {
+          text: '确定',
+          handler: () => {
+            this.platform.exitApp();
+          }
+        }
+      ]
+    }).present();      
   }
 
   //升级
