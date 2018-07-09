@@ -4,11 +4,15 @@ import { SysConfig } from "../providers/sysconfig";
 export class AssetData{
     Id:string;//唯一码
     AssetType:string;//资产类型
+    AssetGroup:string;//资产分组
+    AssetStatus:string;//资产状态
+    RepairStatus:string;//维修状态
     Number:string;//资产编号
     Name:string;//资产名称
     Brand:string;//品牌
     Model:string;//资产型号
     Manufacturer:string;//制造商
+    Supplier:string;//供应商
     Description:string;//描述
     Microdistrict:string;//小区
     AssetLocation:string;//应用地点
@@ -18,8 +22,6 @@ export class AssetData{
     LastInspectionTime:string;//最后巡检时间
     LastRepairApplicationTime:string;//最后维保时间
     IsDisabled:boolean;//是否禁用
-    CreatedTime:string;//创建时间
-    LastModifyedTime:string;//最后修改时间
 }
 //资产传输对象
 export class AssetResponse

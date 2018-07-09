@@ -16,25 +16,37 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let a of assetlist">
-      <ion-item no-lines (click)="openListPage(a)">
+      <label (click)="openListPage(a)">
         <label class="txt-c1">{{a.Name}}&nbsp;{{a.Model}}</label>
         <br/>        
         <label class="txt-c2-min">
-          <ion-icon name="md-barcode"></ion-icon>
+          <ion-icon name="md-barcode" class="iconimg"></ion-icon>
           {{a.Number}}
         </label>
         <br/>
         <label class="txt-c2-min">
-          <ion-icon name="pin"></ion-icon>
+          <ion-icon name="pin" class="iconimg"></ion-icon>
           {{a.Microdistrict}}&nbsp;{{a.InstallLocation}}
         </label>
         <br/>
         <label class="txt-c2-min">
-          <ion-icon name="md-time"></ion-icon>
+          <ion-icon name="md-flag" class="iconimg"></ion-icon>
+          {{a.AssetStatus}}
+        </label>  
+        <br/>
+        <label class="txt-c2-min">
+          <ion-icon name="md-construct" class="iconimg"></ion-icon>
+          {{a.RepairStatus}}
+        </label>  
+        <br/>
+        <label class="txt-c2-min">
+          <ion-icon name="md-time" class="iconimg"></ion-icon>
           {{a.LastRepairApplicationTime}}
         </label>  
-      </ion-item>
-      <button ion-button (click)="openPage(a)" color="light" round small item-right>维保</button> 
+      </label>
+      <label item-right>
+        <button ion-button item-width="10px" (click)="openPage(a)" color="light" round small >维保</button>     
+      </label>
     </ion-item> 
   </ion-list>
 </ion-content>

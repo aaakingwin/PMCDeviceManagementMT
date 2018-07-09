@@ -6,7 +6,6 @@ export class UserData {
     Password:string;
     FullName:string;
     Telephone:string;
-    RoleId:string;
     EquipmentIdentity:string;
 }
 

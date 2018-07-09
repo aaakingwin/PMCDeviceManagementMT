@@ -6,8 +6,6 @@ export class MicrodistrictData
     Name:string;
     Address:string;
     PropertyManagementCompany:string;
-    CreatedTime:string;
-    LastModifyedTime:string;
 }
 
 export class MicrodistrictResponse

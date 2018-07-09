@@ -16,18 +16,27 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let a of assetlist" (click)="openPage(a)">
-      <img class="assettypeimg" item-left src="./assets/imgs/{{a.AssetType | assetTypeImg}}" />
       <label class="txt-c1">{{a.Name}}&nbsp;{{a.Model}}</label>
       <br/>        
       <label class="txt-c2-min">
-        <ion-icon name="md-barcode"></ion-icon>
+        <ion-icon name="md-barcode" class="iconimg"></ion-icon>
         {{a.Number}}
       </label>
       <br/>
       <label class="txt-c2-min">
-        <ion-icon name="pin"></ion-icon>
+        <ion-icon name="pin" class="iconimg"></ion-icon>
         {{a.Microdistrict}}&nbsp;{{a.InstallLocation}}
       </label>
+      <br/>
+      <label class="txt-c2-min">
+        <ion-icon name="md-flag" class="iconimg"></ion-icon>
+        {{a.AssetStatus}}
+      </label>  
+      <br/>
+      <label class="txt-c2-min">
+        <ion-icon name="md-construct" class="iconimg"></ion-icon>
+        {{a.RepairStatus}}
+      </label>  
     </ion-item>
   </ion-list>
 </ion-content>
