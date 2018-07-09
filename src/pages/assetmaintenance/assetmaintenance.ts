@@ -49,10 +49,6 @@ export class AssetmaintenancePage {
     this.navCtrl.push(AssetmaintenancerecordPage,{'asset':item});
   }
 
-  openPage(item) {    
-    this.navCtrl.push(MaintenancesheetPage,{'asset':item,'optType':SysConfig.OperationType_Create});
-  }
-
   selectMicrodistrict(){
     this.navCtrl.push(SelectmicrodistrictPage,{'callback': this.selectMicrodistrictCallback});
   }
@@ -82,7 +78,7 @@ export class AssetmaintenancePage {
       this.webApi.get<AssetResponse>(AssetApi.getDataByNumber(UserService.getUserId(),text)).subscribe(res => {
         let assetdata=res.Data;  
         this.navCtrl.pop(); 
-        this.navCtrl.push(MaintenancesheetPage,{'asset':assetdata,'optType':SysConfig.OperationType_Create}); 
+        this.apply(assetdata);
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
         this.navCtrl.pop();
@@ -94,4 +90,19 @@ export class AssetmaintenancePage {
       this.navCtrl.pop(); 
     }
   } 
+
+  openPage(item) {    
+    this.apply(item);
+  }
+
+  apply(item){
+    if(Verifier.isNull(item.RepairStatus))
+    {
+      this.navCtrl.push(MaintenancesheetPage,{'asset':item,'optType':SysConfig.OperationType_Create});
+    }
+    else
+    {
+      MessageService.showInfo(this.toastCtrl,'已申请');
+    }
+  }
 }
