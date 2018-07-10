@@ -34,21 +34,21 @@ export class MaintenancesheetPage {
     if(Verifier.isNull(this.maintenanceData))
     {     
       this.maintenanceData=new MaintenanceData();
-      this.maintenanceData.ApplicationUser=this.user.FullName;
-      this.maintenanceData.ApplicationDate=new Date().toLocaleDateString();
+      this.maintenanceData.AppliedUser=this.user.FullName;
+      this.maintenanceData.AppliedDate=new Date().toLocaleDateString();
     }
     if(Verifier.isNull(this.assetData))
     {
       this.assetData=new AssetData();
     }  
     this.maintenanceSheetForm= this.formBuilder.group({
-      'Description': [this.maintenanceData.Description,  [Validators.required, Validators.minLength(1)]]
+      'AppliedDescription': [this.maintenanceData.AppliedDescription,  [Validators.required, Validators.minLength(1)]]
     });
   }
 
   save(data, _event) {    
     _event.preventDefault();//该方法将通知 Web 浏览器不要执行与事件关联的默认动作   
-    if(Verifier.isNull(data.Description)||data.Description.trim()=='')
+    if(Verifier.isNull(data.AppliedDescription)||data.AppliedDescription.trim()=='')
     {
       MessageService.showInfo(this.toastCtrl,'请填写情况描述');
       return;
@@ -57,7 +57,7 @@ export class MaintenancesheetPage {
     maintenance.MicrodistrictId=this.microdistrict.Id;
     maintenance.ApplicationUserId=this.user.Id;
     maintenance.AssetId=this.assetData.Id;   
-    maintenance.Description=data.Description;
+    maintenance.Description=data.AppliedDescription;
     this.webApi.post(MaintenanceApi.postCreate(this.user.Id),maintenance).subscribe(res => {
       MessageService.showInfo(this.toastCtrl,'保存成功');
       this.navCtrl.pop();

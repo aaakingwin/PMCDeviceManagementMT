@@ -26,8 +26,8 @@ export class MaintenancelistPage {
   loadDataList(date){
     if(!Verifier.isNull(date))
     {
-      let applicationdate=Converter.toYYYYMMDD(date);
-      this.webApi.get<MaintenanceResponse>(MaintenanceApi.getDataByApplicationDate(UserService.getUserId(),applicationdate)).subscribe(res => {
+      let applieddate=Converter.toYYYYMMDD(date);
+      this.webApi.get<MaintenanceResponse>(MaintenanceApi.getDataByApplicationDate(UserService.getUserId(),applieddate)).subscribe(res => {
         this.maintenancelist=res.Data;
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  

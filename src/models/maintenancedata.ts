@@ -2,16 +2,20 @@ import { SysConfig } from "../providers/sysconfig";
 
 export class MaintenanceData
 {
-    Id:string;    
+    Id:string;   
+    Status:string; 
     Microdistrict:string;   
-    ApplicationDate:string;  
-    ApplicationUser:string; 
-    ConfirmDate:string;
-    ConfirmUser:string;
-    Status:string;
     AssetNumber:string;
     AssetName:string;
-    Description:string;
+    AppliedDate:string;  
+    AppliedUser:string; 
+    AppliedDescription:string;
+    ConfirmedDate:string;
+    ConfirmedUser:string;
+    ConfirmedDescription:string;
+    ClosedDate:string;
+    ClosedUser:string;
+    ClosedDescription:string;
 }
 
 export class MaintenanceResponse
@@ -36,10 +40,10 @@ export class MaintenanceApi
         return SysConfig.WebApi_Module_Maintenance + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
         + '&type=assetid&assetid=' + assetid;
     }
-    static getDataByApplicationDate(userid:string,applicationdate:string)
+    static getDataByApplicationDate(userid:string,applieddate:string)
     {
         return SysConfig.WebApi_Module_Maintenance + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
-        + '&type=applicationdate&applicationdate=' + applicationdate;
+        + '&type=applieddate&applieddate=' + applieddate;
     }
     static getDataById(userid:string,id:string)
     {
