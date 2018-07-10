@@ -6,6 +6,7 @@ import { MessageService } from '../../providers/messageservice';
 import { HomePage } from '../home/home';
 import { WebApi } from '../../providers/webapi';
 import { UserService } from '../../providers/userservice';
+import { SettingPage } from '../setting/setting';
 
 @IonicPage()
 @Component({
@@ -33,7 +34,11 @@ export class LoginPage {
       UserService.set(this.user);
       this.navCtrl.setRoot(HomePage);
     }, error => {
-      MessageService.showInfo(this.toastCtrl,'账户或密码有误');
+      MessageService.showWebApiError(this.toastCtrl,error);
     }); 
+  }  
+
+  setup(){
+    this.navCtrl.push(SettingPage);
   }  
 }

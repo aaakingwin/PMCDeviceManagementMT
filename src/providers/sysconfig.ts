@@ -1,8 +1,12 @@
 //系统配置
 export class SysConfig {   
-    //网站根目录
-    static readonly RootUrl = 'http://58.211.58.110:1105';
-    //static readonly RootUrl = 'http://6f390792d13a.sn.mynetname.net:7474';
+    //服务器地址
+    //正式IP='58.211.58.110';
+    //正式Port='1105';
+    //测试IP='6f390792d13a.sn.mynetname.net';
+    //测试Port='7474';
+    static readonly DefaultUrlIP='6f390792d13a.sn.mynetname.net';
+    static readonly DefaultUrlPort='7474';
     //WebApi
     static readonly WebApi_Root='/api/v1/';//根路径
     static readonly WebApi_Param_User='userid=';
@@ -22,6 +26,8 @@ export class SysConfig {
     static readonly StorageKey_SelectedMicrodistrict='SelectedMicrodistrict';//被选中的小区
     static readonly StorageKey_AssetStatusList='AssetStatusList';//资产状态列表
     static readonly StorageKey_AppVersion='AppVersion';//当前app信息
+    static readonly StorageKey_UrlIP='UrlIP';//IP
+    static readonly StorageKey_UrlPort='UrlPort';//端口
     //操作类型
     static readonly OperationType_See='See';
     static readonly OperationType_Create='Create';

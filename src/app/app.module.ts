@@ -30,6 +30,7 @@ import { FileOpener } from '@ionic-native/file-opener';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { AboutPage } from '../pages/about/about';
+import { SettingPage } from '../pages/setting/setting';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AboutPage } from '../pages/about/about';
     AssetlistPage,
     AssetPage,
     AboutPage,
+    SettingPage,
     SelectmicrodistrictPage
   ],
   imports: [
@@ -71,6 +73,7 @@ import { AboutPage } from '../pages/about/about';
     AssetlistPage,
     AssetPage,
     AboutPage,
+    SettingPage,
     SelectmicrodistrictPage
   ],
   providers: [

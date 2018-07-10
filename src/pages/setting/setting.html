@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>设置</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="urlForm">
+    <ion-item>
+      <ion-label class="txt-c1">IP地址：</ion-label>
+      <ion-input type="text" formControlName="IP"></ion-input>
+    </ion-item>      
+    <ion-item>
+      <ion-label class="txt-c1">端口：</ion-label>
+      <ion-input type="text" formControlName="Port"></ion-input>
+    </ion-item>     
+    <br/>
+    <button ion-button full (click)="save(urlForm.value, $event)">保存</button>
+  </form>
+</ion-content>

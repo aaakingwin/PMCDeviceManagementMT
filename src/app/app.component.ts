@@ -22,6 +22,8 @@ import { AppVersionData, AppVersionApi, AppVersionResponse } from '../models/app
 import { StorageService } from '../providers/storageservice';
 import { SysConfig } from '../providers/sysconfig';
 import { MessageService } from '../providers/messageservice';
+import { SettingPage } from '../pages/setting/setting';
+import { UrlService } from '../providers/urlservice';
 
 @Component({
   templateUrl: 'app.html'
@@ -38,6 +40,7 @@ export class MyApp {
     {title: '巡检记录', component: InspectionlistPage ,img: 'inspectionrecord.png'},
     {title: '维保记录', component: MaintenancelistPage ,img: 'microdistrictrecord.png'},
     {title: '资产', component: AssetlistPage ,img: 'asset.png'},
+    {title: '设置', component: SettingPage ,img: 'setting.png'},
     {title: '关于', component: AboutPage ,img: 'about.png'}
   ];    
   constructor(public appCtrl: App,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
@@ -70,6 +73,7 @@ export class MyApp {
           }); 
         }, error => {
           MessageService.showWebApiError(this.toastCtrl,error);  
+          this.login();
         });
       }
   }
@@ -172,7 +176,7 @@ export class MyApp {
       alert.present();
       const fileTransfer: FileTransferObject = this.transfer.create();
       const apk = this.file.externalRootDirectory + this.version.Name +'.apk'; 
-      fileTransfer.download(SysConfig.RootUrl + this.version.ServerPath, apk).then(() => {
+      fileTransfer.download(UrlService.getUrl() + this.version.ServerPath, apk).then(() => {
         this.fileOpener.open(apk,'application/vnd.android.package-archive');
       });
       fileTransfer.onProgress((event: ProgressEvent) => {
