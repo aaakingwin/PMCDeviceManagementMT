@@ -28,7 +28,7 @@ export class LoginPage {
     let loginRequest=new LoginRequest();
     loginRequest.UserName=user.LoginID;
     loginRequest.Password=user.LoginPwd;    
-    this.webApi.post<UserResponse>(UserApi.postLogin(),loginRequest).subscribe(res => {
+    this.webApi.get<UserResponse>(UserApi.login(loginRequest)).subscribe(res => {
       this.user=res.Data;
       this.user.Password=loginRequest.Password;
       UserService.set(this.user);

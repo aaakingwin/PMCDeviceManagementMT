@@ -19,7 +19,6 @@ export class AppVersionApi
 {    
     static getLast()
     {
-        return  SysConfig.WebApi_Module_AppVersion + SysConfig.WebApi_Get_View
-        + 'type=last';
+        return  SysConfig.WebApi_Module_AppVersion + 'last';
     }
 }

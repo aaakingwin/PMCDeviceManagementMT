@@ -32,18 +32,18 @@ export class InspectionApi
 {
     static getDataByAssetId(userid:string,assetid:string)
     {
-        return SysConfig.WebApi_Module_Inspection + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
-        + '&type=assetid&assetid=' + assetid;
+        return SysConfig.WebApi_Module_Inspection + SysConfig.WebApi_Get_Multiple + SysConfig.WebApi_Param_User + userid 
+        + '&assetid=' + assetid;
     }
-    static getDataByInspectionDate(userid:string,inspectiondate:string)
+    static getDataByInspectionDate(userid:string,bod:string,eod:string)
     {
-        return SysConfig.WebApi_Module_Inspection + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid  
-        + '&type=inspectiondate&inspectiondate=' + inspectiondate;
+        return SysConfig.WebApi_Module_Inspection + SysConfig.WebApi_Get_Multiple + SysConfig.WebApi_Param_User + userid  
+        + '&bod=' + bod + '&eod=' +eod;
     }
     static getDataById(userid:string,id:string)
     {
-        return SysConfig.WebApi_Module_Inspection + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid  
-        +'&id=' + id;
+        return SysConfig.WebApi_Module_Inspection + SysConfig.WebApi_Get_Single + SysConfig.WebApi_Param_User + userid  
+        + '&id=' + id;
     }
     static postCreate(userid:string)
     {

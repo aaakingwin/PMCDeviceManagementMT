@@ -18,4 +18,11 @@ export class WebApi {
     let headers = new HttpHeaders().set("Content-Type", "application/json");
     return this.http.post<T>(UrlService.getUrl() + SysConfig.WebApi_Root + api, body, { headers });
   }
+  //Patch
+  patch<T>(api:string,param:any)
+  {
+    let body = JSON.stringify(param);
+    let headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this.http.patch<T>(UrlService.getUrl() + SysConfig.WebApi_Root + api, body, { headers });
+  }
 }

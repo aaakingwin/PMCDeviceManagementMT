@@ -14,6 +14,7 @@ import { MessageService } from '../../providers/messageservice';
 import { UserService } from '../../providers/userservice';
 import { AboutPage } from '../about/about';
 import { SettingPage } from '../setting/setting';
+import { ChangepasswordPage } from '../changepassword/changepassword';
 
 @IonicPage()
 @Component({
@@ -27,6 +28,7 @@ export class HomePage {
     {title: '巡检记录', component: InspectionlistPage ,img: 'inspectionrecord.png'},
     {title: '维保记录', component: MaintenancelistPage ,img: 'microdistrictrecord.png'},
     {title: '资产', component: AssetlistPage ,img: 'asset.png'},
+    {title: '修改密码', component: ChangepasswordPage ,img: 'changepassword.png'},
     {title: '设置', component: SettingPage ,img: 'setting.png'},
     {title: '关于', component: AboutPage ,img: 'about.png'}
   ];    

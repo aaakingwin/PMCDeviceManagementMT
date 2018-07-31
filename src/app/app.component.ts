@@ -24,6 +24,7 @@ import { SysConfig } from '../providers/sysconfig';
 import { MessageService } from '../providers/messageservice';
 import { SettingPage } from '../pages/setting/setting';
 import { UrlService } from '../providers/urlservice';
+import { ChangepasswordPage } from '../pages/changepassword/changepassword';
 
 @Component({
   templateUrl: 'app.html'
@@ -40,6 +41,7 @@ export class MyApp {
     {title: '巡检记录', component: InspectionlistPage ,img: 'inspectionrecord.png'},
     {title: '维保记录', component: MaintenancelistPage ,img: 'microdistrictrecord.png'},
     {title: '资产', component: AssetlistPage ,img: 'asset.png'},
+    {title: '修改密码', component: ChangepasswordPage ,img: 'changepassword.png'},
     {title: '设置', component: SettingPage ,img: 'setting.png'},
     {title: '关于', component: AboutPage ,img: 'about.png'}
   ];    
@@ -85,8 +87,8 @@ export class MyApp {
     {
       let loginRequest=new LoginRequest();
       loginRequest.UserName=this.user.Name;
-      loginRequest.Password=this.user.Password;    
-      this.webApi.post<UserResponse>(UserApi.postLogin(),loginRequest).subscribe(res => {
+      loginRequest.Password=this.user.Password; 
+      this.webApi.get<UserResponse>(UserApi.login(loginRequest)).subscribe(res => {
         this.user=res.Data;
         this.user.Password=loginRequest.Password;
         UserService.set(this.user);

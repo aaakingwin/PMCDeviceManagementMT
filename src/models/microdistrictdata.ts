@@ -19,7 +19,6 @@ export class MicrodistrictApi
 {
     static getAll(userid:string)
     {
-        return SysConfig.WebApi_Module_Microdistrict + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
-        + '&type=all';
+        return SysConfig.WebApi_Module_Microdistrict + SysConfig.WebApi_Get_All + SysConfig.WebApi_Param_User + userid;
     }
 }

@@ -22,10 +22,22 @@ export class LoginRequest
     Password:string;
 }
 
+export class ChangePasswordRequest
+{
+    Password:string;
+}
+
 export class UserApi{
 
-    static postLogin()
+    static login(lr:LoginRequest)
     {
-        return SysConfig.WebApi_Module_Authentication + SysConfig.WebApi_Post_Login;
+        return SysConfig.WebApi_Module_Authentication + SysConfig.WebApi_Get_Signin
+        + 'username=' + lr.UserName + '&password=' + lr.Password;
+    }
+
+    static changePassword(userid:string)
+    {
+        return SysConfig.WebApi_Module_User + SysConfig.WebApi_Patch_ChangePassword + SysConfig.WebApi_Param_User + userid
+        + '&id=' + userid;
     }
 }

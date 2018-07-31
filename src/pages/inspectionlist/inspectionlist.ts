@@ -16,22 +16,33 @@ import { UserService } from '../../providers/userservice';
   templateUrl: 'inspectionlist.html',
 })
 export class InspectionlistPage {
-  querydate:string=new Date().toISOString();
+  bod:string;
+  eod:string;
   inspectionlist: InspectionData[];
   constructor(public navCtrl: NavController,public navParams: NavParams,
     public toastCtrl:ToastController,public webApi:WebApi) {
-      this.loadDataList(this.querydate);
+      this.bod=new Date().toISOString();
+      this.eod=new Date().toISOString();
+      this.loadDataList();
     }
 
-  loadDataList(date){
-    if(!Verifier.isNull(date))
+  loadDataList(){
+    if(!Verifier.isNull(this.bod) && !Verifier.isNull(this.eod))
     {
-      let inspectiondate=Converter.toYYYYMMDD(date);
-      this.webApi.get<InspectionResponse>(InspectionApi.getDataByInspectionDate(UserService.getUserId(),inspectiondate)).subscribe(res => {
-        this.inspectionlist=res.Data;
-      }, error => {
-        MessageService.showWebApiError(this.toastCtrl,error);  
-      }); 
+      if(this.bod>this.eod)
+      {
+        MessageService.showInfo(this.toastCtrl,'开始日期不能大于结束日期');
+      }
+      else
+      {
+        let b=Converter.toYYYYMMDD(this.bod);
+        let e=Converter.toYYYYMMDD(this.eod);
+        this.webApi.get<InspectionResponse>(InspectionApi.getDataByInspectionDate(UserService.getUserId(),b,e)).subscribe(res => {
+          this.inspectionlist=res.Data;
+        }, error => {
+          MessageService.showWebApiError(this.toastCtrl,error);  
+        }); 
+      }      
     }   
   }
 
@@ -42,10 +53,5 @@ export class InspectionlistPage {
     }, error => {
       MessageService.showWebApiError(this.toastCtrl,error);  
     });     
-  }
-
-  changeDate(_event)
-  {   
-    this.loadDataList(_event);
   }
 }

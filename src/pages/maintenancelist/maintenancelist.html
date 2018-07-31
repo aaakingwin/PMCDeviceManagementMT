@@ -6,9 +6,20 @@
     <ion-title>维保记录</ion-title>
   </ion-navbar>
   <ion-item>
-    <ion-label class="txt-c1" color='dark' >筛选日期</ion-label>
-    <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" (ngModelChange)="changeDate($event)" [(ngModel)]="querydate"></ion-datetime>
-  </ion-item>
+      <label >
+        <ion-item no-lines>
+          <label item-left class="txt-c1">开始日期</label>
+          <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" [(ngModel)]="bod"></ion-datetime>
+        </ion-item>
+        <ion-item no-lines>   
+          <label item-left class="txt-c1">结束日期</label>
+          <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" cancelText="取消" doneText="确定" [(ngModel)]="eod"></ion-datetime>
+        </ion-item>
+      </label>
+      <label item-right>
+        <button ion-button (click)="loadDataList()" color="light" round small>查询</button> 
+      </label> 
+    </ion-item>
 </ion-header>
 <ion-content padding>
   <ion-list>

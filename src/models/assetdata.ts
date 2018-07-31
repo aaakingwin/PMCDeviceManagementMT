@@ -35,8 +35,8 @@ export class AssetApi
 {    
     static getDataByMicrodistrictId(userid:string,microdistrictid:string)
     {
-        return  SysConfig.WebApi_Module_Asset + SysConfig.WebApi_Get_View + SysConfig.WebApi_Param_User + userid 
-        + '&type=microdistrictid&microdistrictid=' + microdistrictid;
+        return  SysConfig.WebApi_Module_Asset + SysConfig.WebApi_Get_Multiple + SysConfig.WebApi_Param_User + userid 
+        + '&microdistrictid=' + microdistrictid;
     }
 
     static getDataByNumber(userid:string,number:string)
