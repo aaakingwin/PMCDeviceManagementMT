@@ -12,13 +12,11 @@ export class SysConfig {
     static readonly WebApi_Param_User='userid=';
     static readonly WebApi_Get_Signin='signin?';
     static readonly WebApi_Get_Scan='scan?';
-    static readonly WebApi_Get_All='all?';
-    //static readonly WebApi_Get_View='view?';   
+    static readonly WebApi_Get_All='all?'; 
     static readonly WebApi_Get_Single='single?';
     static readonly WebApi_Get_Multiple='multiple?';
     static readonly WebApi_Post_Create='create?';
     static readonly WebApi_Patch_ChangePassword='changepassword?';
-    //static readonly WebApi_Post_Login='login';
     static readonly WebApi_Module_Asset='asset/';
     static readonly WebApi_Module_Microdistrict='microdistrict/';
     static readonly WebApi_Module_Authentication='authentication/';
