@@ -39,8 +39,15 @@ export class HomePage {
   loadAssetStatusList()
   {
     this.webApi.get<AssetStatusResponse>(AssetStatusApi.getAll(UserService.getUserId())).subscribe(res => {
-      let assetStatusList=res.Data;
-      StorageService.write(SysConfig.StorageKey_AssetStatusList,assetStatusList);
+      if(res.Success)
+      {
+        let assetStatusList=res.Data;
+        StorageService.write(SysConfig.StorageKey_AssetStatusList,assetStatusList);
+      }
+      else
+      {
+        MessageService.showInfo(this.toastCtrl,res.Message);  
+      }    
     }, error => {
       MessageService.showWebApiError(this.toastCtrl,error);  
     }); 

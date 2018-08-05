@@ -29,11 +29,18 @@ export class ChangepasswordPage {
       let cpr =new ChangePasswordRequest();
       cpr.Password=p.password1;
       this.webApi.patch<UserResponse>(UserApi.changePassword(UserService.getUserId()),cpr).subscribe(res => {
-        this.user.Password=cpr.Password;
-        UserService.set(this.user);
-        MessageService.showInfo(this.toastCtrl,res.Message);
+        if(res.Success)
+        {
+          MessageService.showInfo(this.toastCtrl,res.Message);
+          this.user.Password=cpr.Password;
+          UserService.set(this.user);          
+        }
+        else
+        {
+          MessageService.showInfo(this.toastCtrl,res.Message);
+        }        
       }, error => {
-        MessageService.showWebApiError(this.toastCtrl,error);  
+        MessageService.showWebApiError(this.toastCtrl,error);
       }); 
     }
     else

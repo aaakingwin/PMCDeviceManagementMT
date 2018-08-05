@@ -60,19 +60,27 @@ export class MyApp {
       }
       else
       {
-        this.webApi.get<AppVersionResponse>(AppVersionApi.getLast()).subscribe(res => {          
-          this.version = res.Data;         
-          this.appVersion.getVersionCode().then(code=> {
-            if(this.version.Version==code)
-            {     
-              StorageService.write(SysConfig.StorageKey_AppVersion,this.version);       
-              this.login();
-            }
-            else
-            {
-              this.upgrade();
-            }             
-          }); 
+        this.webApi.get<AppVersionResponse>(AppVersionApi.getLast()).subscribe(res => { 
+          if(res.Success)
+          {
+            this.version = res.Data;         
+            this.appVersion.getVersionCode().then(code=> {
+              if(this.version.Version==code)
+              {     
+                StorageService.write(SysConfig.StorageKey_AppVersion,this.version);       
+                this.login();
+              }
+              else
+              {
+                this.upgrade();
+              }             
+            }); 
+          }
+          else
+          {
+            MessageService.showInfo(this.toastCtrl,res.Message);
+            this.login();
+          }        
         }, error => {
           MessageService.showWebApiError(this.toastCtrl,error);  
           this.login();
@@ -89,10 +97,17 @@ export class MyApp {
       loginRequest.UserName=this.user.Name;
       loginRequest.Password=this.user.Password; 
       this.webApi.get<UserResponse>(UserApi.login(loginRequest)).subscribe(res => {
-        this.user=res.Data;
-        this.user.Password=loginRequest.Password;
-        UserService.set(this.user);
-        this.rootPage=HomePage;
+        if(res.Success)
+        {
+          this.user=res.Data;
+          this.user.Password=loginRequest.Password;
+          UserService.set(this.user);
+          this.rootPage=HomePage;
+        }
+        else
+        {
+          this.rootPage=LoginPage;
+        }        
       }, error => {
         this.rootPage=LoginPage;
       }); 

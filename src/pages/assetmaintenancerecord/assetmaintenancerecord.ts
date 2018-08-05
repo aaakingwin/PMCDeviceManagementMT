@@ -31,7 +31,14 @@ export class AssetmaintenancerecordPage {
     if(!Verifier.isNull(this.assetdata) && !Verifier.isNull(this.assetdata.Id))
     {
       this.webApi.get<MaintenanceResponse>(MaintenanceApi.getDataByAssetId(UserService.getUserId(),this.assetdata.Id)).subscribe(res => {
-        this.maintenancelist=res.Data;
+        if(res.Success)
+        {
+          this.maintenancelist=res.Data;
+        }
+        else
+        {
+          MessageService.showInfo(this.toastCtrl,res.Message);
+        }        
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
       }); 

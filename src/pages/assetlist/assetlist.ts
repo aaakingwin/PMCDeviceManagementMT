@@ -34,7 +34,14 @@ export class AssetlistPage {
     if(!Verifier.isNull(this.microdistrict) && !Verifier.isNull(this.microdistrict.Id))
     {
       this.webApi.get<AssetResponse>(AssetApi.getDataByMicrodistrictId(UserService.getUserId(),this.microdistrict.Id)).subscribe(res => {
-        this.assetlist=res.Data;
+        if(res.Success)
+        {
+          this.assetlist=res.Data;
+        }
+        else
+        {
+          MessageService.showInfo(this.toastCtrl,res.Message);
+        }        
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
       }); 

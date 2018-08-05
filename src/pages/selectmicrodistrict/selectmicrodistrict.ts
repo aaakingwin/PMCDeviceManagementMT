@@ -25,8 +25,15 @@ export class SelectmicrodistrictPage {
   loadDataList()
   {
     this.webApi.get<MicrodistrictResponse>(MicrodistrictApi.getAll(UserService.getUserId())).subscribe(res=>{
-      this.all=res.Data;
-      this.items=this.all;
+      if(res.Success)
+      {
+        this.all=res.Data;
+        this.items=this.all;
+      }
+      else
+      {
+        MessageService.showInfo(this.toastCtrl,res.Message);
+      }     
     }, error => {
       MessageService.showWebApiError(this.toastCtrl,error);  
     }); 

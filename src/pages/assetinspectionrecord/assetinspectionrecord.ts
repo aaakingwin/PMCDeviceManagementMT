@@ -31,7 +31,14 @@ export class AssetinspectionrecordPage {
     if(!Verifier.isNull(this.assetdata) && !Verifier.isNull(this.assetdata.Id))
     {
       this.webApi.get<InspectionResponse>(InspectionApi.getDataByAssetId(UserService.getUserId(),this.assetdata.Id)).subscribe(res => {
-        this.inspectionlist=res.Data;
+        if(res.Success)
+        {
+          this.inspectionlist=res.Data;
+        }
+        else
+        {
+          MessageService.showInfo(this.toastCtrl,res.Message);
+        }        
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
       }); 

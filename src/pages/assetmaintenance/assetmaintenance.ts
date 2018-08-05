@@ -38,7 +38,14 @@ export class AssetmaintenancePage {
     if(!Verifier.isNull(this.microdistrict) && !Verifier.isNull(this.microdistrict.Id))
     {
       this.webApi.get<AssetResponse>(AssetApi.getDataByMicrodistrictId(UserService.getUserId(),this.microdistrict.Id)).subscribe(res => {
-        this.assetlist=res.Data;
+        if(res.Success)
+        {
+          this.assetlist=res.Data;
+        }
+        else
+        {
+          MessageService.showInfo(this.toastCtrl,res.Message);
+        }        
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
       }); 
@@ -76,9 +83,17 @@ export class AssetmaintenancePage {
     if(!Verifier.isNull(text))
     {     
       this.webApi.get<AssetResponse>(AssetApi.getDataByNumber(UserService.getUserId(),text)).subscribe(res => {
-        let assetdata=res.Data;  
-        this.navCtrl.pop(); 
-        this.apply(assetdata);
+        if(res.Success)
+        {
+          let assetdata=res.Data;  
+          this.navCtrl.pop(); 
+          this.apply(assetdata);
+        }
+        else
+        {
+          MessageService.showInfo(this.toastCtrl,res.Message);  
+          this.navCtrl.pop();
+        }       
       }, error => {
         MessageService.showWebApiError(this.toastCtrl,error);  
         this.navCtrl.pop();

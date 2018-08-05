@@ -38,7 +38,14 @@ export class MaintenancelistPage {
         let b=Converter.toYYYYMMDD(this.bod);
         let e=Converter.toYYYYMMDD(this.eod);
         this.webApi.get<MaintenanceResponse>(MaintenanceApi.getDataByApplicationDate(UserService.getUserId(),b,e)).subscribe(res => {
-          this.maintenancelist=res.Data;
+          if(res.Success)
+          {
+            this.maintenancelist=res.Data;
+          }
+          else
+          {
+            MessageService.showInfo(this.toastCtrl,res.Message);
+          }          
         }, error => {
           MessageService.showWebApiError(this.toastCtrl,error);  
         });
@@ -48,8 +55,15 @@ export class MaintenancelistPage {
 
   openPage(item) {    
     this.webApi.get<AssetResponse>(AssetApi.getDataByNumber(UserService.getUserId(),item.AssetNumber)).subscribe(res => {
-      let assetdata=res.Data;  
-      this.navCtrl.push(MaintenancesheetPage,{'maintenance':item,'asset':assetdata,'optType':SysConfig.OperationType_See});   
+      if(res.Success)
+      {
+        let assetdata=res.Data;  
+        this.navCtrl.push(MaintenancesheetPage,{'maintenance':item,'asset':assetdata,'optType':SysConfig.OperationType_See}); 
+      }
+      else
+      {
+        MessageService.showInfo(this.toastCtrl,res.Message);
+      }      
     }, error => {
       MessageService.showWebApiError(this.toastCtrl,error);  
     });     

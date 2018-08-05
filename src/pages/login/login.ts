@@ -29,10 +29,17 @@ export class LoginPage {
     loginRequest.UserName=user.LoginID;
     loginRequest.Password=user.LoginPwd;    
     this.webApi.get<UserResponse>(UserApi.login(loginRequest)).subscribe(res => {
-      this.user=res.Data;
-      this.user.Password=loginRequest.Password;
-      UserService.set(this.user);
-      this.navCtrl.setRoot(HomePage);
+      if(res.Success)
+      {
+        this.user=res.Data;
+        this.user.Password=loginRequest.Password;
+        UserService.set(this.user);
+        this.navCtrl.setRoot(HomePage);
+      }
+      else
+      {
+        MessageService.showInfo(this.toastCtrl,res.Message);
+      }
     }, error => {
       MessageService.showWebApiError(this.toastCtrl,error);
     }); 
