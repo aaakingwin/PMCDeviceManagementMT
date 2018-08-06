@@ -5,6 +5,7 @@ import { MessageService } from '../../providers/messageservice';
 import { WebApi } from '../../providers/webapi';
 import { UserResponse, UserApi, ChangePasswordRequest, UserData } from '../../models/userdata';
 import { UserService } from '../../providers/userservice';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -31,9 +32,7 @@ export class ChangepasswordPage {
       this.webApi.patch<UserResponse>(UserApi.changePassword(UserService.getUserId()),cpr).subscribe(res => {
         if(res.Success)
         {
-          MessageService.showInfo(this.toastCtrl,res.Message);
-          this.user.Password=cpr.Password;
-          UserService.set(this.user);          
+          this.navCtrl.setRoot(HomePage);     
         }
         else
         {

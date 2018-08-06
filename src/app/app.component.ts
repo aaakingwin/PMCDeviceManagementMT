@@ -23,7 +23,6 @@ import { StorageService } from '../providers/storageservice';
 import { SysConfig } from '../providers/sysconfig';
 import { MessageService } from '../providers/messageservice';
 import { SettingPage } from '../pages/setting/setting';
-import { UrlService } from '../providers/urlservice';
 import { ChangepasswordPage } from '../pages/changepassword/changepassword';
 
 @Component({
