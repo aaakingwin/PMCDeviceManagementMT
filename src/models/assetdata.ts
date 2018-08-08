@@ -6,7 +6,6 @@ export class AssetData{
     AssetType:string;//资产类型
     AssetGroup:string;//资产分组
     AssetStatus:string;//资产状态
-    RepairStatus:string;//维修状态
     Number:string;//资产编号
     Name:string;//资产名称
     Brand:string;//品牌
