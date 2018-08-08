@@ -2,7 +2,7 @@ import { SysConfig } from "../providers/sysconfig";
 
 export class AssetStatusData
 {
-    Id:string;
+    Id:number;
     Name:string;
 }
 

@@ -24,7 +24,7 @@ export class InspectionsheetPage {
   user:UserData;
   microdistrict:MicrodistrictData;
   assetStatusList:AssetStatusData[];   
-  assetStatusId:string;  
+  assetStatusId:number;  
   inspectionSheetForm:FormGroup;
   optType:string;
   constructor(public navCtrl: NavController,public navParams: NavParams,public formBuilder: FormBuilder,

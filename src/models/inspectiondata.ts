@@ -24,7 +24,7 @@ export class InspectionRequest
     MicrodistrictId:string;
     InspectorUserId:string;
     AssetId:string;
-    AssetStatusId:string;
+    AssetStatusId:number;
     Description:string;
 }
 
