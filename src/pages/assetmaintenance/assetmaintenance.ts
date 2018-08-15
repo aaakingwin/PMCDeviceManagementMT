@@ -111,7 +111,7 @@ export class AssetmaintenancePage {
   }
 
   apply(item){
-    if(Verifier.isNull(item.RepairStatus))
+    if(item.AssetStatus!='报修')
     {
       this.navCtrl.push(MaintenancesheetPage,{'asset':item,'optType':SysConfig.OperationType_Create});
     }
