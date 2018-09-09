@@ -49,7 +49,6 @@ export class MaintenancesheetPage {
       return;
     }    
     let maintenance =new MaintenanceRequest();
-    maintenance.ApplicationUserId=this.user.Id;
     maintenance.AssetId=this.assetData.Id;   
     maintenance.Description=data.AppliedDescription;
     this.webApi.post(MaintenanceApi.postCreate(this.user.Id),maintenance).subscribe(res => {

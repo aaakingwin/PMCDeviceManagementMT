@@ -59,8 +59,7 @@ export class InspectionsheetPage {
       MessageService.showInfo(this.toastCtrl,'请填写情况描述');
       return;
     }    
-    let inspection =new InspectionRequest();
-    inspection.InspectorUserId=this.user.Id;
+    let inspection =new InspectionRequest();    
     inspection.AssetId=this.assetData.Id;
     inspection.AssetStatusId=this.assetStatusId;     
     inspection.Description=data.Description;

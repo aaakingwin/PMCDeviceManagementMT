@@ -20,8 +20,7 @@ export class InspectionResponse
 }
 
 export class InspectionRequest
-{
-    InspectorUserId:string;
+{   
     AssetId:string;
     AssetStatusId:number;
     Description:string;

@@ -27,7 +27,6 @@ export class MaintenanceResponse
 
 export class MaintenanceRequest
 {
-	ApplicationUserId:string;
 	AssetId:string;
 	Description:string;
 }
