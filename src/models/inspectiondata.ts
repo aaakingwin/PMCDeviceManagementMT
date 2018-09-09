@@ -21,7 +21,6 @@ export class InspectionResponse
 
 export class InspectionRequest
 {
-    MicrodistrictId:string;
     InspectorUserId:string;
     AssetId:string;
     AssetStatusId:number;

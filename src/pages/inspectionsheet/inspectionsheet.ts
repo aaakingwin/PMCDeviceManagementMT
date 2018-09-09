@@ -9,7 +9,6 @@ import { SysConfig } from '../../providers/sysconfig';
 import { StorageService } from '../../providers/storageservice';
 import { UserData } from '../../models/userdata';
 import { AssetStatusData } from '../../models/assetstatusdata';
-import { MicrodistrictData } from '../../models/microdistrictdata';
 import { Verifier } from '../../providers/verifier';
 import { UserService } from '../../providers/userservice';
 
@@ -22,7 +21,6 @@ export class InspectionsheetPage {
   inspectionData:InspectionData;
   assetData:AssetData;
   user:UserData;
-  microdistrict:MicrodistrictData;
   assetStatusList:AssetStatusData[];   
   assetStatusId:number;  
   inspectionSheetForm:FormGroup;
@@ -33,7 +31,6 @@ export class InspectionsheetPage {
     this.inspectionData=this.navParams.get('inspection');
     this.assetData=this.navParams.get('asset');
     this.user=UserService.get();
-    this.microdistrict= StorageService.read<MicrodistrictData>(SysConfig.StorageKey_SelectedMicrodistrict);
     this.assetStatusList=StorageService.read<AssetStatusData[]>(SysConfig.StorageKey_AssetStatusList);
     if(Verifier.isNull(this.inspectionData))
     {     
@@ -63,7 +60,6 @@ export class InspectionsheetPage {
       return;
     }    
     let inspection =new InspectionRequest();
-    inspection.MicrodistrictId=this.microdistrict.Id;
     inspection.InspectorUserId=this.user.Id;
     inspection.AssetId=this.assetData.Id;
     inspection.AssetStatusId=this.assetStatusId;     

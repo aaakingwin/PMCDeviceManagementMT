@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { SysConfig } from '../../providers/sysconfig';
 import { MaintenanceData, MaintenanceRequest, MaintenanceApi } from '../../models/maintenancedata';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserData } from '../../models/userdata';
-import { StorageService } from '../../providers/storageservice';
-import { MicrodistrictData } from '../../models/microdistrictdata';
 import { AssetData } from '../../models/assetdata';
 import { Verifier } from '../../providers/verifier';
 import { MessageService } from '../../providers/messageservice';
@@ -19,7 +16,6 @@ import { UserService } from '../../providers/userservice';
 })
 export class MaintenancesheetPage {
   user:UserData;
-  microdistrict:MicrodistrictData;
   maintenanceData:MaintenanceData;
   assetData:AssetData;
   maintenanceSheetForm:FormGroup;
@@ -30,7 +26,6 @@ export class MaintenancesheetPage {
     this.maintenanceData=this.navParams.get('maintenance');
     this.assetData=this.navParams.get('asset');
     this.user = UserService.get();
-    this.microdistrict= StorageService.read<MicrodistrictData>(SysConfig.StorageKey_SelectedMicrodistrict);
     if(Verifier.isNull(this.maintenanceData))
     {     
       this.maintenanceData=new MaintenanceData();
@@ -54,7 +49,6 @@ export class MaintenancesheetPage {
       return;
     }    
     let maintenance =new MaintenanceRequest();
-    maintenance.MicrodistrictId=this.microdistrict.Id;
     maintenance.ApplicationUserId=this.user.Id;
     maintenance.AssetId=this.assetData.Id;   
     maintenance.Description=data.AppliedDescription;

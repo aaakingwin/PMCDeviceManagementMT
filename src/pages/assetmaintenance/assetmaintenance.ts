@@ -68,15 +68,8 @@ export class AssetmaintenancePage {
     }
   }
 
-  scan() {    
-    if(Verifier.isNull(this.microdistrict.Id))
-    {
-      MessageService.showInfo(this.toastCtrl,SysConfig.ShowText_SelectedMicrodistrict);
-    }
-    else
-    {
-      this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
-    }
+  scan() {       
+    this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
   } 
 
   scanCallback =(text) => {   

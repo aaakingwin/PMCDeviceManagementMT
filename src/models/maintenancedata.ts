@@ -27,7 +27,6 @@ export class MaintenanceResponse
 
 export class MaintenanceRequest
 {
-    MicrodistrictId:string;
 	ApplicationUserId:string;
 	AssetId:string;
 	Description:string;

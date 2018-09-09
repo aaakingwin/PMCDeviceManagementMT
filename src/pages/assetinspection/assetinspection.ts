@@ -72,15 +72,8 @@ export class AssetinspectionPage {
     }
   }
 
-  scan() {    
-    if(Verifier.isNull(this.microdistrict.Id))
-    {
-      MessageService.showInfo(this.toastCtrl,SysConfig.ShowText_SelectedMicrodistrict);
-    }
-    else
-    {
+  scan() {        
       this.navCtrl.push('ScanPage',{'callback': this.scanCallback});    
-    }
   } 
 
   scanCallback =(text) => {   
