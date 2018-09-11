@@ -39,7 +39,7 @@ export class MyApp {
     {title: '维保申请', component: AssetmaintenancePage ,img: 'microdistrict.png'},
     {title: '巡检记录', component: InspectionlistPage ,img: 'inspectionrecord.png'},
     {title: '维保记录', component: MaintenancelistPage ,img: 'microdistrictrecord.png'},
-    {title: '资产', component: AssetlistPage ,img: 'asset.png'},
+    {title: '物品清单', component: AssetlistPage ,img: 'asset.png'},
     {title: '修改密码', component: ChangepasswordPage ,img: 'changepassword.png'},
     {title: '设置', component: SettingPage ,img: 'setting.png'},
     {title: '关于', component: AboutPage ,img: 'about.png'}
