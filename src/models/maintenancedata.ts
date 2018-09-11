@@ -1,21 +1,27 @@
 import { SysConfig } from "../providers/sysconfig";
-
+//维保单数据
 export class MaintenanceData
 {
     Id:string;   
-    Status:string; 
-    Microdistrict:string;   
-    AssetNumber:string;
-    AssetName:string;
-    AppliedDate:string;  
-    AppliedUser:string; 
-    AppliedDescription:string;
-    ConfirmedDate:string;
-    ConfirmedUser:string;
-    ConfirmedDescription:string;
-    ClosedDate:string;
-    ClosedUser:string;
-    ClosedDescription:string;
+    Status:string; //申请状态
+    Microdistrict:string;   //所属小区
+    AssetNumber:string;//物品代码
+    AssetName:string;//物品名称
+    AppliedDate:string;//申请日期
+    AppliedUser:string; //申请人员
+    AppliedDescription:string;//申请描述
+    ConfirmedDate:string;//确认日期
+    ConfirmedUser:string;//确认人员
+    ConfirmedDescription:string;//确认描述
+    ClosedDate:string;//关闭日期
+    ClosedUser:string;//关闭人员
+    ClosedDescription:string;//关闭描述	
+    Department:string;	//部门科室
+    Township:string;	//所属区镇
+    Community:string;	//所属社区
+    AssetCategory:string;	//物品总类
+    AssetType:string;	//物品类型
+    AssetGroup:string;	//物品分组		
 }
 
 export class MaintenanceResponse
