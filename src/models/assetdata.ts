@@ -2,25 +2,29 @@ import { SysConfig } from "../providers/sysconfig";
 
 //资产数据类
 export class AssetData{
-    Id:string;//唯一码
-    AssetType:string;//资产类型
-    AssetGroup:string;//资产分组
-    AssetStatus:string;//资产状态
-    Number:string;//资产编号
-    Name:string;//资产名称
-    Brand:string;//品牌
-    Model:string;//资产型号
-    Manufacturer:string;//制造商
-    Supplier:string;//供应商
-    Description:string;//描述
-    Microdistrict:string;//小区
-    AssetLocation:string;//应用地点
-    PowerLocation:string;//电箱地点
-    InstallLocation:string;//安装地点
-    Remark:string;//备注
-    LastInspectionTime:string;//最后巡检时间
-    LastRepairApplicationTime:string;//最后维保时间
-    IsDisabled:boolean;//是否禁用
+    Id:string;//唯一码   
+    AssetStatus:string; //物品状态
+    Department:string;	//部门科室
+    Township:string;	//所属区镇
+    Community:string;	//所属社区
+    Microdistrict:string;	//所属小区
+    ResponsiblePerson:string;	//责任人员
+    AssetCategory:string;	//物品总类
+    AssetType:string;	//物品类型
+    AssetGroup:string;	//物品分组
+    Number:string;	//物品代码
+    Name:string;	//物品名称
+    Brand:string;	//物品品牌
+    Model:string;	//规格型号
+    Description:string;	//物品描述
+    Warranty:string;	//质保期限
+    Supplier:string;	//供应厂商
+    AssetLocation:string;	//物品位置
+    InstallLocation:string;	//安装位置
+    PowerLocation:string;	//供电位置
+    Remark:string;	//备注信息
+    LastInspectionTime:string;	//巡检日期
+    LastRepairApplicationTime:string;	//维保日期
 }
 //资产传输对象
 export class AssetResponse

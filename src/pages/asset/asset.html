@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>资产</ion-title>
+    <ion-title>物品</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>   
@@ -9,51 +9,87 @@
     <label class="txt-h1">{{assetData.Name}}</label>
   </ion-item>
   <ion-item>
-    <label class="txt-c1" >资产编号：</label>
+    <label class="txt-c1" >物品代码：</label>
     <label class="txt-c2" >{{assetData.Number}}</label>
- </ion-item>
-  <ion-item>
-    <label class="txt-c1" >类型：</label>
-    <label class="txt-c2" >{{assetData.AssetType}}</label>
   </ion-item>
   <ion-item>
-    <label class="txt-c1" >资产状态：</label>
+    <label class="txt-c1" >物品状态：</label>
     <label class="txt-c2" >{{assetData.AssetStatus}}</label>
   </ion-item>
   <ion-item>
-    <label class="txt-c1" >品牌：</label>
+    <label class="txt-c1" >物品品牌：</label>
     <label class="txt-c2" >{{assetData.Brand}}</label>
   </ion-item>
   <ion-item>
-    <label class="txt-c1" >型号：</label>
+    <label class="txt-c1" >规格型号：</label>
     <label class="txt-c2" >{{assetData.Model}}</label>
   </ion-item>
   <ion-item>
-    <label class="txt-c1" >制造商：</label>
-    <label class="txt-c2" >{{assetData.Manufacturer}}</label>
+    <label class="txt-c1" >部门科室：</label>
+    <label class="txt-c2" >{{assetData.Department}}</label>
   </ion-item>
   <ion-item>
-    <label class="txt-c1" >描述：</label>
-    <label class="txt-c2" >{{assetData.Description}}</label>
+    <label class="txt-c1" >所属区镇：</label>
+    <label class="txt-c2" >{{assetData.Township}}</label>
   </ion-item>
   <ion-item>
-    <label class="txt-c1" >小区名称：</label>
+    <label class="txt-c1" >所属社区：</label>
+    <label class="txt-c2" >{{assetData.Community}}</label>
+  </ion-item>
+  <ion-item>
+    <label class="txt-c1" >所属小区：</label>
     <label class="txt-c2" >{{assetData.Microdistrict}}</label>
   </ion-item>
   <ion-item>
-    <label class="txt-c1" >应用地点：</label>
+    <label class="txt-c1" >责任人员：</label>
+    <label class="txt-c2" >{{assetData.ResponsiblePerson}}</label>
+  </ion-item>
+  <ion-item>
+    <label class="txt-c1" >物品总类：</label>
+    <label class="txt-c2" >{{assetData.AssetCategory}}</label>
+  </ion-item>
+  <ion-item>
+    <label class="txt-c1" >物品类型：</label>
+    <label class="txt-c2" >{{assetData.AssetType}}</label>
+  </ion-item>
+  <ion-item>
+    <label class="txt-c1" >物品分组：</label>
+    <label class="txt-c2" >{{assetData.AssetGroup}}</label>
+  </ion-item>
+  <ion-item>
+    <label class="txt-c1" >物品描述：</label>
+    <label class="txt-c2" >{{assetData.Description}}</label>
+  </ion-item>
+  <ion-item>
+    <label class="txt-c1" >质保期限：</label>
+    <label class="txt-c2" >{{assetData.Warranty}}</label>
+  </ion-item>
+  <ion-item>
+    <label class="txt-c1" >供应厂商：</label>
+    <label class="txt-c2" >{{assetData.Supplier}}</label>
+  </ion-item>
+  <ion-item>
+    <label class="txt-c1" >物品位置：</label>
     <label class="txt-c2" >{{assetData.AssetLocation}}</label>
   </ion-item>
   <ion-item>
-    <label class="txt-c1" >电箱地点：</label>
-    <label class="txt-c2" >{{assetData.PowerLocation}}</label>
-  </ion-item>
-  <ion-item>
-    <label class="txt-c1" >安装地点：</label>
+    <label class="txt-c1" >安装位置：</label>
     <label class="txt-c2" >{{assetData.InstallLocation}}</label>
   </ion-item>
   <ion-item>
-    <label class="txt-c1" >备注：</label>
+    <label class="txt-c1" >供电位置：</label>
+    <label class="txt-c2" >{{assetData.PowerLocation}}</label>
+  </ion-item>
+  <ion-item>
+    <label class="txt-c1" >备注信息：</label>
     <label class="txt-c2" >{{assetData.Remark}}</label>
+  </ion-item>
+  <ion-item>
+    <label class="txt-c1" >巡检日期：</label>
+    <label class="txt-c2" >{{assetData.LastInspectionTime}}</label>
+  </ion-item>
+  <ion-item>
+    <label class="txt-c1" >维保日期：</label>
+    <label class="txt-c2" >{{assetData.LastRepairApplicationTime}}</label>
   </ion-item>
 </ion-content>
